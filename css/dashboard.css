@@ -1,0 +1,474 @@
+/* ------------------------ 
+        Dashboard
+---------------------------*/
+
+/* ----- Dashboard Settings ----- */
+.navbar-dashboard {
+    padding: var(--44px) 0;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.navbar-dashboard>.navbar-buttons {
+    position: relative;
+    z-index: 1;
+    display: flex;
+    align-items: center;
+    gap: var(--24px);
+}
+.navbar-dashboard>.navbar-buttons>.button>.icon{
+    color: var(--text);
+}
+.settings-content {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+    gap: var(--24px);
+}
+
+.settings-content>.settings-btn {
+    padding: 0;
+    display: grid;
+    grid-template-columns: max-content 1fr;
+    gap: var(--18px);
+    align-items: center;
+    width: 100%;
+    text-align: left;
+    background: var(--bgSpan);
+    border: 0;
+    overflow: hidden;
+}
+
+.settings-content>.settings-btn>.btn-icon {
+    width: 5rem;
+    height: 5rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: var(--fontSizeH);
+    color: var(--white);
+    background: var(--accentDark);
+    font-variation-settings: 'wght' 300
+}
+
+.settings-content>.settings-btn:hover>.btn-icon {
+    background: var(--accent);
+}
+
+.settings-content>.settings-btn>.btn-content {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    gap: var(--4px);
+}
+
+.settings-content>.settings-btn>.btn-content>.btn-subtext {
+    color: var(--accent);
+    font-family: var(--fontNumber);
+    font-size: var(--14px);
+    text-transform: uppercase;
+}
+
+
+/* ----- Dashboard Table ----- */
+.dashboard-table {
+    margin-top: var(--24px);
+    background: var(--bgSpan);
+    overflow: hidden;
+}
+
+.table-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background: var(--accentDark);
+}
+
+
+.table-header>span {
+    height: 100%;
+    padding: var(--14px);
+    cursor: pointer;
+    color: var(--white);
+}
+
+.table-nav {
+    display: flex;
+    align-items: center;
+    height: 100%;
+    width: 100%;
+
+}
+
+.nav-btn {
+    padding: var(--12px) var(--24px);
+    display: flex;
+    align-items: center;
+    border: none;
+    cursor: pointer;
+    color: var(--white);
+    font-family: var(--fontSemiBold);
+    font-size: var(--fontSizeL);
+    background: var(--accentDark);
+}
+
+.nav-btn.active {
+    color: var(--white);
+    background: var(--accentLight);
+}
+
+.table-btns {
+    margin-right: var(--24px);
+    display: none;
+    align-items: center;
+    gap: var(--12px);
+}
+
+.table-btns.active {
+    display: flex;
+}
+
+.table-btns>span {
+    color: var(--white);
+    cursor: pointer;
+}
+
+.table-content {
+    position: relative;
+    width: 100%;
+    max-height: 450px;
+    overflow-y: auto;
+    display: none;
+}
+
+.table-content.active {
+    display: unset;
+}
+
+.table-content table {
+    border-collapse: collapse;
+    width: 100%;
+    table-layout: auto;
+}
+
+.table-content thead {
+    position: sticky;
+    top: 0;
+    z-index: 2;
+
+    backdrop-filter: blur(20px);
+}
+
+.table-content tbody tr:hover {
+    background: var(--bgSpan);
+}
+
+.table-content thead tr th {
+    padding: var(--12px) var(--24px);
+    text-align: left;
+    font-family: var(--fontSemiBold);
+    font-size: var(--fontSizeM);
+    color: var(--white);
+    background: var(--accentLight);
+    white-space: nowrap;
+}
+
+.table-content tbody tr td {
+    padding: var(--10px) var(--24px);
+    font-size: var(--fontSizeM);
+    vertical-align: middle;
+    white-space: nowrap;
+}
+
+.table-content tbody tr td:nth-child(2) {
+    max-width: 160px;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
+
+.table-content tbody tr td:nth-child(2):hover {
+    position: relative;
+    z-index: 1;
+    overflow: visible;
+    white-space: normal;
+}
+
+.table-content tbody tr .file-type1 {
+    text-transform: capitalize;
+}
+
+.table-content tbody tr .file-format1 {
+    font-family: var(--fontNumber);
+    font-size: var(--fontSizeS);
+}
+
+.table-content tbody tr td>div>span {
+    cursor: pointer;
+    font-size: var(--fontSizeM);
+    color: var(--accentDark);
+}
+
+.table-content tbody tr td>div>span:hover {
+    transform: scale(1.2);
+}
+
+
+/* ----- Dialog Window ----- */
+.window {
+    position: fixed;
+    z-index: 99;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 450px;
+    max-width: 90%;
+    background: var(--bgDialog);
+    border: 0;
+    box-shadow: 0 0 0 100vw rgba(0, 0, 0, 0.5);
+    animation: hide-dialog 0.5s;
+    overflow: hidden;
+}
+
+.window[open] {
+    animation: show-dialog 0.5s;
+}
+
+.window[open]::backdrop {
+    display: none;
+}
+
+.window>header {
+    margin-bottom: var(--24px);
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: var(--18px);
+}
+
+.window>header>h6 {
+    line-height: normal;
+    font-size: var(--fontSizeM);
+    color: var(--text);
+}
+
+.window>header>span {
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: var(--text);
+}
+
+.window form {
+    display: flex;
+    flex-direction: column;
+    padding: 0 var(--24px) var(--24px);
+}
+
+.window>form>.form-text {
+    opacity: 0;
+    height: 0;
+    transform: translateY(0);
+    margin-bottom: var(--16px);
+    font-family: var(--fontSemiBold);
+    font-size: var(--fontSizeM);
+}
+
+.window>form>.form-text.show {
+    opacity: 1;
+    height: 20px;
+}
+
+.window>form>.form-input {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    gap: var(--12px);
+}
+
+.window>form>.form-input .input {
+    padding: var(--12px) var(--16px);
+    width: 100%;
+    border-left: var(--4px) solid var(--accentLight);
+    background: var(--bgSpan);
+}
+
+.window>form>.form-input .input:hover {
+    border-left: var(--4px) solid var(--accentDark);
+}
+
+.window>form>.form-input .input.error {
+    border-left: var(--4px) solid rgb(240, 75, 75);
+    animation: input-error 0.5s;
+}
+
+.window>form>.form-input .input::placeholder {
+    color: var(--text);
+    transition: all .5s ease;
+    opacity: 0.5;
+}
+
+.window>form>.form-input .input:hover::placeholder {
+    color: var(--text);
+    opacity: 1;
+}
+
+.window>form>.form-btn {
+    margin-top: var(--24px);
+    margin-left: auto;
+    display: flex;
+    align-items: center;
+
+}
+
+.window>form>.form-btn>.btn {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border: 0;
+    border-radius: 0;
+}
+
+.window>form>.form-btn>.btn>span {
+    color: var(--text);
+}
+
+.window>form>.form-btn>.btn:hover>span,
+.window>form>.form-btn>.btn:active>span {
+    transform: scale(1.2);
+    color: var(--accent);
+}
+
+.window>form>.form-btn>.select {
+    padding: 0 var(--12px);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: var(--52px);
+    field-sizing: content;
+    color: var(--text);
+    background: transparent;
+    font-family: var(--fontSemiBold);
+    font-size: var(--fontSizeS);
+    border: 0;
+    border-radius: 0;
+    outline: none;
+}
+
+
+/* ----- Dialog Window > File Upload ----- */
+.window>form>.form-img {
+    position: relative;
+    z-index: 2;
+}
+
+.window>form>.form-img>.file-format {
+    position: absolute;
+    z-index: 3;
+    top: 0;
+    left: 0;
+    padding: var(--4px) var(--12px);
+    width: auto;
+    height: auto;
+    text-align: center;
+    color: var(--white);
+    font-family: var(--fontNumber);
+    font-size: var(--14px);
+    font-weight: 500;
+    text-transform: uppercase;
+    background: var(--accent);
+    border: 0;
+    border-radius: 0;
+}
+
+.window>form>.form-img {
+    margin: auto;
+    margin-bottom: var(--16px);
+    width: auto;
+    max-width: 0;
+    height: auto;
+    max-height: 0;
+    opacity: 0;
+    visibility: hidden;
+    transform: scale(0);
+    overflow: hidden;
+}
+
+.window>form>.form-img>.file-view {
+    width: 100%;
+    height: 100%;
+}
+
+.window>form>.form-img.show {
+    max-width: 386px;
+    max-height: 450px;
+    opacity: 1;
+    visibility: visible;
+    transform: scale(1);
+}
+
+.window>form>.form-input>.file-name {
+    text-align: left;
+}
+
+
+/* ----- Dialog Window > Message ----- */
+.window-message {
+    width: clamp(450px, 40vw, 600px);
+
+}
+.window>header>h6 {
+    display: flex;
+    align-items: center;
+    gap: var(--8px);
+}
+.window>header>h6> span {
+    font-family: var(--fontNumber);
+    font-weight: 500;
+    color: var(--textAccent);
+}
+.window-message>.window-content {
+    padding: 0 var(--24px) var(--24px);
+}
+
+.window-message>.window-content>div {
+    display: flex;
+    align-items: center;
+    gap: var(--8px);
+}
+
+.window-message>.window-content>div>span {
+    user-select: all;
+}
+
+.window-message>.window-content>div>.txtMessage {
+    margin-top: var(--12px);
+    width: 100%;
+    height: 100%;
+    max-height: clamp(450px, 40vw, 600px);
+    display: flex;
+    flex-direction: column;
+    gap: var(--18px);
+    padding: var(--12px);
+    background: var(--bgSpan);
+    overflow-x: scroll;
+}
+
+.window-message>.window-content>div>.txtMessage>li {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: var(--4px);
+}
+
+.window-message>.window-content>div>.txtMessage>li>.timestamp {
+    user-select: all;
+    color: var(--accentDark);
+    font-family: var(--fontNumber);
+    font-size: var(--fontSizeS);
+}
+
+.window-message>.window-content>div>.txtMessage>li>.message {
+    user-select: all;
+}
