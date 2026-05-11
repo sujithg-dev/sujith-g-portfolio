@@ -17,8 +17,7 @@
 
     <!-- Custom CSS -->
     <link rel="stylesheet" type="text/css" href="css/main.css">
-    <link rel="stylesheet" type="text/css" href="css/responsive.css">
-    <link rel="stylesheet" type="text/css" href="css/animation.css">
+    <link rel="stylesheet" type="text/css" href="css/anim.css">
     <!---->
 
     <!-- JS Plugins -->
@@ -71,11 +70,11 @@
                         <a class="nav-link nav-link5" href="#service">Service</a>
                         <a class="nav-link nav-link6" href="#contact">Contact</a>
                     </div>
-                    <div class="navbar-buttons">
-                        <button class="button" href="javascript:void" onclick="toggleMode()">
+                    <div class="navbar-tools">
+                        <button class="btn" onclick="toggleMode()">
                             <span class="material-symbols-outlined icon mode-icon">light_mode</span>
                         </button>
-                        <button class="button" href="javascript:void" onclick="togglePicker()">
+                        <button class="btn" onclick="togglePicker()">
                             <span class="material-symbols-outlined icon theme-icon">palette</span>
                             <div class="color-picker"><input type="range" min="0" max="360" onchange="updateColor(false, this.value)"></div>
                         </button>
@@ -123,15 +122,15 @@
                         </div>
                         <div class="para">
                             <p class="text">
-                                I'm a <b>Full Stack Developer</b> with <b>4+ years of experience</b> turning ideas into
+                                I'm a <span>Full Stack Developer</span> with <span>4+ years of experience</span> turning ideas into
                                 fast, production-ready web applications — for startups moving quickly and businesses
                                 building for scale.
                             </p>
                             <p class="text">What I bring to the table:</p>
                             <ul class="list">
-                                <li class="list-item"><b>Scalable full-stack web apps</b> — from concept to deployment</li>
-                                <li class="list-item"><b>Performant, intuitive UIs</b> — built with clean, maintainable code</li>
-                                <li class="list-item"><b>Robust backend APIs</b> — powered by Spring Boot and RESTful design</li>
+                                <li class="list-item"><span>Scalable full-stack web apps</span> — from concept to deployment</li>
+                                <li class="list-item"><span>Performant, intuitive UIs</span> — built with clean, maintainable code</li>
+                                <li class="list-item"><span>Robust backend APIs</span> — powered by Spring Boot and RESTful design</li>
                             </ul>
                             <p class="text">
                                 I care about the details that matter — performance under load, architecture that doesn't
@@ -387,12 +386,14 @@
                 <div class="layout layout-works">
                     <div class="works-item" data-category="web">
                         <span class="item-tag">Website</span>
-                        <img class="item-img" src="assets/images/works/personal-portfolio/personal-portfolio1.webp">
+                        <div class="item-bg">
+                            <img class="item-img" src="assets/images/works/personal-portfolio/personal-portfolio1.webp">
+                        </div>
                         <div class="item-links">
                             <a class="item-link" href="https://github.com/sujithg-dev/sujith-g-portfolio" target="_blank">GitHub<span class="material-symbols-outlined link-icon">arrow_right_alt</span></a>
                         </div>
                         <div class="item-content">
-                            <h2 class="title">Personal Portfolio</h2>
+                            <h3 class="title">Personal Portfolio</h3>
                             <p class="description">A responsive portfolio website to showcase projects, skills, and experience.</p>
                             <ul class="item-list">
                                 <li class="list-item">HTML</li>
@@ -408,13 +409,15 @@
                         </div>
                     </div>
                     <div class="works-item" data-category="web">
-                        <img class="item-img" src="assets/images/works/chef-booking/chef-booking1.webp">
                         <span class="item-tag">Website</span>
+                        <div class="item-bg">
+                            <img class="item-img" src="assets/images/works/chef-booking/chef-booking1.webp">
+                        </div>
                         <div class="item-links">
                             <a class="item-link" href="https://github.com/sujithg-dev/chef-booking-website" target="_blank">GitHub<span class="material-symbols-outlined link-icon">arrow_right_alt</span></a>
                         </div>
                         <div class="item-content">
-                            <h2 class="title">Chef Booking</h2>
+                            <h3 class="title">Chef Booking</h3>
                             <p class="description">A web platform for booking chefs, managing schedules, and handling customer requests.</p>
                             <ul class="item-list">
                                 <li class="list-item">HTML</li>
@@ -428,14 +431,16 @@
                         </div>
                     </div>
                     <div class="works-item" data-category="web">
-                        <img class="item-img" src="assets/images/works/personal-branding/personal-branding1.webp">
                         <span class="item-tag">Website</span>
+                        <div class="item-bg">
+                            <img class="item-img" src="assets/images/works/product-sale/product-sale1.webp">
+                        </div>
                         <div class="item-links">
-                            <a class="item-link" href="https://github.com/sujithg-dev/personal-branding-website" target="_blank">GitHub<span class="material-symbols-outlined link-icon">arrow_right_alt</span></a>
+                            <a class="item-link" href="https://github.com/sujithg-dev/product-sale-website" target="_blank">GitHub<span class="material-symbols-outlined link-icon">arrow_right_alt</span></a>
                         </div>
                         <div class="item-content">
-                            <h2 class="title">Personal Branding</h2>
-                            <p class="description">A personal branding website designed to highlight skills, projects, and professional identity.</p>
+                            <h3 class="title">Product Sale</h3>
+                            <p class="description">A product showcase website focused on improving conversions with clean design and layout.</p>
                             <ul class="item-list">
                                 <li class="list-item">HTML</li>
                                 <li class="break"></li>
@@ -449,13 +454,15 @@
                     </div>
                     <div class="works-item" data-category="web">
                         <span class="item-tag">Website</span>
-                        <img class="item-img" src="assets/images/works/product-sale/product-sale1.webp">
+                        <div class="item-bg">
+                            <img class="item-img" src="assets/images/works/personal-branding/personal-branding1.webp">
+                        </div>
                         <div class="item-links">
-                            <a class="item-link" href="https://github.com/sujithg-dev/product-sale-website" target="_blank">GitHub<span class="material-symbols-outlined link-icon">arrow_right_alt</span></a>
+                            <a class="item-link" href="https://github.com/sujithg-dev/personal-branding-website" target="_blank">GitHub<span class="material-symbols-outlined link-icon">arrow_right_alt</span></a>
                         </div>
                         <div class="item-content">
-                            <h2 class="title">Product Sale</h2>
-                            <p class="description">A product showcase website focused on improving conversions with clean design and layout.</p>
+                            <h3 class="title">Personal Branding</h3>
+                            <p class="description">A personal branding website designed to highlight skills, projects, and professional identity.</p>
                             <ul class="item-list">
                                 <li class="list-item">HTML</li>
                                 <li class="break"></li>
@@ -469,12 +476,14 @@
                     </div>
                     <div class="works-item" data-category="android">
                         <span class="item-tag">Android App</span>
-                        <img class="item-img" src="assets/images/works/pro-class/proclass.webp">
+                        <div class="item-bg">
+                            <img class="item-img" src="assets/images/works/pro-class/proclass.webp">
+                        </div>
                         <div class="item-links">
                             <a class="item-link" href="javascript:void(0)" target="_blank">GitHub<span class="material-symbols-outlined link-icon">arrow_right_alt</span></a>
                         </div>
                         <div class="item-content">
-                            <h2 class="title">Pro Class</h2>
+                            <h3 class="title">Pro Class</h3>
                             <p class="description">An Android application to track student attendance and monitor activity during sessions.</p>
                             <ul class="item-list">
                                 <li class="list-item">Java</li>
@@ -514,13 +523,10 @@
                                 <line class="l7" x1="26" y1="34" x2="52" y2="34" stroke="var(--accentDark)" stroke-width="2" />
                                 <line class="l8" x1="26" y1="40" x2="40" y2="40" stroke="var(--accentDark)" stroke-width="2" />
                             </svg>
-                            <h2 class="name">Frontend <br> Development</h2>
+                            <h3 class="name">Frontend <br> Development</h3>
                         </div>
                         <div class="content">
                             <p class="text">Crafting fast, responsive interfaces that look great on every device — pixel-perfect, accessible, and built to convert.</p>
-                        </div>
-                        <div class="link-btn">
-                            <a class="link" href="javascript:void" onclick='toggleDialog("service-contact")'><span class="material-symbols-outlined link-icon">arrow_right_alt</span></a>
                         </div>
                     </div>
                     <div class="service-item">
@@ -532,13 +538,10 @@
                                 <rect class="r4" x="42" y="3" width="5" height="5" fill="var(--white)" />
                                 <rect class="r5" x="50" y="3" width="5" height="5" fill="var(--white)" />
                             </svg>
-                            <h2 class="name">Backend <br> Development</h2>
+                            <h3 class="name">Backend <br> Development</h3>
                         </div>
                         <div class="content">
                             <p class="text">Architecting reliable APIs and server-side systems with Spring Boot — secure, scalable, and ready to grow with your product.</p>
-                        </div>
-                        <div class="link-btn">
-                            <a class="link" href="javascript:void" onclick='toggleDialog("service-contact")'><span class="material-symbols-outlined link-icon">arrow_right_alt</span></a>
                         </div>
                     </div>
                     <div class="service-item">
@@ -553,62 +556,13 @@
                                 <rect class="r3" x="32" y="25" width="20" height="6" fill="var(--accentLight)" stroke="var(--accentLight)" stroke-width="2" />
                                 <rect class="r3" x="32" y="36" width="20" height="6" fill="none" stroke="var(--accentLight)" stroke-width="2" />
                             </svg>
-                            <h2 class="name">UI / UX <br> Design</h2>
+                            <h3 class="name">UI / UX <br> Design</h3>
                         </div>
                         <div class="content">
                             <p class="text">Designing intuitive experiences that reduce friction and keep users engaged — clean layouts, thoughtful flows, and a sharp visual identity.</p>
                         </div>
-                        <div class="link-btn">
-                            <a class="link" href="javascript:void" onclick='toggleDialog("service-contact")'><span class="material-symbols-outlined link-icon">arrow_right_alt</span></a>
-                        </div>
                     </div>
                 </div>
-
-                <dialog class="service-contact">
-                    <span class="material-symbols-outlined" onclick='toggleDialog("service-contact")'>close</span>
-                    <div class="content-header text-center">
-                        <h4 class="subtitle">Start a Project</h4>
-                        <h1 class="title">Let’s Create Together</h1>
-                    </div>
-                    <form class="form service-form">
-                        <div class="form-text serviceFormError mt-3"></div>
-                        <div class="form-content">
-                            <span class="form-text">Hi, I'm</span>
-                            <div class="input-box">
-                                <input class="input inName1" type="text" name="fullname" maxlength="30" placeholder="John Doe" autocomplete="off" required>
-                            </div>
-                            <span class="form-text">looking for a</span>
-                            <div class="select">
-                                <div class="select-input inDeveloper" onclick="handleSelect(this)">developer</div>
-                                <div class="select-list">
-                                    <div class="list-item" onclick="handleSelect(this, true)">Full Stack Developer</div>
-                                    <div class="list-item" onclick="handleSelect(this, true)">Front-End Developer</div>
-                                    <div class="list-item" onclick="handleSelect(this, true)">Back-End Developer</div>
-                                    <div class="list-item" onclick="handleSelect(this, true)">Website Designer</div>
-                                </div>
-                            </div>
-                            <span class="form-text">to build a</span>
-                            <div class="select">
-                                <div class="select-input inProject" onclick="handleSelect(this)">project</div>
-                                <div class="select-list">
-                                    <div class="list-item" onclick="handleSelect(this, true)">Personal Portfolio</div>
-                                    <div class="list-item" onclick="handleSelect(this, true)">Business Website</div>
-                                    <div class="list-item" onclick="handleSelect(this, true)">Blog Sites</div>
-                                    <div class="list-item" onclick="handleSelect(this, true)">Landing Pages</div>
-                                    <div class="list-item" onclick="handleSelect(this, true)">Website</div>
-                                    <div class="list-item" onclick="handleSelect(this, true)">Web Application</div>
-                                </div>
-                            </div>
-                            <span class="form-text">Let’s connect at</span>
-                            <div class="input-box">
-                                <input class="input inEmail1" type="email" name="userEmail" placeholder="johndoe@gmail.com" autocomplete="off" required>
-                            </div>
-                        </div>
-                        <div class="form-btn">
-                            <button class="button submit-service-form" type="button">Let’s Talk<span class="material-symbols-outlined icon">send</span></button>
-                        </div>
-                    </form>
-                </dialog>
             </div>
         </section>
         <!---->

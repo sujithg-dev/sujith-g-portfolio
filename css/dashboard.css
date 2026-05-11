@@ -10,16 +10,25 @@
     justify-content: space-between;
 }
 
-.navbar-dashboard>.navbar-buttons {
+.navbar-dashboard>.navbar-tools {
     position: relative;
     z-index: 1;
     display: flex;
     align-items: center;
     gap: var(--24px);
 }
-.navbar-dashboard>.navbar-buttons>.button>.icon{
+
+.navbar-dashboard>.navbar-tools>.btn {
+    padding: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.navbar-dashboard>.navbar-tools>.btn>.icon {
     color: var(--text);
 }
+
 .settings-content {
     display: grid;
     grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
@@ -225,6 +234,8 @@
     max-width: 90%;
     background: var(--bgDialog);
     border: 0;
+    -webkit-backdrop-filter: blur(20px);
+    backdrop-filter: blur(20px);
     box-shadow: 0 0 0 100vw rgba(0, 0, 0, 0.5);
     animation: hide-dialog 0.5s;
     overflow: hidden;
@@ -418,16 +429,19 @@
     width: clamp(450px, 40vw, 600px);
 
 }
+
 .window>header>h6 {
     display: flex;
     align-items: center;
     gap: var(--8px);
 }
-.window>header>h6> span {
+
+.window>header>h6>span {
     font-family: var(--fontNumber);
     font-weight: 500;
     color: var(--textAccent);
 }
+
 .window-message>.window-content {
     padding: 0 var(--24px) var(--24px);
 }
@@ -471,4 +485,191 @@
 
 .window-message>.window-content>div>.txtMessage>li>.message {
     user-select: all;
+}
+
+/* -------------------------
+   Certificates Page
+------------------------- */
+
+.section-certificates {
+    width: 100%;
+    height: 100vh;
+}
+
+.certificates-title {
+    padding: var(--60px) 0 var(--24px);
+}
+
+.certificates-content {
+    position: relative;
+    width: 100%;
+    height: 75vh;
+    overflow-y: auto;
+}
+
+.certificates-content table {
+    border-collapse: collapse;
+    width: 100%;
+    table-layout: auto;
+}
+
+.certificates-content>table>thead {
+    position: sticky;
+    top: 0;
+    z-index: 2;
+}
+
+.certificates-content>table>thead::after {
+    content: "";
+    position: absolute;
+    left: 0;
+    right: 0;
+    bottom: -2px;
+    height: 2px;
+    background: var(--text);
+}
+
+.certificates-content thead tr th {
+    padding: var(--12px) 0;
+    text-align: left;
+    font-family: var(--fontSemiBold);
+    font-size: var(--fontSizeL);
+    white-space: nowrap;
+    background: var(--bg);
+}
+
+.certificates-content tbody tr td {
+    padding: var(--24px) 0;
+    font-size: var(--fontSizeS);
+    border-bottom: 1px solid var(--textLight);
+    vertical-align: middle;
+    white-space: nowrap;
+}
+
+.certificates-content tbody tr td h3 {
+    font-family: var(--fontSemiBold);
+}
+
+.certificates-content tbody tr td span {
+    display: block;
+    margin: var(--12px) auto var(--4px);
+}
+
+.certificates-content tbody tr td p {
+    line-height: normal;
+}
+
+.img-preview {
+    margin: auto;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 140px;
+    height: 100px;
+    background: var(--bgCard);
+    border: 2px solid var(--text);
+    overflow: hidden;
+}
+
+.img-preview>img {
+    cursor: pointer;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.window-certificate {
+    width: 600px;
+    max-width: 80%;
+    border: var(--2px) solid var(--white);
+}
+
+.window-certificate>header {
+    margin: 0;
+    background: var(--bgCard);
+}
+
+.window-certificate>.window-content>img {
+    padding: var(--24px);
+    width: 100%;
+    object-fit: cover;
+}
+
+/* -------------------------
+   RESPONSIVE DESIGN
+------------------------- */
+
+/* Mobile (up to 767px) */
+@media (max-width: 767px) {
+
+    /* ----- Dashboard Settings ----- */
+    .navbar-dashboard {
+        padding: var(--20px) 0;
+    }
+
+    .navbar-dashboard>.navbar-tools {
+        gap: var(--12px);
+    }
+
+    .section.section-dashboard {
+        padding: var(--20px) 0;
+    }
+
+    .settings-content {
+        gap: var(--20px);
+    }
+
+
+    .settings-content>.settings-btn>.btn-icon {
+        width: 75px;
+        height: 75px;
+    }
+
+
+    /* ----- Dashboard Table ----- */
+    .dashboard-table {
+        margin-top: var(--20px);
+    }
+
+    .nav-btn {
+        padding: var(--10px);
+    }
+
+    .table-btns>span {
+        color: var(--white);
+        cursor: pointer;
+    }
+
+    .table-content {
+        position: relative;
+        width: 100%;
+        max-height: 450px;
+        overflow-y: auto;
+        display: none;
+    }
+
+    .table-content.active {
+        display: unset;
+    }
+
+    .table-content table {
+        border-collapse: collapse;
+        width: 100%;
+        table-layout: auto;
+    }
+
+    .certificates-content {
+        position: relative;
+        width: 100%;
+        height: 100vh;
+        overflow-y: auto;
+    }
+
+    .certificates-content tbody tr td {
+        padding: var(--12px) 0;
+        font-size: var(--fontSizeS);
+        border-bottom: 1px solid var(--textLight);
+        vertical-align: middle;
+        white-space: nowrap;
+    }
 }

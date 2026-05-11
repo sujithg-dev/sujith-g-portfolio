@@ -73,11 +73,11 @@ $(window).on("load", e => {
     getSettings();
     if ($("body").hasClass("index-page")) {
         navbar();
-        randomText(["FullStack Developer"], ".random", 10000);
-        glitchText(["Design", "Develop", "Code"], ".glitch", 4000);
+        randomText(["Developer", "Freelancer"], ".random", 10000);
+        // glitchText(["Design", "Develop", "Code"], ".glitch", 4000);
         initSkill();
         initWorks();
-        if(!isLocalhost()) getUserData();
+        if (!isLocalhost()) getUserData();
     }
 });
 
@@ -145,36 +145,48 @@ const randomText = (words, selector, delay) => {
     let i = 0;
     const el = document.querySelector(selector);
     if (!el) return;
-    const render = (word, opacity = 1) => {
-        el.innerHTML = [...word]
-            .map(l => {
-                if (l == ' ') {
-                    return `<span class="random-text" style="opacity:${opacity}">&nbsp;&nbsp;</span>`;
-                } else {
-                    return `<span class="random-text" style="opacity:${opacity}" data-text="${l}">${l}</span>`;
-                }
-            })
-            .join("");
+
+    const render = (text, opacity = 1) => {
+        const wordArray = text.split(" ");
+
+        el.innerHTML = wordArray.map(word => {
+            const letters = [...word]
+                .map(l => {
+                    return `<span class="letter" style="opacity:${opacity}" data-text="${l}">${l}</span>`;
+                })
+                .join("");
+
+            return `<div class="word">${letters}</div>`;
+        }).join("");
     };
+
     const animate = (spans, show = true) => {
         const order = spans.map((_, i) => i).sort(() => Math.random() - 0.5);
-        order.forEach((idx, i) =>
-            setTimeout(() => spans[idx].style.opacity = show ? 1 : 0, i * 120)
-        );
+
+        order.forEach((idx, i) => {
+            setTimeout(() => {
+                spans[idx].style.opacity = show ? 1 : 0;
+            }, i * 120);
+        });
     };
+
     const cycle = () => {
         const word = words[i];
         render(word, 1);
+
         setTimeout(() => {
             const spans = [...el.querySelectorAll("span")];
             animate(spans, false);
+
             setTimeout(() => {
                 i = (i + 1) % words.length;
                 render(words[i], 0);
                 animate([...el.querySelectorAll("span")], true);
             }, spans.length * 120 + 200);
+
         }, 2000);
     };
+
     cycle();
     setInterval(cycle, delay);
 };
@@ -285,6 +297,7 @@ const initWorks = () => {
     });
 };
 
+
 // ---------------- Get User Data ----------------
 const getUserData = async () => {
     let userId = localStorage.getItem("userId");
@@ -338,7 +351,7 @@ const getUserData = async () => {
         await userRef.set({
             userId: userId,
             browserInfo: browserData,
-            
+
             visits: {
                 visitCount: 1,
                 firstVisit: formattedTime,

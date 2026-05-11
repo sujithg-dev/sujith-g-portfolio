@@ -20,8 +20,7 @@
     <!-- Custom CSS -->
     <link rel="stylesheet" type="text/css" href="css/main.css">
     <link rel="stylesheet" type="text/css" href="css/dashboard.css">
-    <link rel="stylesheet" type="text/css" href="css/responsive.css">
-    <link rel="stylesheet" type="text/css" href="css/animation.css">
+    <link rel="stylesheet" type="text/css" href="css/anim.css">
     <!---->
 
     <!-- JS Plugins -->
@@ -151,17 +150,17 @@
         <div class="container">
             <div class="navbar-dashboard">
                 <h4>Dashboard</h4>
-                <div class="navbar-buttons">
-                    <button class="button" href="javascript:void" onclick='toggleDialog("window-password")'>
+                <div class="navbar-tools">
+                    <div class="btn btn-lock" onclick='toggleDialog("window-password")'>
                         <span class="material-symbols-outlined icon">lock</span>
-                    </button>
-                    <button class="button" href="javascript:void" onclick="toggleMode()">
+                    </div>
+                    <div class="btn btn-mode" onclick="toggleMode()">
                         <span class="material-symbols-outlined icon mode-icon">light_mode</span>
-                    </button>
-                    <button class="button" href="javascript:void" onclick="togglePicker()">
+                    </div>
+                    <div class="btn btn-theme" onclick="togglePicker()">
                         <span class="material-symbols-outlined icon">palette</span>
                         <div class="color-picker"> <input type="range" min="0" max="360" onchange="updateColor(true, this.value)"></div>
-                    </button>
+                    </div>
                 </div>
             </div>
         </div>
