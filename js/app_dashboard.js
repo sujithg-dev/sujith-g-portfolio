@@ -116,9 +116,9 @@ function updateSettings(selector) {
 
 function checkFormInput() {
     if ($(".file-type").val() == "certificate") {
-        $(".in-certInstitute").removeClass("d-none");
+        $(".ini-certInstitute").removeClass("d-none");
     } else {
-        $(".in-certInstitute").addClass("d-none");
+        $(".ini-certInstitute").addClass("d-none");
     }
 }
 
@@ -126,10 +126,6 @@ function checkFormInput() {
 function toggleTable(table, btn) {
     $(".table-content, .nav-btn, .table-btns").removeClass("active");
     $("." + table + ", ." + btn).addClass("active");
-
-    if (table == "table-files") {
-        $(".table-btns").addClass("active");
-    }
 }
 
 // ---------------- Form Dashboard Login ----------------

@@ -1,14 +1,16 @@
 // ---------------- Firebase Init ----------------
-firebase.initializeApp({
-    apiKey: "AIzaSyAsm8okuXmkyyOE2gyjlk-ZFS_W7beGnag",
-    authDomain: "sujith-g.firebaseapp.com",
-    databaseURL: "https://sujith-g-default-rtdb.firebaseio.com",
-    portfolioId: "sujith-g",
-    storageBucket: "sujith-g.appspot.com",
-    messagingSenderId: "702373791246",
-    appId: "1:702373791246:web:5a35c56e509c304a9b9e5f",
-    measurementId: "G-35PFV9DBR0"
-});
+firebase.initializeApp(
+    {
+        apiKey: "AIzaSyAsm8okuXmkyyOE2gyjlk-ZFS_W7beGnag",
+        authDomain: "sujith-g.firebaseapp.com",
+        databaseURL: "https://sujith-g-default-rtdb.firebaseio.com",
+        portfolioId: "sujith-g",
+        storageBucket: "sujith-g.appspot.com",
+        messagingSenderId: "702373791246",
+        appId: "1:702373791246:web:5a35c56e509c304a9b9e5f",
+        measurementId: "G-35PFV9DBR0"
+    }
+);
 
 
 // ---------------- Firebase Variable ----------------
@@ -22,17 +24,27 @@ const db = {
 
 
 // ---------------- Common Helpers ----------------
-const toggle = (selector, condition, active = "active", hide = "hide") => $(selector).toggleClass(active, condition).toggleClass(hide, !condition);
-const app = (selector, condition, active = "active", hide = "hide") => $(selector).toggleClass(active, condition).toggleClass(hide, !condition);
-const text = (selector, value) => $(selector).text(value);
-const delay = (fn, ms) => setTimeout(fn, ms);
+const toggle = (selector, condition, active = "active", hide = "hide") =>
+    $(selector).toggleClass(active, condition).toggleClass(hide, !condition);
+
+const app = (selector, condition, active = "active", hide = "hide") =>
+    $(selector).toggleClass(active, condition).toggleClass(hide, !condition);
+
+const text = (selector, value) =>
+    $(selector).text(value);
+
+const delay = (fn, ms) =>
+    setTimeout(fn, ms);
+
 const inputError = (field, input) => {
     if (field == "input") {
         input.addClass("error").focus();
     }
+
     input.addClass("error");
     delay(() => input.removeClass("error"), 500);
 };
+
 const getTime = () => {
     const now = new Date();
 
@@ -54,15 +66,13 @@ const getTime = () => {
         second: second,
         formattedTime: `${day}, ${month}, ${year} - ${hour % 12 || 12}:${minute}:${second} ${hour >= 12 ? 'PM' : 'AM'}`
     }
-
 }
+
 const isLocalhost = () => {
     const host = window.location.hostname;
 
     return (
-        host === "localhost" ||
-        host === "127.0.0.1" ||
-        host === "::1"
+        host === "localhost" || host === "127.0.0.1" || host === "::1"
     );
 }
 
@@ -71,39 +81,55 @@ const isLocalhost = () => {
 $(window).on("load", e => {
     getTheme();
     getSettings();
+
     if ($("body").hasClass("index-page")) {
         navbar();
         randomText(["Developer", "Freelancer"], ".random", 10000);
         // glitchText(["Design", "Develop", "Code"], ".glitch", 4000);
         initSkill();
         initWorks();
-        if (!isLocalhost()) getUserData();
+        if (!isLocalhost())
+            getUserData();
     }
 });
 
 
 // ---------------- Scroll ----------------
 $(window).on("scroll click", e => {
-    if ($("body").hasClass("index-page")) navbar();
-    if (!$(e.target).closest(".select").length) $(".select").removeClass("open");
+    if ($("body").hasClass("index-page"))
+        navbar();
+
+    if (!$(e.target).closest(".select").length)
+        $(".select").removeClass("open");
 });
 
 
 // ---------------- Navbar ----------------
 const navbar = () => {
-    if ($("body").hasClass("page-to-ignore")) return;
+    if ($("body").hasClass("page-to-ignore"))
+        return;
 
     $(".navbar").toggleClass("sticky", window.scrollY >= 10);
 
     let current = "";
+
     $("section").each(function () {
         const top = this.offsetTop - 60;
-        if (scrollY >= top && scrollY < top + this.clientHeight) current = this.id;
+        const bottom = top + this.clientHeight;
+
+        if (scrollY >= top && scrollY < bottom)
+            current = this.id;
     });
 
+    $(".nav-link").removeClass("active");
+
     $(".nav-link").each(function () {
-        $(this).toggleClass("active", $(this).attr("href") === "#" + current);
+        if ($(this).attr("href") === "#" + current)
+            $(this).addClass("active");
     });
+
+    if (current === "skills" || current === "journey")
+        $(".nav-link3").addClass("active");
 };
 
 
@@ -111,12 +137,12 @@ const navbar = () => {
 function getSettings() {
     const settingsMap = {
         appLive: value => {
-            if ($("body").hasClass("index-page") && !value && !window.location.pathname.includes("blank.html")) {
+            if ($("body").hasClass("index-page") && !value && !window.location.pathname.includes("blank.html"))
                 window.location.replace("blank.html");
-            }
-            if ($("body").hasClass("blank-page") && value && !window.location.pathname.includes("index.html")) {
+
+            if ($("body").hasClass("blank-page") && value && !window.location.pathname.includes("index.html"))
                 window.location.replace("index.html");
-            }
+
             text(".appLiveText", value ? "live" : "block");
             delay(() => $(".pre-loader").addClass("hide"), 100);
         },
@@ -203,9 +229,7 @@ const glitchText = (words, selector, delay) => {
         let iteration = 0;
         const interval = setInterval(() => {
             const text = finalWord.split("").map((l, i) =>
-                i < iteration
-                    ? l
-                    : chars[Math.floor(Math.random() * chars.length)]
+                i < iteration ? l : chars[Math.floor(Math.random() * chars.length)]
             ).join("");
             el.innerHTML = '<span class="glitch-text" data-text=' + text + '>' + text + '</span>';
             iteration += 1 / 3;
@@ -230,26 +254,26 @@ const glitchText = (words, selector, delay) => {
 
 // ---------------- Skill ----------------
 const initSkill = () => {
-    $(".skill-card").each(function () {
+    $(".skill-item").each(function () {
         const card = $(this);
         const bar = card.find(".progress-bar")[0];
         const txt = card.find(".progress-text");
-        const img = card.find(".preview-img");
+        const img = card.find(".progress-icon");
 
         const r = 70, c = 2 * Math.PI * r;
         bar.style.strokeDasharray = c;
 
         let raf;
 
-        card.find(".tag").hover(function () {
+        card.find(".skill").hover(function () {
             const skill = $(this).data("skill");
             const percent = +$(this).data("percent");
 
-            const src = card.find(`.icon[data-skill="${skill}"] img`).attr("src");
+            const src = card.find(`.icon-box[data-skill="${skill}"] img`).attr("src");
             img.attr("src", src);
 
             card.addClass("active")
-                .find(".icon").removeClass("active")
+                .find(".icon-box").removeClass("active")
                 .filter(`[data-skill="${skill}"]`).addClass("active");
 
             let start;
@@ -264,26 +288,32 @@ const initSkill = () => {
             };
             raf = requestAnimationFrame(anim);
 
-        }, function () {
-            cancelAnimationFrame(raf);
-            card.removeClass("active").find(".icon").removeClass("active");
-            bar.style.strokeDashoffset = c;
-            txt.text("0%");
-        });
+        },
+            function () {
+                cancelAnimationFrame(raf);
+                card.removeClass("active").find(".icon-box").removeClass("active");
+                bar.style.strokeDashoffset = c;
+                txt.text("0%");
+            }
+        );
     });
 };
 
 
 // ---------------- Works ----------------
 const initWorks = () => {
+
     const tabs = document.querySelectorAll(".works-tab");
     const items = document.querySelectorAll(".works-item");
-    if (!tabs.length) return;
+
+    if (!tabs.length)
+        return;
 
     const obs = new IntersectionObserver(e =>
         e.forEach(i => i.target.classList.toggle("active", i.isIntersecting)),
         { rootMargin: "-50% 0px" }
     );
+
     items.forEach(i => obs.observe(i));
 
     tabs.forEach(t => t.onclick = () => {
@@ -296,7 +326,9 @@ const initWorks = () => {
         );
     });
 };
-
+$(".works-tabs").on("click", function () {
+    
+});
 
 // ---------------- Get User Data ----------------
 const getUserData = async () => {
@@ -415,16 +447,29 @@ const handleForm = (formData) => {
     const { form, fields, buildMsg, output } = formData;
 
     $(form).on("click", () => {
-
         const name = fields.name?.val()?.trim();
         const email = fields.email?.val()?.toLowerCase().trim();
         const { timestamp, formattedTime } = getTime();
 
-        if (!name || name.length < 3) return inputError("input", fields.name);
-        if (!/^\S+@\S+\.\S+$/.test(email)) return inputError("input", fields.email);
-        if (fields.message && !fields.message.val().trim()) return inputError("input", fields.message);
-        if (fields.dev && fields.dev.text() === "developer") return inputError("select", fields.dev);
-        if (fields.proj && fields.proj.text() === "project") return inputError("select", fields.proj);
+        if (!name || name.length < 3) {
+            return inputError("input", fields.name);
+        }
+
+        if (!/^\S+@\S+\.\S+$/.test(email)) {
+            return inputError("input", fields.email);
+        }
+
+        if (fields.message && !fields.message.val().trim()) {
+            return inputError("input", fields.message);
+        }
+
+        if (fields.dev && fields.dev.text() === "developer") {
+            return inputError("select", fields.dev);
+        }
+
+        if (fields.proj && fields.proj.text() === "project") {
+            return inputError("select", fields.proj);
+        }
 
         const msg = buildMsg(name, fields);
 
@@ -477,8 +522,8 @@ handleForm({
 handleForm({
     form: ".submit-contact-form",
     fields: {
-        name: $(".inName2"),
-        email: $(".inEmail2"),
+        name: $(".inName"),
+        email: $(".inEmail"),
         message: $(".inMessage")
     },
     output: ".contactFormError",

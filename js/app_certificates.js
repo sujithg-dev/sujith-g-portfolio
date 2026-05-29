@@ -1,6 +1,6 @@
 db.files.on("child_added", data => {
     const value = data.val();
-
+    
     if (value.fileType === "certificate") {
 
         const imgContainer = $("<div>").addClass("img-preview").text("Loading");

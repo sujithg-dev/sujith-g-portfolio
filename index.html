@@ -9,7 +9,7 @@
 
     <title>Sujith G - Portfolio</title>
 
-    <link rel="icon" type="image/x-icon" href="assets/ico/sg.png">
+    <link rel="icon" type="image/x-icon" href="assets/ico/Sg.png">
 
     <!-- CSS Plugins -->
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css">
@@ -19,6 +19,7 @@
 
     <!-- Custom CSS -->
     <link rel="stylesheet" type="text/css" href="css/main.css">
+    <link rel="stylesheet" type="text/css" href="css/responsive.css">
     <link rel="stylesheet" type="text/css" href="css/anim.css">
     <!---->
 
@@ -46,13 +47,6 @@
     </div>
     <!---->
 
-    <!-- Background Effect -->
-    <div class="bg-effect1"></div>
-    <div class="bg-effect2"></div>
-    <div class="bg-effect3"></div>
-    <div class="bg-effect4"></div>
-    <!---->
-
     <!-- Header -->
     <header class="header">
 
@@ -67,10 +61,15 @@
                     <div class="navbar-nav">
                         <a class="nav-link active" href="#home">Home</a>
                         <a class="nav-link nav-link2" href="#about">About</a>
-                        <a class="nav-link nav-link3" href="#resume">Resume</a>
+                        <div class="nav-item dropdown">
+                            <a class="nav-link nav-link3 dropdown-toggle" href="#" data-bs-toggle="dropdown">Resume</a>
+                            <div class="dropdown-menu">
+                                <a class="dropdown-item" href="#skills">Skills</a>
+                                <a class="dropdown-item" href="#journey">Journey</a>
+                            </div>
+                        </div>
                         <a class="nav-link nav-link4" href="#works">Works</a>
-                        <a class="nav-link nav-link5" href="#service">Service</a>
-                        <a class="nav-link nav-link6" href="#contact">Contact</a>
+                        <a class="nav-link nav-link5" href="#contact">Contact</a>
                     </div>
                     <div class="navbar-tools">
                         <button class="btn" onclick="toggleMode()">
@@ -82,7 +81,6 @@
                         </button>
                     </div>
                 </div>
-
             </div>
         </nav>
         <!---->
@@ -122,7 +120,7 @@
                             <h4 class="subtitle">About Me</h4>
                             <h1 class="title">Nice to meet you!</h1>
                         </div>
-                        <div class="para">
+                        <div class="paragraph">
                             <p class="text">
                                 I'm a <span>Full Stack Developer</span> with <span>4+ years of experience</span> turning ideas into
                                 fast, production-ready web applications — for startups moving quickly and businesses
@@ -139,152 +137,211 @@
                                 break at scale, and interfaces people actually enjoy using.
                             </p>
                         </div>
-                        <a class="link" href="#resume">Know More<span class="material-symbols-outlined link-icon">keyboard_double_arrow_down</span></a>
                     </div>
                 </div>
             </div>
         </section>
         <!---->
 
-        <!-- Section Resume -->
-        <section class="section section-resume" id="resume">
+        <!-- Section Skills -->
+        <section class="section section-skills" id="skills">
             <div class="container">
-                <div class="layout layout-skill">
-                    <div class="content-header">
-                        <h4 class="subtitle">My Skills</h4>
-                        <h1 class="title">Technologies I Work With</h1>
+                <div class="content-header">
+                    <h4 class="subtitle">My Skills</h4>
+                    <h1 class="title">Technologies I Work With</h1>
+                </div>
+                <div class="layout layout-skills">
+                    <div class="skill-item">
+                        <div class="content">
+                            <div class="header">
+                                <div class="icon">
+                                    <svg class="svg" width="70" height="55" viewBox="0 0 60 50" style="overflow:visible">
+                                        <rect class="r1" x="0" y="0" rx="5" ry="5" width="60" height="50" fill="none" stroke="var(--accentDark)" stroke-width="3" />
+                                        <rect class="r2" x="0" y="0" rx="5" width="60" height="12" fill="var(--accentDark)" stroke="var(--accentDark)" stroke-width="3" />
+                                        <rect class="r3" x="1" y="13" width="20" height="36" fill="var(--accentLight)" />
+                                        <rect class="r4" x="6" y="18" rx="2" ry="2" width="10" height="10" fill="var(--white)" />
+                                        <line class="l2" x1="6" y1="34" x2="16" y2="34" stroke="var(--white)" stroke-width="2" />
+                                        <line class="l3" x1="6" y1="40" x2="16" y2="40" stroke="var(--white)" stroke-width="2" />
+                                        <line class="l5" x1="26" y1="22" x2="52" y2="22" stroke="var(--accentDark)" stroke-width="2" />
+                                        <line class="l6" x1="26" y1="28" x2="52" y2="28" stroke="var(--accentDark)" stroke-width="2" />
+                                        <line class="l7" x1="26" y1="34" x2="52" y2="34" stroke="var(--accentDark)" stroke-width="2" />
+                                        <line class="l8" x1="26" y1="40" x2="40" y2="40" stroke="var(--accentDark)" stroke-width="2" />
+                                    </svg>
+                                </div>
+                                <div class="text">
+                                    <h3 class="name">Frontend</h3>
+                                    <span class="experience">4+ Years Experience</span>
+                                </div>
+                            </div>
+                            <ul class="skills">
+                                <li class="skill" data-skill="html" data-percent="95">HTML5</li>
+                                <li class="skill" data-skill="css" data-percent="90">CSS3</li>
+                                <li class="skill" data-skill="js" data-percent="80">JavaScript</li>
+                                <li class="skill" data-skill="react" data-percent="60">React.js</li>
+                            </ul>
+                        </div>
+                        <div class="skill-icons">
+                            <div class="icon-box" data-skill="html">
+                                <img class="icon" alt="icon" src="assets/icons/html.webp">
+                            </div>
+                            <div class="icon-box" data-skill="css">
+                                <img class="icon" alt="icon" src="assets/icons/css.webp">
+                            </div>
+                            <div class="icon-box" data-skill="js">
+                                <img class="icon" alt="icon" src="assets/icons/js.webp">
+                            </div>
+                            <div class="icon-box" data-skill="react">
+                                <img class="icon" alt="icon" src="assets/icons/reactjs.webp">
+                            </div>
+                        </div>
+                        <div class="skill-progress">
+                            <svg class="progress-svg">
+                                <circle class="progress-bg"></circle>
+                                <circle class="progress-bar"></circle>
+                            </svg>
+                            <img class="progress-icon" src="">
+                            <div class="progress-text">0%</div>
+                        </div>
                     </div>
-                    <div class="skills-grid">
-                        <div class="skill-card">
-                            <div class="skill-content">
-                                <h3 class="title">Frontend</h3>
-                                <span class="span">4+ Years Experience</span>
-                                <ul class="tags">
-                                    <li class="tag" data-skill="html" data-percent="95">HTML</li>
-                                    <li class="tag" data-skill="css" data-percent="90">CSS</li>
-                                    <li class="tag" data-skill="js" data-percent="80">JavaScript</li>
-                                    <li class="tag" data-skill="react" data-percent="60">React</li>
-                                </ul>
-                            </div>
-                            <div class="icon-stack">
-                                <div class="icon" data-skill="html">
-                                    <img src="assets/icons/html.webp">
+                    <div class="skill-item">
+                        <div class="content">
+                            <div class="header">
+                                <div class="icon">
+                                    <svg class="svg" width="70" height="55" viewBox="0 0 60 50" style="overflow:visible">
+                                        <rect class="r1" x="0" y="0" rx="5" ry="5" width="60" height="50" fill="none" stroke="var(--accentDark)" stroke-width="3" />
+                                        <rect class="r2" x="0" y="0" rx="5" ry="5" width="60" height="12" fill="var(--accentLight)" stroke="var(--accentLight)" stroke-width="3" />
+                                        <rect class="r3" x="30" y="3" rx="6" ry="6" width="6" height="6" fill="var(--white)" />
+                                        <rect class="r4" x="40" y="3" rx="6" ry="6" width="6" height="6" fill="var(--white)" />
+                                        <rect class="r5" x="50" y="3" rx="6" ry="6" width="6" height="6" fill="var(--white)" />
+                                    </svg>
                                 </div>
-                                <div class="icon" data-skill="css">
-                                    <img src="assets/icons/css.webp">
-                                </div>
-                                <div class="icon" data-skill="js">
-                                    <img src="assets/icons/js.webp">
-                                </div>
-                                <div class="icon" data-skill="react">
-                                    <img src="assets/icons/reactjs.webp">
+                                <div class="text">
+                                    <h3 class="name">Backend</h3>
+                                    <span class="experience">3+ Years Experience</span>
                                 </div>
                             </div>
-                            <div class="icon-preview">
-                                <svg class="progress-ring">
-                                    <circle class="progress-bg"></circle>
-                                    <circle class="progress-bar"></circle>
-                                </svg>
-                                <img class="preview-img" src="">
-                                <div class="progress-text">0%</div>
+                            <ul class="skills">
+                                <li class="skill" data-skill="java" data-percent="85">Java</li>
+                                <li class="skill" data-skill="php" data-percent="60">PHP</li>
+                                <li class="skill" data-skill="nodejs" data-percent="50">Node JS</li>
+                            </ul>
+                        </div>
+                        <div class="skill-icons">
+                            <div class="icon-box" data-skill="java">
+                                <img class="icon" alt="icon" src="assets/icons/java.webp">
+                            </div>
+                            <div class="icon-box" data-skill="php">
+                                <img class="icon" alt="icon" src="assets/icons/php.webp">
+                            </div>
+                            <div class="icon-box" data-skill="nodejs">
+                                <img class="icon" alt="icon" src="assets/icons/nodejs.webp">
                             </div>
                         </div>
-                        <div class="skill-card">
-                            <div class="skill-content">
-                                <h3 class="title">Backend</h3>
-                                <span class="span">3+ Years Experience</span>
-                                <ul class="tags">
-                                    <li class="tag" data-skill="java" data-percent="85">Java</li>
-                                    <li class="tag" data-skill="php" data-percent="60">PHP</li>
-                                    <li class="tag" data-skill="nodejs" data-percent="50">Node JS</li>
-                                </ul>
+                        <div class="skill-progress">
+                            <svg class="progress-svg">
+                                <circle class="progress-bg"></circle>
+                                <circle class="progress-bar"></circle>
+                            </svg>
+                            <img class="progress-icon" src="">
+                            <div class="progress-text">0%</div>
+                        </div>
+                    </div>
+                    <div class="skill-item">
+                        <div class="content">
+                            <div class="header">
+                                <div class="icon">
+                                    <svg class="svg" width="70" height="55" viewBox="0 0 60 50" style="overflow:visible">
+                                        <rect class="r1" x="0" y="0" rx="5" ry="5" width="60" height="50" fill="none" stroke="var(--accentDark)" stroke-width="3" />
+                                        <rect class="r2" x="0" y="0" rx="5" width="60" height="12" fill="var(--accentDark)" stroke="var(--accentDark)" stroke-width="3" />
+                                        <rect class="r3" x="6" y="18" rx="2" ry="2" width="18" height="26" fill="var(--accentLight)" stroke="var(--accentDark)" stroke-width="1" />
+                                        <rect class="r3" x="28" y="18" rx="2" ry="2" width="26" height="26" fill="none" stroke="var(--accentDark)" stroke-width="1" />
+                                    </svg>
+                                </div>
+                                <div class="text">
+                                    <h3 class="name">Database</h3>
+                                    <span class="experience">3+ Years Experience</span>
+                                </div>
                             </div>
-                            <div class="icon-stack">
-                                <div class="icon" data-skill="java">
-                                    <img src="assets/icons/java.webp">
-                                </div>
-                                <div class="icon" data-skill="php">
-                                    <img src="assets/icons/php.webp">
-                                </div>
-                                <div class="icon" data-skill="nodejs">
-                                    <img src="assets/icons/nodejs.webp">
-                                </div>
+                            <ul class="skills">
+                                <li class="skill" data-skill="mySQL" data-percent="80">MySQL</li>
+                                <li class="skill" data-skill="firebase" data-percent="90">Firebase</li>
+                                <li class="skill" data-skill="oracle" data-percent="50">Oracle</li>
+                            </ul>
+                        </div>
+                        <div class="skill-icons">
+                            <div class="icon-box" data-skill="mySQL">
+                                <img class="icon" alt="icon" src="assets/icons/mysql.webp">
                             </div>
-                            <div class="icon-preview">
-                                <svg class="progress-ring">
-                                    <circle class="progress-bg"></circle>
-                                    <circle class="progress-bar"></circle>
-                                </svg>
-                                <img class="preview-img" src="">
-                                <div class="progress-text">0%</div>
+                            <div class="icon-box" data-skill="firebase">
+                                <img class="icon" alt="icon" src="assets/icons/firebase.webp">
+                            </div>
+                            <div class="icon-box" data-skill="oracle">
+                                <img class="icon" alt="icon" src="assets/icons/oracle.webp">
                             </div>
                         </div>
-                        <div class="skill-card">
-                            <div class="skill-content">
-                                <h3 class="title">Database</h3>
-                                <span class="span">3+ Years Experience</span>
-                                <ul class="tags">
-                                    <li class="tag" data-skill="mySQL" data-percent="80">MySQL</li>
-                                    <li class="tag" data-skill="firebase" data-percent="90">Firebase</li>
-                                    <li class="tag" data-skill="oracle" data-percent="50">Oracle</li>
-                                </ul>
+                        <div class="skill-progress">
+                            <svg class="progress-svg">
+                                <circle class="progress-bg"></circle>
+                                <circle class="progress-bar"></circle>
+                            </svg>
+                            <img class="progress-icon" src="">
+                            <div class="progress-text">0%</div>
+                        </div>
+                    </div>
+                    <div class="skill-item">
+                        <div class="content">
+                            <div class="header">
+                                <div class="icon">
+                                    <svg class="svg" width="70" height="55" viewBox="0 0 60 50" style="overflow:visible">
+                                        <rect class="r1" x="0" y="0" rx="5" ry="5" width="60" height="50" fill="none" stroke="var(--accentDark)" stroke-width="3" />
+                                        <rect class="r2" x="0" y="0" rx="5" width="60" height="12" fill="var(--accentDark)" stroke="var(--accentDark)" stroke-width="3" />
+                                        <rect class="r3" x="6" y="18" rx="2" ry="2" width="18" height="26" fill="var(--accentLight)" stroke="var(--accentDark)" stroke-width="1" />
+                                        <rect class="r3" x="28" y="18" rx="2" ry="2" width="26" height="26" fill="none" stroke="var(--accentDark)" stroke-width="1" />
+                                    </svg>
+                                </div>
+                                <div class="text">
+                                    <h3 class="name">Design</h3>
+                                    <span class="experience">3+ Years Experience</span>
+                                </div>
                             </div>
-                            <div class="icon-stack">
-                                <div class="icon" data-skill="mySQL">
-                                    <img src="assets/icons/mysql.webp">
-                                </div>
-                                <div class="icon" data-skill="firebase">
-                                    <img src="assets/icons/firebase.webp">
-                                </div>
-                                <div class="icon" data-skill="oracle">
-                                    <img src="assets/icons/oracle.webp">
-                                </div>
+                            <ul class="skills">
+                                <li class="skill" data-skill="figma" data-percent="85">Figma</li>
+                                <li class="skill" data-skill="bootstrap" data-percent="95">Bootstrap</li>
+                                <li class="skill" data-skill="photoshop" data-percent="70">Photoshop</li>
+                                <li class="skill" data-skill="illustrate" data-percent="60">Illustrate</li>
+                            </ul>
+                        </div>
+                        <div class="skill-icons">
+                            <div class="icon-box" data-skill="figma">
+                                <img class="icon" alt="icon" src="assets/icons/figma.webp">
                             </div>
-                            <div class="icon-preview">
-                                <svg class="progress-ring">
-                                    <circle class="progress-bg"></circle>
-                                    <circle class="progress-bar"></circle>
-                                </svg>
-                                <img class="preview-img" src="">
-                                <div class="progress-text">0%</div>
+                            <div class="icon-box" data-skill="bootstrap">
+                                <img class="icon" alt="icon" src="assets/icons/bootstrap.webp">
+                            </div>
+                            <div class="icon-box" data-skill="photoshop">
+                                <img class="icon" alt="icon" src="assets/icons/photoshop.webp">
+                            </div>
+                            <div class="icon-box" data-skill="illustrate">
+                                <img class="icon" alt="icon" src="assets/icons/illustrator.webp">
                             </div>
                         </div>
-                        <div class="skill-card">
-                            <div class="skill-content">
-                                <h3 class="title">UI / UX</h3>
-                                <span class="span">2+ Years Experience</span>
-                                <ul class="tags">
-                                    <li class="tag" data-skill="figma" data-percent="85">Figma</li>
-                                    <li class="tag" data-skill="bootstrap" data-percent="95">Bootstrap</li>
-                                    <li class="tag" data-skill="photoshop" data-percent="70">Photoshop</li>
-                                    <li class="tag" data-skill="illustrate" data-percent="60">Illustrate</li>
-                                </ul>
-                            </div>
-                            <div class="icon-stack">
-                                <div class="icon" data-skill="figma">
-                                    <img src="assets/icons/figma.webp">
-                                </div>
-                                <div class="icon" data-skill="bootstrap">
-                                    <img src="assets/icons/bootstrap.webp">
-                                </div>
-                                <div class="icon" data-skill="photoshop">
-                                    <img src="assets/icons/photoshop.webp">
-                                </div>
-                                <div class="icon" data-skill="illustrate">
-                                    <img src="assets/icons/illustrator.webp">
-                                </div>
-                            </div>
-                            <div class="icon-preview">
-                                <svg class="progress-ring">
-                                    <circle class="progress-bg"></circle>
-                                    <circle class="progress-bar"></circle>
-                                </svg>
-                                <img class="preview-img" src="">
-                                <div class="progress-text">0%</div>
-                            </div>
+                        <div class="skill-progress">
+                            <svg class="progress-svg">
+                                <circle class="progress-bg"></circle>
+                                <circle class="progress-bar"></circle>
+                            </svg>
+                            <img class="progress-icon" alt="progress-icon" src="">
+                            <div class="progress-text">0%</div>
                         </div>
                     </div>
                 </div>
+            </div>
+        </section>
+        <!---->
+
+        <!-- Section Journey -->
+        <section class="section section-journey" id="journey">
+            <div class="container">
                 <div class="layout layout-journey">
                     <div class="content-header">
                         <h4 class="subtitle">My Journey</h4>
@@ -293,37 +350,37 @@
                     <div class="journey-content journey-profession active">
                         <div class="journey-item active">
                             <div class="nav"></div>
-                            <div class="journey">
-                                <span class="date">2026 - Present</span>
+                            <div class="content">
+                                <span class="year">2026 - Present</span>
                                 <h3 class="name">Senior Analsyt</h3>
-                                <h5 class="location">Wipro, Chennai</h5>
-                                <ul class="list">
-                                    <li class="list-item">Working on US healthcare systems and enterprise applications</li>
-                                    <li class="list-item">Improved system performance and reduced production issues</li>
+                                <h5 class="location"><i class="fas fa-briefcase icon"></i>Wipro, Chennai</h5>
+                                <ul class="description">
+                                    <li>Working on US healthcare systems</li>
+                                    <li>Improved system performance & reduced production issues</li>
                                 </ul>
                             </div>
                         </div>
                         <div class="journey-item">
                             <div class="nav"></div>
-                            <div class="journey">
-                                <span class="date">2023 - 2025</span>
+                            <div class="content">
+                                <span class="year">2023 - 2025</span>
                                 <h3 class="name">Senior Setup Configuration Specialist</h3>
-                                <h5 class="location">Wipro, Chennai</h5>
-                                <ul class="list">
-                                    <li class="list-item">Configured and managed application environments</li>
-                                    <li class="list-item">Delivered production-ready solutions</li>
+                                <h5 class="location"><i class="fas fa-briefcase icon"></i>Wipro, Chennai</h5>
+                                <ul class="description">
+                                    <li>Configured and managed application environments</li>
+                                    <li>Delivered production-ready solutions</li>
                                 </ul>
                             </div>
                         </div>
                         <div class="journey-item">
                             <div class="nav"></div>
-                            <div class="journey">
-                                <span class="date">2021 - 2023</span>
+                            <div class="content">
+                                <span class="year">2021 - 2023</span>
                                 <h3 class="name">Setup Configuration Specialist</h3>
-                                <h5 class="location">Wipro, Chennai</h5>
-                                <ul class="list">
-                                    <li class="list-item">Supported backend configurations and deployments</li>
-                                    <li class="list-item">Assisted in troubleshooting and system optimization</li>
+                                <h5 class="location"><i class="fas fa-briefcase icon"></i>Wipro, Chennai</h5>
+                                <ul class="description">
+                                    <li>Supported backend configurations and deployments</li>
+                                    <li>Assisted in troubleshooting and system optimization</li>
                                 </ul>
                             </div>
                         </div>
@@ -331,39 +388,37 @@
                     <div class="journey-content journey-education">
                         <div class="journey-item">
                             <div class="nav"></div>
-                            <div class="journey">
-                                <span class="date">2017 - 2021</span>
+                            <div class="content">
+                                <span class="year">2017 - 2021</span>
                                 <h3 class="name">B.Tech in Information Technology</h3>
-                                <h5 class="location">Adhiyamaan College of Engineering, Hosur</h5>
-                                <ul class="list">
-                                    <li class="list-item">Built a strong foundation in software development and web technologies</li>
-                                    <li class="list-item">Worked on academic projects using Java, SQL, and modern web tools</li>
+                                <h5 class="location"><i class="fas fa-graduation-cap icon"></i>Adhiyamaan College of Engineering, Hosur</h5>
+                                <ul class="description">
+                                    <li>Built a strong foundation in programming</li>
+                                    <li>Worked on academic projects on fullstack development</li>
                                 </ul>
                             </div>
                         </div>
-
                         <div class="journey-item">
                             <div class="nav"></div>
-                            <div class="journey">
-                                <span class="date">2016 - 2017</span>
+                            <div class="content">
+                                <span class="year">2016 - 2017</span>
                                 <h3 class="name">Higher Secondary in Computer Science</h3>
-                                <h5 class="location">Achariya Siksha Mandir, Puducherry</h5>
-                                <ul class="list">
-                                    <li class="list-item">Learned core computer science fundamentals and programming basics</li>
-                                    <li class="list-item">Developed interest in coding and logical problem-solving</li>
+                                <h5 class="location"><i class="fas fa-graduation-cap icon"></i>Achariya Siksha Mandir, Puducherry</h5>
+                                <ul class="description">
+                                    <li>Learned computer science and programming basics</li>
+                                    <li>Developed interest in coding and problem-solving</li>
                                 </ul>
                             </div>
                         </div>
-
                         <div class="journey-item">
                             <div class="nav"></div>
-                            <div class="journey">
-                                <span class="date">2014 - 2015</span>
+                            <div class="content">
+                                <span class="year">2014 - 2015</span>
                                 <h3 class="name">High School</h3>
-                                <h5 class="location">Ideal High School, Puducherry</h5>
-                                <ul class="list">
-                                    <li class="list-item">Built a strong academic foundation across core subjects</li>
-                                    <li class="list-item">Improved analytical thinking and problem-solving skills</li>
+                                <h5 class="location"><i class="fas fa-graduation-cap icon"></i>Ideal High School, Puducherry</h5>
+                                <ul class="description">
+                                    <li>Built a strong academic foundation across core subjects</li>
+                                    <li>Improved analytical thinking and problem-solving skills</li>
                                 </ul>
                             </div>
                         </div>
@@ -376,192 +431,109 @@
         <!-- Section Works -->
         <section class="section section-works" id="works">
             <div class="container">
-                <div class="content-header">
-                    <h4 class="subtitle">Portfolio</h4>
-                    <h1 class="title">Check Out My Works</h1>
-                </div>
-                <div class="works-tabs">
-                    <button class="works-tab active" data-filter="all">All</button>
-                    <button class="works-tab" data-filter="web">Website</button>
-                    <button class="works-tab" data-filter="android">Android</button>
+                <div class="works-header">
+                    <div class="content-header">
+                        <h4 class="subtitle">My Works</h4>
+                        <h1 class="title">Check Out My Works</h1>
+                    </div>
+                    <div class="works-tabs">
+                        <button class="works-tab tab-item1" data-filter="web">Website</button>
+                        <button class="works-tab tab-item2 active" data-filter="all">All</button>
+                        <button class="works-tab tab-item3" data-filter="android">Android</button>
+                    </div>
                 </div>
                 <div class="layout layout-works">
                     <div class="works-item" data-category="web">
-                        <span class="item-tag">Website</span>
-                        <div class="item-bg">
-                            <img class="item-img" src="assets/images/works/personal-portfolio/personal-portfolio1.webp">
+                        <div class="item-img">
+                            <img class="img" alt="img" src="assets/images/works/personal-portfolio/personal-portfolio1.webp">
                         </div>
-                        <div class="item-links">
-                            <a class="item-link" href="https://github.com/sujithg-dev/sujith-g-portfolio" target="_blank">GitHub<span class="material-symbols-outlined link-icon">arrow_right_alt</span></a>
-                        </div>
+                        <span class="category">Website</span>
+                        <a class="link" href="https://github.com/sujithg-dev/sujith-g-portfolio" target="_blank"><img class="icon" alt="icon" src="assets/icons/github.png"></a>
                         <div class="item-content">
-                            <h3 class="title">Personal Portfolio</h3>
+                            <h3 class="name">Personal Portfolio</h3>
                             <p class="description">A responsive portfolio website to showcase projects, skills, and experience.</p>
-                            <ul class="item-list">
-                                <li class="list-item">HTML</li>
-                                <li class="break"></li>
-                                <li class="list-item">CSS</li>
-                                <li class="break"></li>
-                                <li class="list-item">JavaScript</li>
-                                <li class="break"></li>
-                                <li class="list-item">Bootstrap</li>
-                                <li class="break"></li>
-                                <li class="list-item">Firebase</li>
+                            <ul class="skills">
+                                <li class="skill">HTML</li>
+                                <li class="dot"></li>
+                                <li class="skill">CSS</li>
+                                <li class="dot"></li>
+                                <li class="skill">JavaScript</li>
+                                <li class="dot"></li>
+                                <li class="skill">Firebase</li>
                             </ul>
                         </div>
                     </div>
-                    <div class="works-item" data-category="web">
-                        <span class="item-tag">Website</span>
-                        <div class="item-bg">
-                            <img class="item-img" src="assets/images/works/chef-booking/chef-booking1.webp">
+                    <div class="works-item inv" data-category="web">
+                        <div class="item-img">
+                            <img class="img" alt="img" src="assets/images/works/chef-booking/chef-booking1.webp">
                         </div>
-                        <div class="item-links">
-                            <a class="item-link" href="https://github.com/sujithg-dev/chef-booking-website" target="_blank">GitHub<span class="material-symbols-outlined link-icon">arrow_right_alt</span></a>
-                        </div>
+                        <span class="category">Website</span>
+                        <a class="link" href="https://github.com/sujithg-dev/chef-booking-website" target="_blank"><img class="icon" alt="icon" src="assets/icons/github.png"></a>
                         <div class="item-content">
-                            <h3 class="title">Chef Booking</h3>
+                            <h3 class="name">Chef Booking</h3>
                             <p class="description">A web platform for booking chefs, managing schedules, and handling customer requests.</p>
-                            <ul class="item-list">
-                                <li class="list-item">HTML</li>
-                                <li class="break"></li>
-                                <li class="list-item">CSS</li>
-                                <li class="break"></li>
-                                <li class="list-item">JavaScript</li>
-                                <li class="break"></li>
-                                <li class="list-item">Bootstrap</li>
+                            <ul class="skills">
+                                <li class="skill">HTML</li>
+                                <li class="dot"></li>
+                                <li class="skill">CSS</li>
+                                <li class="dot"></li>
+                                <li class="skill">JavaScript</li>
                             </ul>
                         </div>
                     </div>
-                    <div class="works-item" data-category="web">
-                        <span class="item-tag">Website</span>
-                        <div class="item-bg">
-                            <img class="item-img" src="assets/images/works/product-sale/product-sale1.webp">
+                    <div class="works-item inv" data-category="web">
+                        <div class="item-img">
+                            <img class="img" alt="img" src="assets/images/works/product-sale/product-sale1.webp">
                         </div>
-                        <div class="item-links">
-                            <a class="item-link" href="https://github.com/sujithg-dev/product-sale-website" target="_blank">GitHub<span class="material-symbols-outlined link-icon">arrow_right_alt</span></a>
-                        </div>
+                        <span class="category">Website</span>
+                        <a class="link" href="https://github.com/sujithg-dev/product-sale-website" target="_blank"><img class="icon" alt="icon" src="assets/icons/github.png"></a>
                         <div class="item-content">
-                            <h3 class="title">Product Sale</h3>
+                            <h3 class="name">Product Sale</h3>
                             <p class="description">A product showcase website focused on improving conversions with clean design and layout.</p>
-                            <ul class="item-list">
-                                <li class="list-item">HTML</li>
-                                <li class="break"></li>
-                                <li class="list-item">CSS</li>
-                                <li class="break"></li>
-                                <li class="list-item">JavaScript</li>
-                                <li class="break"></li>
-                                <li class="list-item">Bootstrap</li>
+                            <ul class="skills">
+                                <li class="skill">HTML</li>
+                                <li class="dot"></li>
+                                <li class="skill">CSS</li>
+                                <li class="dot"></li>
+                                <li class="skill">JavaScript</li>
                             </ul>
                         </div>
                     </div>
                     <div class="works-item" data-category="web">
-                        <span class="item-tag">Website</span>
-                        <div class="item-bg">
-                            <img class="item-img" src="assets/images/works/personal-branding/personal-branding1.webp">
+                        <div class="item-img">
+                            <img class="img" alt="img" src="assets/images/works/personal-branding/personal-branding1.webp">
                         </div>
-                        <div class="item-links">
-                            <a class="item-link" href="https://github.com/sujithg-dev/personal-branding-website" target="_blank">GitHub<span class="material-symbols-outlined link-icon">arrow_right_alt</span></a>
-                        </div>
+                        <span class="category">Website</span>
+                        <a class="link" href="https://github.com/sujithg-dev/personal-branding-website" target="_blank"><img class="icon" alt="icon" src="assets/icons/github.png"></a>
                         <div class="item-content">
-                            <h3 class="title">Personal Branding</h3>
+                            <h3 class="name">Personal Branding</h3>
                             <p class="description">A personal branding website designed to highlight skills, projects, and professional identity.</p>
-                            <ul class="item-list">
-                                <li class="list-item">HTML</li>
-                                <li class="break"></li>
-                                <li class="list-item">CSS</li>
-                                <li class="break"></li>
-                                <li class="list-item">JavaScript</li>
-                                <li class="break"></li>
-                                <li class="list-item">Bootstrap</li>
-                            </ul>
-                        </div>
-                    </div>
-                    <div class="works-item" data-category="android">
-                        <span class="item-tag">Android App</span>
-                        <div class="item-bg">
-                            <img class="item-img" src="assets/images/works/pro-class/proclass.webp">
-                        </div>
-                        <div class="item-links">
-                            <a class="item-link" href="javascript:void(0)" target="_blank">GitHub<span class="material-symbols-outlined link-icon">arrow_right_alt</span></a>
-                        </div>
-                        <div class="item-content">
-                            <h3 class="title">Pro Class</h3>
-                            <p class="description">An Android application to track student attendance and monitor activity during sessions.</p>
-                            <ul class="item-list">
-                                <li class="list-item">Java</li>
-                                <li class="break"></li>
-                                <li class="list-item">Firebase</li>
-                                <li class="break"></li>
-                                <li class="list-item">Android Studio</li>
-                            </ul>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </section>
-        <!---->
+                            <ul class="skills">
+                                <li class="skill">HTML</li>
+                                <li class="dot"></li>
+                                <li class="skill">CSS</li>
+                                <li class="dot"></li>
+                                <li class="skill">JavaScript</li>
 
-        <!-- Section Service -->
-        <section class="section section-service" id="service">
-            <div class="container">
-                <div class="content-header">
-                    <h4 class="subtitle">Services</h4>
-                    <h1 class="title">What I Do</h1>
-                </div>
-                <div class="layout layout-service">
-                    <div class="service-item">
-                        <div class="header">
-                            <svg class="svg" width="90" height="75" viewBox="0 0 60 50" style="overflow:visible">
-                                <rect class="r1" x="0" y="0" width="60" height="50" fill="none" stroke="var(--accentDark)" stroke-width="3" />
-                                <rect class="r2" x="0" y="0" width="60" height="6" fill="var(--accentDark)" stroke="var(--accentDark)" stroke-width="3" />
-                                <rect class="r3" x="3" y="9" width="16" height="38" fill="var(--accent)" stroke="var(--accent)" stroke-width="3" />
-                                <rect class="r4" x="4.5" y="12" width="13" height="12" fill="var(--white)" stroke="var(--accent)" stroke-width="3" />
-                                <line class="l1" x1="6" y1="28" x2="16" y2="28" stroke="var(--white)" stroke-width="2" />
-                                <line class="l2" x1="6" y1="34" x2="16" y2="34" stroke="var(--white)" stroke-width="2" />
-                                <line class="l3" x1="6" y1="40" x2="16" y2="40" stroke="var(--white)" stroke-width="2" />
-                                <line class="l4" x1="26" y1="16" x2="52" y2="16" stroke="var(--accentDark)" stroke-width="2" />
-                                <line class="l5" x1="26" y1="22" x2="52" y2="22" stroke="var(--accentDark)" stroke-width="2" />
-                                <line class="l6" x1="26" y1="28" x2="52" y2="28" stroke="var(--accentDark)" stroke-width="2" />
-                                <line class="l7" x1="26" y1="34" x2="52" y2="34" stroke="var(--accentDark)" stroke-width="2" />
-                                <line class="l8" x1="26" y1="40" x2="40" y2="40" stroke="var(--accentDark)" stroke-width="2" />
-                            </svg>
-                            <h3 class="name">Frontend <br> Development</h3>
-                        </div>
-                        <div class="content">
-                            <p class="text">Crafting fast, responsive interfaces that look great on every device — pixel-perfect, accessible, and built to convert.</p>
+                            </ul>
                         </div>
                     </div>
-                    <div class="service-item">
-                        <div class="header">
-                            <svg class="svg" width="90" height="75" viewBox="0 0 60 50" style="overflow:visible">
-                                <rect class="r1" x="0" y="0" width="60" height="50" fill="none" stroke="var(--accentDark)" stroke-width="3" />
-                                <rect class="r2" x="0" y="0" width="60" height="12" fill="var(--accent)" stroke="var(--accent)" stroke-width="3" />
-                                <rect class="r3" x="34" y="3" width="5" height="5" fill="var(--white)" />
-                                <rect class="r4" x="42" y="3" width="5" height="5" fill="var(--white)" />
-                                <rect class="r5" x="50" y="3" width="5" height="5" fill="var(--white)" />
-                            </svg>
-                            <h3 class="name">Backend <br> Development</h3>
+                    <div class="works-item inv" data-category="android">
+                        <div class="item-img">
+                            <img class="img" alt="img" src="assets/images/works/pro-class/proclass.webp">
                         </div>
-                        <div class="content">
-                            <p class="text">Architecting reliable APIs and server-side systems with Spring Boot — secure, scalable, and ready to grow with your product.</p>
-                        </div>
-                    </div>
-                    <div class="service-item">
-                        <div class="header">
-                            <svg class="svg" width="90" height="75" viewBox="0 0 60 50" style="overflow:visible">
-                                <rect class="r1" x="0" y="0" width="60" height="50" fill="none" stroke="var(--accentDark)" stroke-width="3" />
-                                <rect class="r2" x="0" y="0" width="60" height="6" fill="var(--accentDark)" stroke="var(--accentDark)" stroke-width="3" />
-                                <rect class="r3" x="8" y="14" width="7" height="6" fill="var(--accent)" stroke="var(--accent)" stroke-width="2" />
-                                <rect class="r3" x="19" y="14" width="7" height="6" fill="var(--accent)" stroke="var(--accent)" stroke-width="2" />
-                                <rect class="r3" x="8" y="25" width="18" height="18" fill="var(--accent)" stroke="var(--accent)" stroke-width="2" />
-                                <rect class="r3" x="32" y="14" width="20" height="6" fill="var(--accentLight)" stroke="var(--accentLight)" stroke-width="2" />
-                                <rect class="r3" x="32" y="25" width="20" height="6" fill="var(--accentLight)" stroke="var(--accentLight)" stroke-width="2" />
-                                <rect class="r3" x="32" y="36" width="20" height="6" fill="none" stroke="var(--accentLight)" stroke-width="2" />
-                            </svg>
-                            <h3 class="name">UI / UX <br> Design</h3>
-                        </div>
-                        <div class="content">
-                            <p class="text">Designing intuitive experiences that reduce friction and keep users engaged — clean layouts, thoughtful flows, and a sharp visual identity.</p>
+                        <span class="category">Android App</span>
+                        <a class="link" href="javascript:void(0)" target="_blank"><img class="icon" alt="icon" src="assets/icons/github.png"></a>
+                        <div class="item-content">
+                            <h3 class="name">Pro Class</h3>
+                            <p class="description">An Android application to track student attendance and monitor activity during sessions.</p>
+                            <ul class="skills">
+                                <li class="skill">Java</li>
+                                <li class="dot"></li>
+                                <li class="skill">Firebase</li>
+                                <li class="dot"></li>
+                                <li class="skill">Android Studio</li>
+                            </ul>
                         </div>
                     </div>
                 </div>
@@ -582,21 +554,21 @@
                             <div class="contact-item">
                                 <span class="material-symbols-outlined icon">mail</span>
                                 <div class="text">
-                                    <h5 class="label">Email Address</h5>
-                                    <a class="link" href="mailto:sujith.g7799@gmail.com">sujith.g7799@gmail.com</a>
+                                    <h5 class="name">Email Address</h5>
+                                    <a class="link" href="mailto:sujithguna001@gmail.com">sujithguna001@gmail.com</a>
                                 </div>
                             </div>
                             <div class="contact-item">
                                 <span class="material-symbols-outlined icon">chat</span>
                                 <div class="text">
-                                    <h5 class="label">Whatsapp</h5>
+                                    <h5 class="name">Whatsapp</h5>
                                     <a class="link" href="https://wa.me/+918825762028" target="_blank">+91 8825762028</a>
                                 </div>
                             </div>
                             <div class="contact-item">
                                 <span class="material-symbols-outlined icon">location_on</span>
                                 <div class="text">
-                                    <h5 class="label">Location</h5>
+                                    <h5 class="name">Location</h5>
                                     <a class="link" href="javascript:void" target="_blank">Chennai, Tamilnadu, India</a>
                                 </div>
                             </div>
@@ -604,15 +576,19 @@
                     </div>
                     <div class="contact-box">
                         <form class="form contact-form">
-                            <div class="form-text contactFormError">Message</div>
-                            <div class="input-box">
-                                <input class="input inName2" type="text" name="fullname" placeholder="Full Name" required>
+                            <div class="form-message">
+                                <p class="form-text contactFormError"></p>
                             </div>
-                            <div class="input-box">
-                                <input class="input inEmail2" type="email" name="email" placeholder="Email Address" required>
+                            <div class="input-item">
+                                <span class="material-symbols-outlined icon">person</span>
+                                <input class="input inName" type="text" name="fullname" placeholder="Your Fullname" required>
                             </div>
-                            <div class="input-box">
-                                <textarea class="input inMessage" rows="6" cols="3" placeholder="Any Inquiries? Type here . . ."></textarea>
+                            <div class="input-item">
+                                <span class="material-symbols-outlined icon">alternate_email</span>
+                                <input class="input inEmail" type="email" name="email" placeholder="Your Email Address" required>
+                            </div>
+                            <div class="input-item">
+                                <textarea class="input inMessage" rows="5" cols="3" placeholder="Any Inquiries? Ask here . . ."></textarea>
                             </div>
                             <div class="form-btn">
                                 <button class="button submit-contact-form" type="button">Send Message<span class="material-symbols-outlined icon">send</span></button>
@@ -630,11 +606,12 @@
     <footer class="footer">
         <div class="container">
             <div class="footer-content">
-                <p class="text">Sujith.g © 2025</p>
-                <div class="links">
-                    <p class="text">Follow on</p>
+                <p class="copyright-text">Sujith.g © 2025</p>
+                <div class="social-links">
                     <a class="link" target="_blank" href="https://www.linkedin.com/in/sujithguna/"><i class="fab fa-linkedin-in icon"></i></a>
                     <a class="link" target="_blank" href="https://www.instagram.com/sujith._.g/"><i class="fab fa-instagram icon"></i></a>
+                    <a class="link" target="_blank" href="https://www.instagram.com/sujith._.g/"><i class="fab fa-github"></i></a>
+                    <a class="link" target="_blank" href="https://www.instagram.com/sujith._.g/"><i class="fab fa-twitter"></i></a>
                 </div>
             </div>
         </div>

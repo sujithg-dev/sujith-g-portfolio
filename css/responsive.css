@@ -1,0 +1,443 @@
+/* -------------------------
+   RESPONSIVE DESIGN
+------------------------- */
+
+/* Mobile (up to 767px) */
+@media (max-width: 767px) {
+    body {
+        font-size: 90%;
+    }
+
+    p {
+        line-height: 1.6;
+    }
+
+    .container {
+        padding-inline: var(--20px);
+    }
+
+    .bg-effect1,
+    .bg-effect2 {
+        display: none;
+    }
+
+    /* ----- Navbar ----- */
+    .navbar,
+    .navbar.sticky {
+        padding: var(--10px) 0;
+        height: auto;
+        background: var(--bgNavbar);
+        backdrop-filter: blur(50px);
+        box-shadow: 0 5px 20px rgba(0, 0, 0, 0.2);
+    }
+
+    .navbar-brand {
+        color: var(--text);
+    }
+
+    .navbar-toggler {
+        padding: 0;
+        border-radius: 0;
+    }
+
+    .navbar-nav {
+        display: flex;
+        flex-direction: column;
+        gap: var(--10px);
+        padding: var(--20px) 0;
+    }
+
+    .navbar-nav::before {
+        display: none;
+    }
+
+    .navbar-nav>.nav-link,
+    .navbar-nav>.nav-item>.nav-link,
+    .navbar.sticky .navbar-nav>.nav-link,
+    .navbar.sticky .navbar-nav>.nav-item>.nav-link {
+        width: 100%;
+        color: var(--text);
+    }
+
+    .dropdown-menu {
+        background: var(--bgCard);
+    }
+
+    .dropdown-menu>.dropdown-item {
+        text-align: center;
+    }
+
+    .navbar-nav>.nav-item>.nav-link {
+        width: 100%;
+    }
+
+    .navbar.sticky .navbar-nav>.nav-link.active {
+        color: var(--white);
+    }
+
+    .navbar-nav>.nav-link:hover,
+    .navbar-nav>.nav-link.active,
+    .navbar-nav>.nav-item>.nav-link.active {
+        color: var(--white);
+        background: var(--accent);
+    }
+
+    .navbar-tools {
+        padding: 0 0 var(--20px);
+        justify-content: center;
+        gap: var(--12px);
+    }
+
+    .navbar-tools>.btn>.icon {
+        color: var(--text);
+    }
+
+    .navbar-tools>.btn>.color-picker {
+        top: 50px;
+        left: 0;
+        margin-left: 100px;
+    }
+
+    .section {
+        padding-top: 100px;
+    }
+
+    .content-header>.title {
+        font-size: var(--fontSizeH);
+    }
+
+    .content-header>.subtitle {
+        margin-bottom: var(--12px);
+    }
+
+    .section-home {
+        padding: 0;
+    }
+
+    .home-content {
+        flex-direction: column;
+        justify-content: flex-start;
+        align-items: center;
+        gap: var(--24px);
+        padding-bottom: 0;
+        padding-top: 10rem;
+        text-align: center;
+    }
+
+    .home-content>.home-img {
+        width: 100%;
+    }
+
+    .home-content .home-subtitle,
+    .home-content .home-subtitle>span {
+        font-size: 3rem;
+    }
+
+    .home-content .home-title,
+    .home-content .home-text {
+        font-size: 5rem;
+    }
+
+    .home-content .glitch>.glitch-text {
+        display: none;
+    }
+
+    .home-content>.random {
+        left: 50%;
+        bottom: 50%;
+        transform: translate(-50%, -50%);
+    }
+
+    .home-content>.random>.word>.letter {
+        font-size: 4rem;
+    }
+
+
+    /* ----- Section About ----- */
+    .about-image {
+        display: none;
+    }
+
+    .about-content>.paragraph>.list {
+        padding-left: var(--20px);
+    }
+
+
+    /* ----- Section Skills ----- */
+    .layout-skills {
+        margin-top: var(--20px);
+        gap: var(--20px);
+    }
+
+    .skill-item {
+        padding-block: var(--20px);
+        padding-left: var(--20px);
+        width: 390px;
+    }
+
+    .skill-item>.content {
+        gap: var(--20px);
+    }
+
+    .skill-item>.content>.header {
+        gap: var(--10px);
+    }
+
+    .skill-item>.content>.skills {
+        gap: var(--4px);
+    }
+
+    .skill-item>.skill-icons>.icon-box {
+        width: var(--40px);
+        height: var(--40px);
+    }
+
+    .skill-item>.skill-progress {
+        width: auto;
+        height: auto;
+    }
+
+    .skill-item>.skill-progress>.progress-icon {
+        top: 50%;
+        right: var(--20px);
+        width: 80px;
+    }
+
+    .skill-item>.skill-progress>.progress-svg,
+    .skill-item>.skill-progress>.progress-svg>.progress-bg,
+    .skill-item>.skill-progress>.progress-svg>.progress-bar,
+    .skill-item>.skill-progress>.progress-text {
+        display: none;
+    }
+
+
+
+    /* ----- Section Journey ----- */
+    .layout-journey,
+    .journey-item {
+        gap: var(--40px);
+    }
+
+    .journey-item:not(:last-child)>.content {
+        margin-bottom: 100px;
+    }
+
+    .journey-item>.content>.year::before {
+        left: -40px;
+        width: 40px;
+    }
+
+    .journey-item>.content>.year::after {
+        left: -48.5px;
+    }
+
+    .journey-item>.content>.description {
+        padding-left: var(--10px);
+    }
+
+
+    /* ----- Section Works ----- */
+    .works-header {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: var(--20px);
+    }
+
+    .works-tabs::before {
+        width: 100px;
+        height: var(--40px);
+    }
+
+    .works-tab {
+        width: 100px;
+        height: var(--40px);
+    }
+
+    .works-tab.active {
+        color: var(--white);
+    }
+
+    .works-tabs:has(.tab-item2.active)::before {
+        left: 115px;
+    }
+
+    .works-tabs:has(.tab-item3.active)::before {
+        left: 220px;
+    }
+
+    .layout-works {
+        margin-top: var(--20px);
+        grid-template-columns: 1fr;
+        gap: var(--20px);
+    }
+
+    .works-item {
+        height: 250px;
+    }
+
+    .works-item>.item-img>.img {
+        height: 250px;
+    }
+
+    .works-item>.link>.icon {
+        width: var(--28px);
+    }
+
+    .works-item>.item-content {
+        top: 120px;
+        padding: var(--20px);
+    }
+
+    .works-item:hover>.item-content {
+        top: 0;
+    }
+
+    .works-item>.item-content::before {
+        top: 80px;
+    }
+
+    .works-item>.item-content>.skills {
+        margin-top: 0;
+        gap: var(--6px);
+    }
+
+    .works-item>.item-content>.skills>.skill {
+        font-size: var(--fontSizeM);
+    }
+
+
+    /* ----- Section Contact ----- */
+    .section-contact {
+        padding-block: 50px;
+    }
+
+    .layout-contact {
+        gap: var(--40px);
+    }
+
+    .contact-box>.contact-items {
+        margin-top: var(--20px);
+        gap: var(--20px);
+    }
+
+
+    /* ----- Section Contact > Contact Form ----- */
+    .contact-form {
+        padding: var(--20px);
+    }
+
+    .contact-form>.input-item>.icon {
+        padding: var(--10px);
+    }
+
+    .contact-form>.form-btn>.button {
+        margin-top: var(--10px);
+    }
+
+
+    /* ----- Footer ----- */
+    .footer {
+        padding-block: var(--20px);
+    }
+
+    .footer-content>.social-links {
+        gap: var(--20px);
+    }
+
+    .footer-content>.social-links>.link {
+        font-size: var(--18px);
+    }
+
+
+    /* -------------------------
+        dashboard.html
+    ------------------------- */
+    .navbar-dashboard {
+        padding: var(--20px) 0;
+    }
+
+    .navbar-dashboard>.navbar-tools {
+        gap: var(--12px);
+    }
+
+    .navbar-dashboard>.navbar-tools>.btn>.color-picker {
+        top: 40px;
+        left: unset;
+        right: 0;
+    }
+
+    .section.section-dashboard {
+        padding: var(--20px) 0;
+    }
+
+    .layout-settings {
+        gap: var(--10px);
+    }
+
+    .settings-item>.icon {
+        width: 70px;
+        height: 70px;
+    }
+
+
+    /* ----- Dashboard Table ----- */
+    .table-header,
+    .table-header>.table-btns {
+        gap: var(--6px);
+    }
+
+    .table-header>.table-nav::before {
+        width: 80px;
+        height: var(--40px);
+    }
+
+    .table-header>.table-nav>.nav-btn {
+        width: 80px;
+        height: var(--40px);
+        font-size: var(--fontSizeS);
+    }
+
+    .table-header>.table-nav>.nav-btns.nav-btn.active {
+        color: var(--white);
+    }
+
+    .table-header>.table-nav:has(.nav-btn2.active)::before {
+        left: 90px;
+    }
+
+    .table-header>.table-nav:has(.nav-btn3.active)::before {
+        left: 175px;
+    }
+
+    .table-header>.table-btns>.icon {
+        width: var(--40px);
+        height: var(--40px);
+    }
+
+    .table-content>table>tbody>tr>td {
+        font-size: 12px;
+
+    }
+
+    /* -------------------------
+        certificates.html
+    ------------------------- */
+    .section-certificates {
+        padding: 0;
+    }
+
+    .certificates-content {
+        position: relative;
+        width: 100%;
+        height: 100vh;
+        overflow-y: auto;
+    }
+
+    .certificates-content tbody tr td {
+        padding: var(--12px) 0;
+        font-size: var(--fontSizeS);
+        border-bottom: 1px solid var(--textLight);
+        vertical-align: middle;
+        white-space: nowrap;
+    }
+}
