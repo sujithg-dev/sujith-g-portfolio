@@ -35,9 +35,11 @@
     <!---->
 
     <!-- Custom JS -->
+    <script src="js/firebase.js" defer></script>
+    <script src="js/custom.js" defer></script>
     <script src="js/app_config.js" defer></script>
-    <script src="js/app_dashboard.js" defer></script>
-    <script src="js/app_theme.js" defer></script>
+    <script src="js/theme.js" defer></script>
+    <script src="js/formHandler.js" defer></script>
     <!---->
 </head>
 
@@ -49,28 +51,25 @@
     </div>
     <!---->
 
-    <div class="home-effect1"></div>
-    <div class="home-effect2"></div>
-    <div class="home-effect3"></div>
-
-
     <!-- Block -->
     <div class="block dashboard">
         <div class="window dashboard">
             <header>
                 <h4 class="title">Dashboard Login</h4>
             </header>
-            <form>
-                <div class="form-text login"></div>
-                <div class="form-input">
-                    <div class="input-item">
-                        <span class="material-symbols-outlined icon">password</span>
-                        <input type="password" class="input loginPin" placeholder="Enter Password">
+            <main>
+                <div class="form-output login-form-output"></div>
+                <form>
+                    <div class="field-items">
+                        <div class="input-item">
+                            <span class="material-symbols-outlined icon">password</span>
+                            <input type="password" class="input inPassword" placeholder="Enter Password">
+                        </div>
                     </div>
-                </div>
-            </form>
+                </form>
+            </main>
             <footer>
-                <span class="material-symbols-outlined icon submit-dashboardLogin act">arrow_forward</span>
+                <button class="button dashboard-login">Login<span class="material-symbols-outlined icon">keyboard_double_arrow_right</span></button>
             </footer>
         </div>
     </div>
@@ -82,58 +81,53 @@
             <h4 class="title">Change Password</h4>
             <span class="material-symbols-outlined icon" onclick='toggleDialog("window-password")'>close</span>
         </header>
-        <form>
-            <div class="form-text contactFormError"></div>
-            <div class="form-input">
-                <div class="input-item">
-                    <span class="material-symbols-outlined icon">password</span>
-                    <input type="text" class="input currentPin" placeholder="Current Password">
+        <main>
+            <div class="form-output password-form-output"></div>
+            <form>
+                <div class="field-items">
+                    <div class="input-item">
+                        <span class="material-symbols-outlined icon">password</span>
+                        <input type="text" class="input inCurrentPassword" placeholder="Current Password">
+                    </div>
+                    <div class="input-item">
+                        <span class="material-symbols-outlined icon">password</span>
+                        <input type="text" class="input inNewPassword" placeholder="New Password">
+                    </div>
+                    <div class="input-item">
+                        <span class="material-symbols-outlined icon">password</span>
+                        <input type="text" class="input inConfirmPassword" placeholder="Confirm Password">
+                    </div>
                 </div>
-                <div class="input-item">
-                    <span class="material-symbols-outlined icon">password</span>
-                    <input type="text" class="input newPin" placeholder="New Password">
-                </div>
-                <div class="input-item">
-                    <span class="material-symbols-outlined icon">password</span>
-                    <input type="text" class="input confirmPin" placeholder="Confirm Password">
-                </div>
-            </div>
-        </form>
+            </form>
+        </main>
         <footer>
-            <span class="material-symbols-outlined icon reset-passwordChange">close</span>
-            <span class="material-symbols-outlined icon submit-passwordChange">arrow_forward</span>
+            <button class="button change-password">Change<span class="material-symbols-outlined icon">keyboard_double_arrow_right</span></button>
         </footer>
     </dialog>
     <!---->
 
     <!-- Dialog File Upload -->
-    <dialog class="window window-file">
+    <dialog class="window window-fileUpload">
         <header>
             <h4 class="title">File Upload</h4>
-            <span class="material-symbols-outlined icon" onclick='toggleDialog("window-file")'>close</span>
+            <span class="material-symbols-outlined icon" onclick='toggleDialog("window-fileUpload")'>close</span>
         </header>
-        <form>
-            <div class="form-img"></div>
-            <div class="form-text file-text"></div>
-            <div class="form-input">
-                <div class="input-item">
-                    <span class="material-symbols-outlined icon">file_present</span>
-                    <input type="text" class="input file-name" placeholder="File Name">
+        <main>
+            <div class="form-output fileUpload-form-output"></div>
+            <form>
+                <div class="fileUpload-preview"></div>
+                <div class="field-items">
+                    <div class="input-item">
+                        <span class="material-symbols-outlined icon">file_present</span>
+                        <input type="text" class="input infileName" placeholder="File Name">
+                    </div>
                 </div>
-                <div class="input-item ini-certInstitute d-none">
-                    <span class="material-symbols-outlined icon">badge</span>
-                    <input type="text" class="input in-certInstitute" placeholder="Institution Name">
-                </div>
-            </div>
-        </form>
+            </form>
+        </main>
         <footer>
-            <select class="select file-type" onchange='checkFormInput()'>
-                <option value="file">File</option>
-                <option value="certificate">Certificate</option>
-            </select>
-            <span class="material-symbols-outlined icon reset-file">close</span>
-            <span class="material-symbols-outlined icon attach-file">attachment</span>
-            <span class="material-symbols-outlined icon upload-file">upload</span>
+            <button class="button reset-file">Reset</button>
+            <button class="button attach-file">Attach</button>
+            <button class="button upload-file">Upload</button>
         </footer>
     </dialog>
     <!---->
@@ -141,8 +135,8 @@
     <!-- Dialog Message Info -->
     <dialog class="window window-message">
         <header>
-            <h6>Message</h6>
-            <span class="material-symbols-outlined" onclick='toggleDialog("window-message")'>close</span>
+            <h4 class="title">Message</h4>
+            <span class="material-symbols-outlined icon" onclick='toggleDialog("window-message")'>close</span>
         </header>
         <div class="window-content">
             <div>
@@ -160,21 +154,70 @@
     </dialog>
     <!---->
 
+    <!-- Dialog Visitor Info -->
+    <dialog class="window window-visitor">
+        <header>
+            <h4 class="title">User Details</h4>
+            <span class="material-symbols-outlined icon" onclick='toggleDialog("window-visitor")'>close</span>
+        </header>
+        <main>
+            <div class="window-content">
+                <div class="item">
+                    <label>Device Type</label>
+                    <span>:</span>
+                    <span class="txtDeviceType"></span>
+                </div>
+                <div class="item">
+                    <label>Total Visits</label>
+                    <span>:</span>
+                    <span class="txtTotalVisit"></span>
+                </div>
+                <div class="item">
+                    <label>First Visit</label>
+                    <span>:</span>
+                    <span class="txtFirstVisit"></span>
+                </div>
+                <div class="item">
+                    <label>Last Visit</label>
+                    <span>:</span>
+                    <span class="txtLastVisit"></span>
+                </div>
+                <hr>
+                <div class="visit-list"></div>
+            </div>
+        </main>
+
+    </dialog>
+    <!---->
+
     <!-- Header -->
-    <header>
+    <header class="dashboard-header">
         <div class="container">
             <div class="navbar-dashboard">
                 <h4>Dashboard</h4>
-                <div class="navbar-tools">
-                    <div class="btn btn-lock" onclick='toggleDialog("window-password")'>
+                <div class="navbar-items">
+                    <div class="nav-item nav-lock" onclick='toggleDialog("window-password")'>
                         <span class="material-symbols-outlined icon">lock</span>
                     </div>
-                    <div class="btn btn-mode" onclick="toggleMode()">
+                    <div class="nav-item nav-mode" onclick="toggleMode()">
                         <span class="material-symbols-outlined icon mode-icon">light_mode</span>
                     </div>
-                    <div class="btn btn-theme" onclick="togglePicker()">
+                    <div class="nav-item nav-theme" onclick="togglePicker()">
                         <span class="material-symbols-outlined icon">palette</span>
                         <div class="color-picker"> <input type="range" min="0" max="360" onchange="updateColor(true, this.value)"></div>
+                    </div>
+                    <div class="nav-item nav-notification" onclick='toggleNotification(".notification-window")'>
+                        <span class="material-symbols-outlined icon">notifications</span>
+                        <span class="notification-count"></span>
+                    </div>
+                    <div class="notification-window">
+                        <div class="header">
+                            <h4 class="title">Notifications</h4>
+                            <span class="material-symbols-outlined icon" onclick='toggleNotification(".notification-window")'>close</span>
+                        </div>
+                        <div class="content notification">
+                            <p>No Notification</p>
+                        </div>
                     </div>
                 </div>
             </div>
@@ -191,41 +234,40 @@
                     <div class="settings-item appLive-btn" onclick='updateSettings("appLive")'>
                         <span class="material-symbols-outlined icon">computer</span>
                         <div class="content">
-                            <h5 class="name">App Status</h5>
-                            <h6 class="status appLiveText"></h6>
+                            <h4 class="name">App Status</h4>
+                            <span class="status appLiveText"></>
                         </div>
                     </div>
                     <div class="settings-item hueTheme-btn" onclick='updateSettings("hueTheme")'>
                         <span class="material-symbols-outlined icon">person</span>
                         <div class="content">
-                            <h5 class="name">Hue Theme</h5>
-                            <h6 class="status hueThemeText"></h6>
+                            <h4 class="name">Hue Theme</h4>
+                            <span class="status hueThemeText"></span>
                         </div>
                     </div>
                     <div class="settings-item appMode-btn" onclick='updateMode()'>
                         <span class="material-symbols-outlined icon">light_mode</span>
                         <div class="content">
-                            <h5 class="name">Theme Mode</h5>
-                            <h6 class="status appModeText"></h6>
+                            <h4 class="name">Theme Mode</h4>
+                            <span class="status appModeText"></>
                         </div>
                     </div>
                     <div class="settings-item dashboardLock-btn" onclick='updateSettings("dashboardLock")'>
                         <span class="material-symbols-outlined icon">lock</span>
                         <div class="content">
-                            <h5 class="name">Dashboard Lock</h5>
-                            <h6 class="status dashboardLockText"></h6>
+                            <h4 class="name">Dashboard Lock</h4>
+                            <span class="status dashboardLockText"></>
                         </div>
                     </div>
                 </div>
                 <div class="dashboard-table">
                     <div class="table-header">
-                        <div class="table-btns">
-                            <span class="material-symbols-outlined icon" onclick='window.open("certificates.html")'>crop_free</span>
-                            <span class="material-symbols-outlined icon" onclick='toggleDialog("window-file")'>upload</span>
+                        <div class="table-items">
+                            <button class="item-btn" onclick='toggleDialog("window-fileUpload")'><span class="material-symbols-outlined icon">upload</span></button>
                         </div>
                         <div class="table-nav">
                             <button class="nav-btn nav-btn1 messages-btn active" id="messagesNav" onclick="toggleTable('table-messages', 'messages-btn')">Messages</button>
-                            <button class="nav-btn nav-btn2 users-btn" id="UsersNav" onclick="toggleTable('table-users', 'users-btn')">Users</button>
+                            <button class="nav-btn nav-btn2 visitors-btn" id="visitorNav" onclick="toggleTable('table-visitors', 'visitors-btn')">Visitors</button>
                             <button class="nav-btn nav-btn3 files-btn" id="filesNav" onclick="toggleTable('table-files', 'files-btn')">Files</button>
                         </div>
                     </div>
@@ -236,26 +278,26 @@
                                     <th>#</th>
                                     <th>Name</th>
                                     <th>Email</th>
+                                    <th>Received</th>
                                     <th class="text-center">Actions</th>
                                 </tr>
                             </thead>
                             <tbody class="messages-data"></tbody>
                         </table>
                     </div>
-                    <div class="table-content table-users">
+                    <div class="table-content table-visitors">
                         <table>
                             <thead>
                                 <tr>
                                     <th>#</th>
-                                    <th>User Id</th>
-                                    <th>Device Type</th>
-                                    <th>First Visit</th>
-                                    <th>Last Visit</th>
-                                    <th>Total Visits</th>
+                                    <th>Visitor Id</th>
+                                    <th class="text-center">Device Type</th>
+                                    <th class="text-center">First Visit</th>
+                                    <th class="text-center">Total Visits</th>
                                     <th class="text-center">Actions</th>
                                 </tr>
                             </thead>
-                            <tbody class="users-data"></tbody>
+                            <tbody class="visitors-data"></tbody>
                         </table>
                     </div>
                     <div class="table-content table-files">
@@ -264,7 +306,6 @@
                                 <tr>
                                     <th>#</th>
                                     <th>File Name</th>
-                                    <th class="text-center">Type</th>
                                     <th class="text-center">Format</th>
                                     <th class="text-center">Actions</th>
                                 </tr>

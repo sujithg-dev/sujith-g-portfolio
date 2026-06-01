@@ -16,11 +16,6 @@
         padding-inline: var(--20px);
     }
 
-    .bg-effect1,
-    .bg-effect2 {
-        display: none;
-    }
-
     /* ----- Navbar ----- */
     .navbar,
     .navbar.sticky {
@@ -82,32 +77,36 @@
         background: var(--accent);
     }
 
-    .navbar-tools {
+    .navbar-items {
         padding: 0 0 var(--20px);
         justify-content: center;
         gap: var(--12px);
     }
 
-    .navbar-tools>.btn>.icon {
+    .navbar-items>.nav-item>.icon {
         color: var(--text);
     }
 
-    .navbar-tools>.btn>.color-picker {
+    .navbar-items>.nav-item>.color-picker {
         top: 50px;
         left: 0;
         margin-left: 100px;
     }
 
-    .section {
-        padding-top: 100px;
-    }
 
+    /* ----- Content Header ----- */
     .content-header>.title {
         font-size: var(--fontSizeH);
     }
 
     .content-header>.subtitle {
         margin-bottom: var(--12px);
+    }
+
+
+    /* ----- Section Home ----- */
+    .section {
+        padding-top: 100px;
     }
 
     .section-home {
@@ -167,12 +166,12 @@
     .layout-skills {
         margin-top: var(--20px);
         gap: var(--20px);
+        grid-template-columns: 1fr;
     }
 
     .skill-item {
         padding-block: var(--20px);
         padding-left: var(--20px);
-        width: 390px;
     }
 
     .skill-item>.content {
@@ -183,11 +182,16 @@
         gap: var(--10px);
     }
 
+    .skill-item>.content>.header>.svg {
+        width: 50px;
+        height: 50px;
+    }
+
     .skill-item>.content>.skills {
         gap: var(--4px);
     }
 
-    .skill-item>.skill-icons>.icon-box {
+    .skill-item>.skill-img>.img-box {
         width: var(--40px);
         height: var(--40px);
     }
@@ -197,7 +201,7 @@
         height: auto;
     }
 
-    .skill-item>.skill-progress>.progress-icon {
+    .skill-item>.skill-progress>.progress-img {
         top: 50%;
         right: var(--20px);
         width: 80px;
@@ -213,7 +217,11 @@
 
 
     /* ----- Section Journey ----- */
-    .layout-journey,
+    .layout-journey {
+        grid-template-columns: 1fr;
+        gap: var(--40px);
+    }
+
     .journey-item {
         gap: var(--40px);
     }
@@ -243,26 +251,28 @@
         gap: var(--20px);
     }
 
+    .works-tabs {
+        padding: var(--6px);
+    }
+
     .works-tabs::before {
-        width: 100px;
+        top: var(--6px);
+        left: var(--6px);
+        width: 80px;
         height: var(--40px);
     }
 
     .works-tab {
-        width: 100px;
+        width: 80px;
         height: var(--40px);
     }
 
-    .works-tab.active {
-        color: var(--white);
-    }
-
     .works-tabs:has(.tab-item2.active)::before {
-        left: 115px;
+        left: 90px;
     }
 
     .works-tabs:has(.tab-item3.active)::before {
-        left: 220px;
+        left: 175px;
     }
 
     .layout-works {
@@ -284,7 +294,7 @@
     }
 
     .works-item>.item-content {
-        top: 120px;
+        top: 100px;
         padding: var(--20px);
     }
 
@@ -293,7 +303,7 @@
     }
 
     .works-item>.item-content::before {
-        top: 80px;
+        top: 85px;
     }
 
     .works-item>.item-content>.skills {
@@ -312,6 +322,7 @@
     }
 
     .layout-contact {
+        grid-template-columns: 1fr;
         gap: var(--40px);
     }
 
@@ -327,7 +338,7 @@
     }
 
     .contact-form>.input-item>.icon {
-        padding: var(--10px);
+        padding: var(--14px);
     }
 
     .contact-form>.form-btn>.button {
@@ -356,14 +367,25 @@
         padding: var(--20px) 0;
     }
 
-    .navbar-dashboard>.navbar-tools {
+    .navbar-dashboard>.navbar-items {
         gap: var(--12px);
     }
 
-    .navbar-dashboard>.navbar-tools>.btn>.color-picker {
+    .navbar-dashboard>.navbar-items>.nav-item>.color-picker {
         top: 40px;
         left: unset;
         right: 0;
+    }
+
+    .notification-window {
+        position: fixed;
+        top: 10%;
+        left: 5%;
+        width: 90%;
+    }
+
+    .notification-window>.content {
+        padding-inline: var(--10px);
     }
 
     .section.section-dashboard {
@@ -417,27 +439,5 @@
     .table-content>table>tbody>tr>td {
         font-size: 12px;
 
-    }
-
-    /* -------------------------
-        certificates.html
-    ------------------------- */
-    .section-certificates {
-        padding: 0;
-    }
-
-    .certificates-content {
-        position: relative;
-        width: 100%;
-        height: 100vh;
-        overflow-y: auto;
-    }
-
-    .certificates-content tbody tr td {
-        padding: var(--12px) 0;
-        font-size: var(--fontSizeS);
-        border-bottom: 1px solid var(--textLight);
-        vertical-align: middle;
-        white-space: nowrap;
     }
 }

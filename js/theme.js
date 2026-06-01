@@ -1,44 +1,55 @@
 let appMode, hueCode;
 
-const getTheme = () => {
+const initTheme = () => {
     const hour = new Date().getHours();
 
     const localMode = localStorage.getItem("appMode");
     const localColor = localStorage.getItem("hueCode");
 
     const applyMode = val => {
+
         if (val === "system")
             appMode = window.matchMedia("(prefers-color-scheme:dark)").matches ? "dark" : "light";
+            
         else if (val === "auto")
             appMode = (hour < 5 || hour > 19) ? "dark" : "light";
+            
         else
             appMode = val;
+
         setTheme();
     };
 
     hueCode = localColor ?? null;
-    hueCode ? setTheme() :
-        db.settings.child("hueCode").once("value").then(s => { hueCode = s.val(); setTheme(); });
-    if (localMode) {
+
+    hueCode
+        ? setTheme()
+        : db.settings.child("hueCode").once("value").then(s => { hueCode = s.val(); setTheme(); });
+    
+    if (localMode)
         applyMode(localMode);
-    } else {
+
+    else
         db.settings.child("appMode").on("value", s => applyMode(s.val()));
-    }
 };
 
 let hueInterval;
 let hueListenerInitialized = false;
+
 const setTheme = () => {
+
     document.body.classList.toggle("light-mode", appMode === "light");
+
     $(".mode-icon").text(appMode === "light" ? "dark_mode" : "light_mode");
+
     if (!hueListenerInitialized) {
+
         hueListenerInitialized = true;
 
         db.settings.child("hueTheme").on("value", s => {
 
-            if (hueInterval) {
+            if (hueInterval)
                 clearInterval(hueInterval);
-            }
 
             if (!s.val()) {
                 $(":root").css("--hueColor", hueCode);
@@ -47,6 +58,7 @@ const setTheme = () => {
             }
 
             let count = hueCode ?? 0;
+            
             hueInterval = setInterval(() => {
                 $(":root").css("--hueColor", count++);
                 $(".color-picker").children().val(count);
