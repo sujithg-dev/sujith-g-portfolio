@@ -1,4 +1,3 @@
-
 $(window).on("load", e => {
 
     if ($("body").hasClass("index-page")) {
@@ -18,6 +17,11 @@ $(window).on("scroll", e => {
 
     $(".color-picker").removeClass("show")
 });
+
+
+const isLocalhost = () => {
+    return window.location.hostname === "localhost" || window.location.hostname === "127.0.0.1" || window.location.hostname === "::1"
+}
 
 
 const getTime = () => {
@@ -42,6 +46,7 @@ const getTime = () => {
         formattedTime: `${day}, ${month}, ${year} - ${hour % 12 || 12}:${minute}:${second} ${hour >= 12 ? 'PM' : 'AM'}`
     }
 }
+
 
 const formatTime = (timestamp) => {
     const now = Date.now();
@@ -74,12 +79,6 @@ const formatTime = (timestamp) => {
         month: "short",
         year: "numeric"
     });
-}
-
-
-const isLocalhost = () => {
-    const host = window.location.hostname;
-    return host === "localhost" || host === "127.0.0.1" || host === "::1"
 }
 
 
@@ -199,6 +198,7 @@ const radiumAnimation = (words, selector, delay) => {
         const order = spans.map((_, i) => i).sort(() => Math.random() - 0.5);
 
         order.forEach((idx, i) => {
+
             setTimeout(() => {
                 spans[idx].style.opacity = show ? 1 : 0;
             }, i * 120);
@@ -210,15 +210,16 @@ const radiumAnimation = (words, selector, delay) => {
         render(word, 1);
 
         setTimeout(() => {
+
             const spans = [...element.querySelectorAll("span")];
             animate(spans, false);
 
             setTimeout(() => {
+
                 i = (i + 1) % words.length;
                 render(words[i], 0);
                 animate([...element.querySelectorAll("span")], true);
             }, spans.length * 120 + 200);
-
         }, 2000);
     };
 

@@ -1,8 +1,15 @@
 
 const inputError = input => {
-    input.addClass("error").focus();
-    setTimeout(() => input.removeClass("error"), 1000);
+
+    input
+        .addClass("error")
+        .focus();
+
+    setTimeout(() => {
+        input.removeClass("error")
+    }, 1000);
 };
+
 
 const formOutput = (form, type, message) => {
 
@@ -14,8 +21,8 @@ const formOutput = (form, type, message) => {
     };
 
     const background = {
-        error: "rgba(255, 50, 50, 0.2)",
-        success: "rgba(0, 180, 0, 0.2)"
+        error: "rgba(255, 50, 50, 0.25)",
+        success: "rgba(0, 180, 0, 0.25)"
     };
 
     output
@@ -24,7 +31,9 @@ const formOutput = (form, type, message) => {
         .css("background", background[type])
         .addClass("show");
 
-    setTimeout(() => { output.text("").removeClass("show"); }, 3000);
+    setTimeout(() => {
+        output.text("").removeClass("show");
+    }, 2500);
 };
 
 
@@ -34,21 +43,24 @@ const handleContactForm = ({ form, fields, output }) => {
 
         const { timestamp, formattedTime } = getTime();
 
-        const name = fields.name?.val()?.trim();
-        const email = fields.email?.val()?.trim().toLowerCase();
-        const message = fields.message?.val()?.trim();
-
-        if (!name || name.length < 3)
-            return inputError(fields.name);
-
-        if (!/^\S+@\S+\.\S+$/.test(email))
-            return inputError(fields.email);
-
-        if (!message)
-            return inputError(fields.message);
+        const name = fields.name.val()?.trim();
+        const email = fields.email.val()?.trim();
+        const message = fields.message.val()?.trim();
 
         try {
             const snap = await db.messages.orderByChild("email").equalTo(email).once("value");
+
+            if (!name || name.length < 3) {
+                return inputError(fields.name);
+            }
+
+            if (!/^\S+@\S+\.\S+$/.test(email)) {
+                return inputError(fields.email);
+            }
+
+            if (!message) {
+                return inputError(fields.message);
+            }
 
             if (snap.exists()) {
 
@@ -61,7 +73,9 @@ const handleContactForm = ({ form, fields, output }) => {
                     [`${id}/totalMessages`]: (data.totalMessages || 0) + 1,
                     [`${id}/message/${timestamp}`]: message
                 });
+
             } else {
+
                 await db.messages.child(timestamp).set({
                     id: timestamp,
                     name,
@@ -85,13 +99,17 @@ const handleContactForm = ({ form, fields, output }) => {
             formOutput(output, "success", "Message sent successfully.");
 
             Object.values(fields).forEach(field => {
-                if (field?.val)
+
+                if (field?.val) {
                     field.val("");
+                }
             });
 
         }
 
-        catch (error) { formOutput(output, "error", error?.message || "Something went wrong."); }
+        catch (error) {
+            formOutput(output, "error", error?.message || "Something went wrong. Please try again later.");
+        }
     });
 };
 
@@ -100,19 +118,27 @@ const handleLoginForm = ({ form, fields, output }) => {
 
     $(form).on("click", async e => {
 
-        if (!fields.password.val())
-            return inputError(fields.password);
+        try {
+            const snap = await db.settings.child("password").once("value");
 
-        db.settings.child("dashboardPin").once("value").then(data => {
+            if (!fields.password.val()) {
+                return inputError(fields.password);
+            }
 
-            if (fields.password.val() !== data.val())
-                formOutput(".login-form-output", "error", "Wrong Password!");
+            if (fields.password.val() !== snap.val()) {
+                formOutput(output, "error", "Wrong Password!");
+            }
 
-            else
+            else {
                 $(".dashboard").addClass("hide");
+            }
 
             fields.password.val("");
-        });
+        }
+
+        catch (error) {
+            formOutput(output, "error", "Unable to verify password! Please try later.");
+        }
     });
 };
 
@@ -121,147 +147,175 @@ const handlePasswordForm = ({ form, fields, output }) => {
 
     $(form).on("click", async e => {
 
-        if (!fields.currentPassword.val())
-            return inputError(fields.currentPassword);
+        try {
+            const snap = await db.settings.child("password").once("value");
 
-        if (!fields.newPassword.val())
-            return inputError(fields.newPassword);
+            if (!fields.currentPassword.val()) {
+                return inputError(fields.currentPassword);
+            }
 
-        if (!fields.confirmPassword.val())
-            return inputError(fields.confirmPassword);
+            if (!fields.newPassword.val()) {
+                return inputError(fields.newPassword);
+            }
 
-        db.settings.child("dashboardPin").once("value").then(snap => {
+            if (!fields.confirmPassword.val()) {
+                return inputError(fields.confirmPassword);
+            }
 
-            if (fields.currentPassword.val() !== snap.val())
-                return formOutput(".password-form-output", "error", "Incorrect current password!");
+            if (fields.currentPassword.val() !== snap.val()) {
+                return formOutput(output, "error", "Incorrect current password!");
+            }
 
-            if (fields.newPassword.val() !== fields.confirmPassword.val())
-                return formOutput(".password-form-output", "error", "Password doesn't match with current password!");
+            if (fields.newPassword.val() !== fields.confirmPassword.val()) {
+                return formOutput(output, "error", "Password do not match!");
+            }
 
-            if (fields.confirmPassword.val() == snap.val())
-                return formOutput(".password-form-output", "error", "New Password must not be current password!");
+            if (fields.confirmPassword.val() === snap.val()) {
+                return formOutput(output, "error", "New password must not be the current password!");
+            }
 
-            db.settings.update({ dashboardPin: fields.confirmPassword.val() }, error => {
-                formOutput(".password-form-output", error ? "error" : "success", error || "Password changed successfully");
+            await db.settings.update({
+                password: fields.confirmPassword.val()
             });
+
+            formOutput(output, "success", "Password changed successfully");
 
             fields.currentPassword.val("");
             fields.newPassword.val("");
-            fields.confirmPassword.val("")
-        });
+            fields.confirmPassword.val("");
+        }
+
+        catch (error) {
+            formOutput(output, "error", "Something went wrong! Please try later.");
+        }
     });
 };
 
 
 const handleFileUploadForm = ({ form, fields, output }) => {
 
-    let files = 0;
+    let attachedFile = null;
 
     const selectors = {
-        fileText: ".fileUpload-form-output",
-        filePreview: ".fileUpload-preview",
-        fileView: ".file-view",
+        file: ".file",
+        filePreview: ".file-preview",
         fileName: ".infileName",
         fileFormat: ".file-format",
     };
 
     const reset = () => {
 
-        $(selectors.filePreview).removeClass("show");
+        $(selectors.filePreview)
+            .removeClass("show uploading")
+            .attr("data-text", "");
+
         $(selectors.fileName).val("");
         $(selectors.fileFormat).remove();
-        $(selectors.filePreview).attr('data-text', ``).removeClass("uploading");
 
-        setTimeout(() => $(selectors.fileView).attr("src", ""), 500);
+        setTimeout(() => {
+            $(selectors.file).attr("src", "");
+        }, 1000);
 
-        files = 0;
+        attachedFile = null;
     };
 
-    $(form.reset).on("click", e => {
-        reset();
-    });
+    $(form.reset).on("click", reset);
 
-    $(form.attach).on("click", e => {
+    $(form.attach).on("click", () => {
 
-        const input = $("<input>").attr({ type: "file", accept: "image/*,.pdf" })[0];
+        const input = $("<input>").attr({
+            type: "file",
+            accept: "image/*,.pdf"
+        })[0];
 
         input.onchange = e => {
 
-            files = e.target.files[0];
+            attachedFile = e.target.files[0];
 
-            if (!files)
+            if (!attachedFile) {
                 return;
+            }
 
-            const name = files.name.lastIndexOf(".") !== -1
-                ? files.name.slice(0, files.name.lastIndexOf("."))
-                : files.name;
+            const name = attachedFile.name.includes(".")
+                ? attachedFile.name.substring(0, attachedFile.name.lastIndexOf("."))
+                : attachedFile.name;
 
-            const type = files.name.lastIndexOf(".") !== -1
-                ? files.name.slice(files.name.lastIndexOf(".") + 1).toLowerCase()
+            const type = attachedFile.name.includes(".")
+                ? attachedFile.name.substring(attachedFile.name.lastIndexOf(".") + 1).toLowerCase()
                 : "";
 
-            if (!(type === "pdf" || files.type.startsWith("image/")))
-                return formOutput(selectors.fileText, "error", "Only Images and PDF files are allowed!");
+            if (!(type === "pdf" || attachedFile.type.startsWith("image/"))) {
+                return formOutput(output, "error", "Only Images and PDF files are allowed!");
+            }
 
             const reader = new FileReader();
 
             reader.onload = () => {
 
                 const preview = type === "pdf"
-                    ? `<span class="file-format"></span><iframe src="${reader.result}#toolbar=0" width="100%" height="500px"></iframe>`
-                    : `<span class="file-format"></span><img src="${reader.result}" class="file-view" />`;
+                    ? `<span class="file-format"></span><iframe src="${reader.result}#toolbar=0" width="100%" height="500"></iframe>`
+                    : `<span class="file-format"></span><img src="${reader.result}" class="file">`;
 
-                $(selectors.filePreview).html(preview).addClass("show");
-                $(fields.fileName).val(name);
+                $(selectors.filePreview)
+                    .html(preview)
+                    .addClass("show");
+
+                fields.fileName.val(name);
                 $(selectors.fileFormat).text(type);
             };
 
-            reader.readAsDataURL(files);
+            reader.readAsDataURL(attachedFile);
         };
 
         input.click();
     });
 
-    $(form.upload).on("click", e => {
+    $(form.upload).on("click", async () => {
 
-        if (!files)
-            return formOutput(selectors.fileText, "error", "Select file");
+        if (!attachedFile) {
+            return formOutput(output, "error", "Select file");
+        }
 
-        if (!fields.fileName.val())
+        if (!fields.fileName.val()) {
             return inputError(fields.fileName);
+        }
 
-        const { timestamp, date, time } = getTime();
+        const { timestamp } = getTime();
 
-        const filename = $(selectors.fileName).val() + "." + $(selectors.fileFormat).text();
-        const uploadTask = db.stFiles.child(filename).put(files);
+        const filename = `${fields.fileName.val()}.${$(selectors.fileFormat).text()}`;
 
-        uploadTask.on("state_changed",
-            snap => {
+        try {
+            const uploadTask = db.stFiles.child(filename).put(attachedFile);
+
+            uploadTask.on("state_changed", snap => {
+
                 const progress = (snap.bytesTransferred / snap.totalBytes) * 100;
 
                 $(selectors.filePreview)
-                    .attr('data-text', `${progress.toFixed(0)}%`)
+                    .attr("data-text", `${progress.toFixed(0)}%`)
                     .addClass("uploading");
-            },
+            });
 
-            error => formOutput(selectors.fileText, "error", error),
+            await uploadTask;
 
-            () => {
-                uploadTask.snapshot.ref.getDownloadURL().then(url => {
-                    db.files.child(timestamp).set({
-                        fileId: timestamp,
-                        fileName: filename,
-                        fileFormat: $(selectors.fileFormat).text(),
-                        fileLink: url,
-                        uploadedAt: timestamp
-                    });
+            const url = await uploadTask.snapshot.ref.getDownloadURL();
 
-                    reset();
+            await db.files.child(timestamp).set({
+                fileId: timestamp,
+                fileName: filename,
+                fileFormat: $(selectors.fileFormat).text(),
+                fileLink: url,
+                uploadedAt: timestamp
+            });
 
-                    formOutput(selectors.fileText, "success", "File uploaded successfully");
-                });
-            }
-        );
+            reset();
+
+            formOutput(output, "success", "File uploaded successfully");
+        }
+
+        catch (error) {
+            formOutput(output, "error", error?.message || "Upload failed.");
+        }
     });
 };
 
@@ -294,7 +348,7 @@ handlePasswordForm({
         confirmPassword: $(".inConfirmPassword")
     },
     output: ".password-form-output"
-})
+});
 
 
 handleFileUploadForm({
@@ -307,5 +361,4 @@ handleFileUploadForm({
         fileName: $(".infileName"),
     },
     output: ".fileUpload-form-output"
-})
-
+});

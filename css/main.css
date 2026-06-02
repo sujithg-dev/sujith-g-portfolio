@@ -88,21 +88,22 @@
     --text: hsl(var(--hueColor), 0%, 100%);
     --textLight: hsl(var(--hueColor), 0%, 80%);
     --textAccent: hsl(var(--hueColor), 90%, 60%);
-    --textplaceholder: hsl(var(--hueColor), 10%, 55%);
+    --textplaceholder: hsl(var(--hueColor), 25%, 40%);
     --textSpan: hsl(var(--hueColor), 0%, 100%);
 
-    --bg: hsl(var(--hueColor), 0%, 0%);
+    --bg: hsl(var(--hueColor), 25%, 2%);
     --bgHeader: hsl(var(--hueColor), 50%, 10%);
-    --bgNavbar: hsl(var(--hueColor), 25%, 6%);
-    --bgCard: hsl(var(--hueColor), 25%, 6%);
-    --bgForm: hsl(var(--hueColor), 25%, 6%);
-    --bgDialog: hsl(var(--hueColor), 25%, 6%);
-    --bgInput: hsl(var(--hueColor), 25%, 10%);
+    --bgNavbar: hsl(var(--hueColor), 25%, 8%);
+    --bgCard: hsl(var(--hueColor), 25%, 8%);
+    --bgDialog: hsl(var(--hueColor), 25%, 8%);
+    --bgInput: hsl(var(--hueColor), 25%, 12%);
     --bgBtn: hsl(var(--hueColor), 25%, 25%);
     --bgWork: hsla(var(--hueColor), 50%, 10%, 0.5);
     --bgImg: linear-gradient(0deg,
             hsl(var(--hueColor), 50%, 50%) 0%,
             hsla(var(--hueColor), 40%, 50%, 0.25) 100%);
+
+    --boxShadow: rgba(0, 0, 0, 0.25) 0px 10px 30px 0px;
 }
 
 body.light-mode {
@@ -112,21 +113,22 @@ body.light-mode {
     --text: hsl(var(--hueColor), 25%, 25%);
     --textLight: hsl(var(--hueColor), 10%, 50%);
     --textAccent: hsl(var(--hueColor), 75%, 50%);
-    --textplaceholder: hsl(var(--hueColor), 10%, 55%);
+    --textplaceholder: hsl(var(--hueColor), 25%, 65%);
     --textSpan: hsl(var(--hueColor), 50%, 25%);
 
     --bg: hsl(var(--hueColor), 0%, 100%);
     --bgHeader: hsl(var(--hueColor), 50%, 25%);
     --bgNavbar: hsl(var(--hueColor), 0%, 100%);
     --bgCard: hsl(var(--hueColor), 25%, 96%);
-    --bgForm: hsl(var(--hueColor), 25%, 96%);
     --bgDialog: hsl(var(--hueColor), 0%, 100%);
-    --bgInput: hsl(var(--hueColor), 25%, 90%);
+    --bgInput: hsl(var(--hueColor), 30%, 95%);
     --bgBtn: hsl(var(--hueColor), 50%, 85%);
     --bgWork: hsla(var(--hueColor), 75%, 20%, 0.5);
     --bgImg: linear-gradient(0deg,
             hsl(var(--hueColor), 50%, 50%) 0%,
             hsla(var(--hueColor), 50%, 50%, 0.25) 100%);
+
+    --boxShadow: rgba(100, 100, 100, 0.25) 0px 10px 30px 0px;
 }
 
 *,
@@ -364,7 +366,8 @@ input:-webkit-autofill {
     color: var(--textSpan);
 }
 
-.navbar-nav>.nav-link.active {
+.navbar-nav>.nav-link.active,
+.navbar-nav>.nav-link.active:hover {
     color: var(--white);
 }
 
@@ -401,10 +404,6 @@ input:-webkit-autofill {
 
 .navbar-nav:has(.nav-link.nav-link3.active:hover)::before {
     width: 120px;
-}
-
-.navbar-nav>.nav-link.active:hover {
-    color: var(--textSpan);
 }
 
 .navbar-nav:has(.nav-link2.active)::before {
@@ -967,6 +966,9 @@ input:-webkit-autofill {
 .works-tabs {
     position: relative;
     padding: var(--10px);
+    display: flex;
+    align-items: center;
+    justify-content: center;
     background: var(--bgInput);
     border-radius: var(--40px);
     overflow: hidden;
@@ -975,7 +977,6 @@ input:-webkit-autofill {
 .works-tabs::before {
     content: '';
     position: absolute;
-    top: var(--10px);
     left: var(--10px);
     width: 120px;
     height: var(--48px);
@@ -985,22 +986,28 @@ input:-webkit-autofill {
 
 .works-tab {
     position: relative;
-    width: 120px;
     height: var(--48px);
+    width: 120px;
     color: var(--textSpan);
-    border-radius: var(--40px);
+    font-family: var(--ff_semibold);
+    font-size: var(--fs_normal);
 }
 
 .works-tab.active {
     color: var(--white);
 }
 
+.works-tabs:has(.works-tab.active:hover)::before {
+    background: var(--accentDark);
+    transform: scale(1.05);
+}
+
 .works-tabs:has(.tab-item2.active)::before {
-    left: 135px;
+    left: 130px;
 }
 
 .works-tabs:has(.tab-item3.active)::before {
-    left: 260px;
+    left: 250px;
 }
 
 .layout-works {
@@ -1017,7 +1024,7 @@ input:-webkit-autofill {
     width: 100%;
     height: 350px;
     border-radius: var(--20px);
-    box-shadow: rgba(50, 50, 93, 0.25) 0px 13px 27px -5px, rgba(0, 0, 0, 0.3) 0px 8px 16px -8px;
+    box-shadow: var(--boxShadow);
     overflow: hidden;
 }
 
@@ -1196,8 +1203,9 @@ input:-webkit-autofill {
     display: flex;
     flex-direction: column;
     gap: var(--10px);
-    background: var(--bgForm);
+    background: var(--bgDialog);
     border-radius: var(--20px);
+    box-shadow: var(--boxShadow);
 }
 
 .contact-form>.form-output {
@@ -1208,7 +1216,7 @@ input:-webkit-autofill {
     height: var(--40px);
     display: grid;
     place-items: center;
-    font-family: var(--ff_semibold);
+    font-family: var(--ff_number);
     font-size: var(--fs_normal);
     color: var(--white);
     border-radius: var(--40px);

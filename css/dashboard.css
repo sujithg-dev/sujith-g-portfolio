@@ -2,6 +2,7 @@
     dashboard.html
 ---------------------------*/
 
+
 /* ----- Dashboard > Navbar ----- */
 .navbar-dashboard {
     padding: var(--40px) 0;
@@ -70,7 +71,7 @@
     width: 500px;
     background: var(--bgDialog);
     border-radius: var(--20px);
-    box-shadow: 0 15px 40px rgba(0, 0, 0, .15);
+    box-shadow: var(--boxShadow);
     opacity: 0;
     visibility: hidden;
     overflow: hidden;
@@ -92,6 +93,20 @@
     color: var(--textSpan);
 }
 
+.notification-window>.header>.notification-link {
+    display: none;
+    cursor: pointer;
+    font-family: var(--ff_number);
+    font-size: 14px;
+    font-weight: 500;
+    color: var(--textAccent);
+    margin-right: 40px;
+}
+
+.notification-window>.header>.notification-link.active {
+    display: block;
+}
+
 .notification-window>.header>.icon {
     cursor: pointer;
     position: absolute;
@@ -106,24 +121,39 @@
     border-bottom-left-radius: var(--20px);
 }
 
-.notification-window>.content {
-    padding-inline: var(--20px);
-    padding-block: var(--10px);
+.notification-window>.notification {
     max-height: 500px;
-    background: var(--bgCard);
+    background: var(--bgInput);
     border-radius: var(--20px);
-    border: 2px solid rgba(160, 160, 160, 0.2);
     overflow-y: auto;
 }
 
-.notification-item {
-    position: relative;
-    padding-block: var(--14px);
-    opacity: 1;
+.notification-window>.notification>.empty {
+    padding: var(--20px);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: var(--textplaceholder);
 }
 
-.notification-item.active {
-    opacity: 1;
+.notification-item {
+    cursor: pointer;
+    position: relative;
+    padding-inline: var(--20px);
+    padding-block: var(--20px);
+}
+
+.notification-item.active::after {
+    content: 'new';
+    position: absolute;
+    top: 50%;
+    right: var(--20px);
+    padding: 0 var(--8px);
+    font-family: var(--ff_regular);
+    font-size: 14px;
+    color: var(--white);
+    background: var(--accent);
+    border-radius: var(--40px);
 }
 
 .notification-item:not(:last-child) {
@@ -144,7 +174,7 @@
 
 .notification-item>div>.time {
     font-size: 14px;
-    color: var(--textSpan);
+    color: var(--accentDark);
 }
 
 .notification-item>.message,
@@ -152,6 +182,7 @@
     font-size: 18px;
     color: var(--textLight);
 }
+
 
 /* ----- Dashboard > Settings ----- */
 .layout-settings {
@@ -166,7 +197,7 @@
     display: flex;
     align-items: center;
     gap: var(--20px);
-    background: var(--bgCard);
+    background: var(--bgInput);
     border-radius: var(--20px);
 }
 
@@ -197,7 +228,7 @@
     color: var(--textAccent);
     font-family: var(--ff_number);
     font-size: var(--14px);
-    font-weight: 500;
+    font-weight: 600;
     text-transform: uppercase;
 }
 
@@ -218,7 +249,10 @@
 .table-header>.table-nav {
     position: relative;
     padding: var(--10px);
-    background: var(--bgCard);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: var(--bgInput);
     border-radius: var(--40px);
     overflow: hidden;
 }
@@ -227,16 +261,17 @@
     content: '';
     position: absolute;
     left: var(--10px);
-    width: 110px;
+    width: 120px;
     height: var(--48px);
     background: var(--accentLight);
     border-radius: var(--40px);
 }
 
+
 .table-header>.table-nav>.nav-btn {
     position: relative;
     height: var(--48px);
-    width: 110px;
+    width: 120px;
     color: var(--textSpan);
     font-family: var(--ff_semibold);
     font-size: var(--fs_normal);
@@ -246,12 +281,17 @@
     color: var(--white);
 }
 
+.table-header>.table-nav:has(.nav-btn.active:hover)::before {
+    background: var(--accentDark);
+    transform: scale(1.05);
+}
+
 .table-header>.table-nav:has(.nav-btn2.active)::before {
-    left: 125px;
+    left: 130px;
 }
 
 .table-header>.table-nav:has(.nav-btn3.active)::before {
-    left: 245px;
+    left: 250px;
 }
 
 .table-header>.table-items {
@@ -272,6 +312,10 @@
     color: var(--white);
     background: var(--accentLight);
     border-radius: var(--40px);
+}
+
+.table-header>.table-items>.item-btn:hover {
+    background: var(--accentDark);
 }
 
 .table-header>.table-items>.item-btn>.icon {
@@ -376,7 +420,7 @@
 
 .window>header>.title {
     padding-left: var(--20px);
-    font-family: var(--ff_semibold);
+    font-family: var(--ff_number);
     font-size: var(--fs_normal);
     color: var(--textSpan);
 }
@@ -393,41 +437,6 @@
     border-bottom-left-radius: var(--20px);
 }
 
-.window>footer {
-    display: flex;
-    align-items: center;
-    justify-content: flex-end;
-}
-
-.window>footer>.button {
-    padding-inline: var(--20px);
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    height: var(--52px);
-    font-family: var(--ff_bold);
-    font-size: var(--fs_small);
-    color: var(--textSpan);
-    background: var(--bgBtn);
-}
-
-.window>footer>.button:hover {
-    color: var(--white);
-    background: var(--accentDark);
-}
-
-.window>footer>.button:first-child {
-    border-top-left-radius: var(--20px);
-}
-
-.window>footer>.button>.icon {
-    color: var(--textSpan);
-}
-
-.window>footer>.button:hover>.icon {
-    color: var(--white);
-}
-
 .window>main {
     padding: var(--40px) var(--40px);
 }
@@ -439,8 +448,9 @@
     display: flex;
     align-items: center;
     justify-content: center;
-    font-family: var(--ff_semibold);
+    font-family: var(--ff_number);
     font-size: var(--fs_small);
+    font-weight: 500;
     color: var(--white);
     border-radius: var(--40px);
     opacity: 0;
@@ -498,43 +508,68 @@
     animation: input-error 0.5s;
 }
 
+.window>footer {
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+}
+
+.window>footer>.button {
+    padding-inline: var(--20px);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: var(--52px);
+    font-family: var(--ff_bold);
+    font-size: var(--fs_small);
+    color: var(--textSpan);
+    background: var(--bgBtn);
+}
+
+.window>footer>.button:hover {
+    color: var(--white);
+    background: var(--accentDark);
+}
+
+.window>footer>.button:first-child {
+    border-top-left-radius: var(--20px);
+}
+
+.window>footer>.button>.icon {
+    color: var(--textSpan);
+}
+
+.window>footer>.button:hover>.icon {
+    color: var(--white);
+}
+
 
 /* ----- Dialog Window > File Upload ----- */
-.window>main>form>.fileUpload-preview {
+.window>main>form>.file-preview {
     position: relative;
     z-index: 2;
-}
-
-.window>main>form>.fileUpload-preview>.file-format {
-    position: absolute;
-    z-index: 3;
-    top: var(--10px);
-    left: var(--10px);
-    padding: var(--4px) var(--10px);
-    font-family: var(--ff_number);
-    font-size: var(--12px);
-    font-weight: 500;
-    text-transform: uppercase;
-    color: var(--white);
-    background: var(--accent);
-    border-radius: var(--40px);
-}
-
-.window>main>form>.fileUpload-preview {
     margin: auto;
-    margin-bottom: var(--16px);
+    margin-bottom: var(--20px);
     width: auto;
     max-width: 0;
     height: auto;
     max-height: 0;
+    border-radius: var(--20px);
+    transform: scale(0);
     opacity: 0;
     visibility: hidden;
-    transform: scale(0);
-    border-radius: var(--20px);
     overflow: hidden;
 }
 
-.window>main>form>.fileUpload-preview::after {
+.window>main>form>.file-preview.show {
+    max-width: 486px;
+    max-height: 450px;
+    opacity: 1;
+    visibility: visible;
+    transform: scale(1);
+}
+
+.window>main>form>.file-preview::after {
     content: attr(data-text);
     position: absolute;
     top: 0;
@@ -555,48 +590,29 @@
     visibility: hidden;
 }
 
-.window>main>form>.fileUpload-preview.uploading::after {
+.window>main>form>.file-preview.uploading::after {
     opacity: 1;
     visibility: visible;
 }
 
-.window>main>form>.fileUpload-preview>.file-view {
+.window>main>form>.file-preview>.file {
     width: 100%;
     height: 100%;
 }
 
-.window>main>form>.fileUpload-preview.show {
-    max-width: 486px;
-    max-height: 450px;
-    opacity: 1;
-    visibility: visible;
-    transform: scale(1);
-}
-
-.window>main>form>.field-items>.select {
-    cursor: pointer;
+.window>main>form>.file-preview>.file-format {
     position: absolute;
-    left: 0;
-    bottom: 0;
-    padding: 0 var(--20px);
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    height: var(--52px);
-    field-sizing: content;
-    font-family: var(--ff_semibold);
-    font-size: var(--fs_small);
-    color: var(--textSpan);
-    background: var(--bgBtn);
-    border-top-right-radius: var(--20px);
-    border: 0;
-    outline: none;
-    appearance: none;
-}
-
-.window>main>form>.field-items>.select:hover {
+    z-index: 3;
+    top: var(--10px);
+    left: var(--10px);
+    padding: var(--4px) var(--10px);
+    font-family: var(--ff_number);
+    font-size: var(--12px);
+    font-weight: 500;
+    text-transform: uppercase;
     color: var(--white);
-    background: var(--accentDark);
+    background: var(--accent);
+    border-radius: var(--40px);
 }
 
 
@@ -684,7 +700,7 @@
 .visit-card {
     display: flex;
     flex-direction: column;
-    gap: var(--10px);
+    gap: var(--6px);
 }
 
 .visit-list {

@@ -21,27 +21,40 @@ const db = {
 
 
 window.addEventListener("load", () => {
-    initTheme();
+
     initSettings();
+    initTheme();
     initTable();
     initNotification();
-    if (!isLocalhost())
+
+    if (!isLocalhost()) {
         initVisitor();
+    }
 });
+
 
 const initVisitor = async () => {
 
     let visitorId = localStorage.getItem("visitorId");
 
     if (!visitorId) {
+
         visitorId = crypto.randomUUID();
         localStorage.setItem("visitorId", visitorId);
     }
 
     function getDeviceType() {
-        const ua = navigator.userAgent.toLowerCase();
-        if (/mobile/i.test(ua)) return "Mobile";
-        if (/tablet|ipad/i.test(ua)) return "Tablet";
+
+        const userAgent = navigator.userAgent.toLowerCase();
+
+        if (/mobile/i.test(userAgent)) {
+            return "Mobile";
+        }
+
+        if (/tablet|ipad/i.test(userAgent)) {
+            return "Tablet";
+        }
+
         return "Desktop";
     }
 
@@ -57,18 +70,23 @@ const initVisitor = async () => {
     const { timestamp, formattedTime } = getTime();
 
     async function getLocationFromIP() {
+
         try {
-            const res = await fetch("https://ipapi.co/json/");
-            const data = await res.json();
+            const response = await fetch("https://ipapi.co/json/");
+            const data = await response.json();
 
             return {
-                coordinates: "Lat: " + data.latitude + ", Lon: " + data.longitude,
-                address: data.city + ", " + data.country_name,
-                ip: data.ip,
                 source: "ip",
-                time: timestamp
+                ip: data.ip,
+                city: data.city,
+                country: data.country_name,
+                latitude: data.latitude,
+                longitude: data.longitude,
+                timestamp: timestamp
             };
-        } catch (err) {
+        }
+
+        catch (error) {
             return null;
         }
     }
@@ -79,6 +97,7 @@ const initVisitor = async () => {
     const snapshot = await visitorRef.once("value");
 
     if (!snapshot.exists()) {
+
         await visitorRef.set({
             visitorId: visitorId,
             browserInfo: browserData,
@@ -89,13 +108,14 @@ const initVisitor = async () => {
                 visit_1: location
             }
         });
-    } else {
+    }
+    else {
         let count = snapshot.val().visits?.visitCount || 0;
         count++;
 
         await visitorRef.update({
             ["visits/visitCount"]: count,
-            ["visits/LastVisit"]: timestamp,
+            ["visits/lastVisit"]: timestamp,
             ["visits//visit_" + count]: location
         });
     }
@@ -123,7 +143,7 @@ const initNotification = () => {
 
             container.html(
                 $("<p>")
-                    .addClass("empty-notification")
+                    .addClass("empty")
                     .text("No notifications")
             );
 
@@ -151,7 +171,14 @@ const initNotification = () => {
 
             container.append(
                 $("<div>")
-                    .addClass("notification-item")
+                    .attr("onclick", value.type === "message"
+                        ? `messageActions('${value.id}', 'info')`
+                        : `visitorActions('${value.visitorId}', 'info')`)
+
+                    .addClass(`notification-item ${value.status === "unread"
+                        ? "active"
+                        : ""}`)
+
                     .append(
                         $("<div>").append(
                             $("<span>")
@@ -170,30 +197,61 @@ const initNotification = () => {
             );
         });
 
-        const count = notifications.length;
+        const unreadCount = notifications.filter(
+            notification => notification.status === "unread"
+        ).length;
 
         $(".notification-count")
-            .toggleClass("active", count > 0)
-            .text(count > 0 ? count : "");
+            .toggleClass("active", unreadCount > 0)
+            .text(unreadCount > 0 ? unreadCount : "");
+
+        $(".notification-link").toggleClass("active", unreadCount > 0)
+    });
+};
+
+
+const deleteNotification = () => {
+
+    db.notifications.once("value", snapshot => {
+
+        const updates = {};
+
+        snapshot.forEach(data => {
+            updates[`${data.key}/status`] = "read";
+        });
+
+        db.notifications.update(updates)
+            .then(() => initNotification())
+            .catch(error => console.error(error));
     });
 };
 
 
 const initSettings = () => {
+
     const settingsMap = {
+
         appLive: value => {
             if (value) {
-                if (value && $("body").hasClass("blank-page") && !window.location.pathname.includes("index.html"))
+                if (value && $("body").hasClass("blank-page") && !window.location.pathname.includes("index.html")) {
                     window.location.replace("index.html");
+                }
+
                 $(".appLiveText").text("LIVE");
             }
+
             else {
-                if (!value && $("body").hasClass("index-page") && !window.location.pathname.includes("blank.html"))
+                if (!value && $("body").hasClass("index-page") && !window.location.pathname.includes("blank.html")) {
                     window.location.replace("blank.html");
+                }
+
                 $(".appLiveText").text("BLOCK");
             }
 
-            setTimeout($(".pre-loader").addClass("hide"), 100);
+            setTimeout(() => {
+                $(".pre-loader").addClass("hide");
+            }, 500);
+
         },
 
         dashboardLock: value => {
@@ -201,6 +259,7 @@ const initSettings = () => {
                 $(".dashboard").removeClass("hide");
                 $(".dashboardLockText").text("ON");
             }
+
             else {
                 $(".dashboard").addClass("hide");
                 $(".dashboardLockText").text("OFF");
@@ -208,11 +267,13 @@ const initSettings = () => {
         },
 
         hueTheme: value => {
-            if (value)
+            if (value) {
                 $(".hueThemeText").text("ON");
+            }
 
-            else
+            else {
                 $(".hueThemeText").text("OFF");
+            }
 
             setTheme();
         },
@@ -222,11 +283,12 @@ const initSettings = () => {
         }
     };
 
-    Object.entries(settingsMap).forEach(([item, setting]) =>
+    Object.entries(settingsMap).forEach(([item, setting]) => {
+
         db.settings.child(item).on("value", data =>
             setting(data.val())
         )
-    );
+    });
 };
 
 
@@ -246,7 +308,7 @@ const initTable = () => {
                 $("<td>").text(value.fileName),
                 $("<td>").addClass("file-format1 text-center").text(value.fileFormat.toUpperCase()),
                 $("<td>").html(`<div class="action">
-                                    <span class="material-symbols-outlined icon"onclick="fileActions('${value.fileId}', 'link')">link</span>
+                                    <span class="material-symbols-outlined icon" onclick="fileActions('${value.fileId}', 'link')">link</span>
                                     <span class="material-symbols-outlined icon" onclick="fileActions('${value.fileId}', 'delete')">delete</span>
                                 </div>`)
             )
@@ -291,54 +353,69 @@ const initTable = () => {
 };
 
 
-const messageActions = (uid, type) => {
+const messageActions = async (uid, type) => {
 
-    db.messages.child(uid).once("value", snap => {
+    try {
+        const snap = await db.messages.child(uid).once("value");
+
+        if (!snap.exists()) {
+            return;
+        }
 
         const value = snap.val();
 
         if (type === "info") {
-            $(".window-message header h6").empty();
-            $(".txtMessage").empty();
-            $(".txtName").text(value.name);
-            $(".txtEmail").text(value.email);
 
-            let count = 0;
+            $(".txtName").text(value.name || "None");
+            $(".txtEmail").text(value.email || "None");
+            $(".txtMessage").empty();
+
+            db.messages.child(uid).child("message").off("child_added");
 
             db.messages.child(uid).child("message").on("child_added", val => {
-                count++;
-                $(".txtMessage").append(
-                    `<li>
+
+                $(".txtMessage").append(`
+                    <li>
                         <span class="timestamp">${formatTime(val.key) || "None"}</span>
                         <span class="message">${val.val() || "None"}</span>
-                    </li>`);
+                    </li>
+                `);
             });
 
-            db.messages.child(uid).update({ status: "read" });
+            await db.messages.child(uid).update({ status: "read" });
+
             toggleDialog("window-message");
         }
 
-        else if (type === "mail")
-            window.location = `mailto:${value.email}?subject=From: Sujith Guna (sujith-g.web.app)&body=Hello,`;
-    });
+        else if (type === "mail") {
+            window.location.href = `mailto:${value.email}?subject=From: Sujith Guna (sujith-g.web.app)&body=Hello,`;
+        }
+    }
+
+    catch (error) {
+        console.error("Message Action Error:", error);
+    }
 };
 
 
-const visitorActions = (visitorId) => {
+const visitorActions = async (visitorId) => {
 
-    db.visitors.child(visitorId).once("value").then((snapshot) => {
+    try {
+        const snap = await db.visitors.child(visitorId).once("value");
 
-        const data = snapshot.val();
+        if (!snap.exists()) {
+            return;
+        }
 
-        if (!data) return;
+        const value = snap.val();
 
-        $(".txtDeviceType").text(data.browserInfo?.deviceType || "--");
-        $(".txtTotalVisit").text(data.visits?.visitCount || 0);
-        $(".txtFirstVisit").text(data.visits?.firstVisit ? formatTime(data.visits.firstVisit) : "--");
-        $(".txtLastVisit").text(data.visits?.lastVisit ? formatTime(data.visits.lastVisit) : "--");
+        $(".txtDeviceType").text(value.browserInfo?.deviceType || "--");
+        $(".txtTotalVisit").text(value.visits?.visitCount || 0);
+        $(".txtFirstVisit").text(value.visits?.firstVisit ? formatTime(value.visits.firstVisit) : "--");
+        $(".txtLastVisit").text(value.visits?.lastVisit ? formatTime(value.visits.lastVisit) : "--");
         $(".visit-list").empty();
 
-        const visits = data.visits || {};
+        const visits = value.visits || {};
 
         Object.keys(visits)
             .filter(key => key.startsWith("visit_"))
@@ -351,12 +428,12 @@ const visitorActions = (visitorId) => {
                             <div class="item">
                                 <label>Location</label>
                                 <span>:</span>
-                                <span>${visit.address || "--"}</span>
+                                <span>${visit.city + ", " + visit.country || "--"}</span>
                             </div>
                             <div class="item">
                                 <label>Coordinates:</label>
                                 <span>:</span>
-                                <span>${visit.coordinates || "--"}</span>
+                                <span>${visit.latitude + ", " + visit.latitude || "--"}</span>
                             </div>
                             <div class="item">
                                 <label>IP Address:</label>
@@ -366,38 +443,62 @@ const visitorActions = (visitorId) => {
                             <div class="item">
                                 <label>Time:</label>
                                 <span>:</span>
-                                <span>${formatTime(visit.time) || "--"}</span>
+                                <span>${formatTime(visit.timestamp) || "--"}</span>
                             </div>
                         </div>`;
                 $(".visit-list").append(html);
             });
 
         toggleDialog("window-visitor");
-    }).catch(error => { });
+    }
+
+    catch (error) {
+        console.error("Visitor Action Error:", error);
+    }
 };
 
 
-const fileActions = (fileId, type) => {
+const fileActions = async (fileId, type) => {
 
-    db.files.child(fileId).once("value", snap => {
+    try {
+        const snap = await db.files.child(fileId).once("value");
 
-        if (type === "link")
-            window.open(snap.val().fileLink);
+        if (!snap.exists()) {
+            return;
+        }
 
-        if (type === "delete" && confirm(`Delete ${snap.val().file}?`)) {
-            db.stFiles.child(snap.val().fileName).delete();
-            db.files.child(fileId).remove();
+        const file = snap.val();
+
+        if (type === "link") {
+            return window.open(file.fileLink, "_blank");
+        }
+
+        if (type === "delete" && confirm(`Delete ${file.fileName}?`)) {
+
+            await db.stFiles.child(file.fileName).delete();
+            await db.files.child(fileId).remove();
+
             $(`#${fileId}`).hide();
         }
-    });
+    }
+
+    catch (error) {
+        console.error("File Action Error:", error);
+    }
 };
 
 
-const updateSettings = (selector) => {
+const updateSettings = async selector => {
 
-    db.settings.child(selector).once("value").then(snapshot =>
-        db.settings.update({
-            [selector]: !snapshot.val()
-        })
-    );
+    try {
+        const snap = await db.settings.child(selector).once("value");
+
+        await db.settings.update({
+            [selector]: !snap.val()
+        });
+    }
+
+    catch (error) {
+        console.error("Update Settings Error:", error);
+    }
 };

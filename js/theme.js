@@ -33,6 +33,7 @@ const initTheme = () => {
         db.settings.child("appMode").on("value", s => applyMode(s.val()));
 };
 
+
 let hueInterval;
 let hueListenerInitialized = false;
 
@@ -68,13 +69,16 @@ const setTheme = () => {
     }
 };
 
+
 const toggleMode = () => {
     appMode = appMode === "light" ? "dark" : "light";
     localStorage.setItem("appMode", appMode);
     setTheme();
 };
 
+
 const togglePicker = () => $(".color-picker").toggleClass("show");
+
 
 const updateMode = () => {
     const hour = new Date().getHours();
