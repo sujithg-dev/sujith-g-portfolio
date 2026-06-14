@@ -1,4 +1,3 @@
-
 const inputError = input => {
 
     input
@@ -21,8 +20,8 @@ const formOutput = (form, type, message) => {
     };
 
     const background = {
-        error: "rgba(255, 50, 50, 0.25)",
-        success: "rgba(0, 180, 0, 0.25)"
+        error: "rgba(255, 50, 50, 0.2)",
+        success: "rgba(0, 180, 0, 0.2)"
     };
 
     output
@@ -32,266 +31,256 @@ const formOutput = (form, type, message) => {
         .addClass("show");
 
     setTimeout(() => {
-        output.text("").removeClass("show");
+        output
+            .text("")
+            .removeClass("show");
     }, 2500);
 };
 
 
-const handleContactForm = ({ form, fields, output }) => {
+const handleContactForm = ({ action, fields, output }) => {
 
-    $(form).on("click", async () => {
+    const clearFields = () =>
+        Object.values(fields).forEach(field => field?.val?.(""));
 
-        const { timestamp, formattedTime } = getTime();
+    $(action).on("click", async () => {
 
-        const name = fields.name.val()?.trim();
-        const email = fields.email.val()?.trim();
-        const message = fields.message.val()?.trim();
+        const userName = fields.userName.val();
+        const userEmail = fields.userEmail.val();
+        const userMessage = fields.userMessage.val();
+
+        if (!/^[A-Za-z]+(?:\s[A-Za-z]+)*$/.test(userName) || userName.length < 3)
+            return inputError(fields.userName);
+
+        if (!/^\S+@\S+\.\S+$/.test(userEmail))
+            return inputError(fields.userEmail);
+
+        if (!userMessage)
+            return inputError(fields.userMessage);
 
         try {
-            const snap = await db.messages.orderByChild("email").equalTo(email).once("value");
+            const snapshot = await db.messages.orderByChild("email").equalTo(userEmail).once("value");
 
-            if (!name || name.length < 3) {
-                return inputError(fields.name);
-            }
+            const { timestamp, formattedTime } = getTime();
 
-            if (!/^\S+@\S+\.\S+$/.test(email)) {
-                return inputError(fields.email);
-            }
+            if (snapshot.exists()) {
 
-            if (!message) {
-                return inputError(fields.message);
-            }
-
-            if (snap.exists()) {
-
-                const id = Object.keys(snap.val())[0];
-                const data = snap.val()[id];
+                const [id] = Object.keys(snapshot.val());
+                const data = snapshot.val()[id];
 
                 await db.messages.update({
-                    [`${id}/received`]: formattedTime,
-                    [`${id}/status`]: "unread",
+                    [`${id}/timestamp`]: timestamp,
                     [`${id}/totalMessages`]: (data.totalMessages || 0) + 1,
-                    [`${id}/message/${timestamp}`]: message
+                    [`${id}/status`]: "unread",
+                    [`${id}/message/${timestamp}`]: userMessage
+                });
+
+                await db.notifications.update({
+                    [`${id}/timestamp`]: timestamp,
+                    [`${id}/status`]: "unread"
                 });
 
             } else {
 
-                await db.messages.child(timestamp).set({
+                const payload = {
                     id: timestamp,
-                    name,
-                    email,
-                    message: { [timestamp]: message },
+                    name: userName,
+                    email: userEmail,
                     received: formattedTime,
-                    totalMessages: 1,
+                    timestamp,
                     status: "unread"
+                };
+
+                await db.messages.child(timestamp).set({
+                    ...payload,
+                    totalMessages: 1,
+                    message: {
+                        [timestamp]: userMessage
+                    }
+                });
+
+                await db.notifications.child(timestamp).set({
+                    ...payload,
+                    type: "message"
                 });
             }
 
-            await db.notifications.child(timestamp).set({
-                id: timestamp,
-                name,
-                email,
-                type: "message",
-                received: formattedTime,
-                status: "unread"
-            });
-
             formOutput(output, "success", "Message sent successfully.");
-
-            Object.values(fields).forEach(field => {
-
-                if (field?.val) {
-                    field.val("");
-                }
-            });
-
+            clearFields();
         }
-
+        
         catch (error) {
-            formOutput(output, "error", error?.message || "Something went wrong. Please try again later.");
+            formOutput(output, "error", error.message);
         }
     });
 };
 
 
-const handleLoginForm = ({ form, fields, output }) => {
+const handleLoginForm = ({ action, fields, output }) => {
 
-    $(form).on("click", async e => {
+    const clearFields = () =>
+        Object.values(fields).forEach(field => field?.val?.(""));
+
+    $(action).on("click", async () => {
+
+        const password = fields.password.val()?.trim();
+
+        if (!password)
+            return inputError(fields.password);
 
         try {
-            const snap = await db.settings.child("password").once("value");
+            const snapshot = await db.settings.child("password").once("value");
 
-            if (!fields.password.val()) {
-                return inputError(fields.password);
-            }
-
-            if (fields.password.val() !== snap.val()) {
-                formOutput(output, "error", "Wrong Password!");
-            }
-
-            else {
+            if (password === snapshot.val())
                 $(".dashboard").addClass("hide");
-            }
+            else
+                formOutput(output, "error", "Incorrect password!");
 
-            fields.password.val("");
+            clearFields();
+
         }
-
+        
         catch (error) {
-            formOutput(output, "error", "Unable to verify password! Please try later.");
+            formOutput(output, "error", error.message);
         }
     });
 };
 
 
-const handlePasswordForm = ({ form, fields, output }) => {
+const handlePasswordForm = ({ action, fields, output }) => {
 
-    $(form).on("click", async e => {
+    const clearFields = () =>
+        Object.values(fields).forEach(field => field?.val?.(""));
+
+    $(action).on("click", async () => {
+
+        const currentPassword = fields.currentPassword.val()?.trim();
+        const newPassword = fields.newPassword.val()?.trim();
+        const confirmPassword = fields.confirmPassword.val()?.trim();
+
+        if (!currentPassword)
+            return inputError(fields.currentPassword);
+
+        if (!newPassword)
+            return inputError(fields.newPassword);
+
+        if (!confirmPassword)
+            return inputError(fields.confirmPassword);
 
         try {
-            const snap = await db.settings.child("password").once("value");
+            const snapshot = await db.settings.child("password").once("value");
+            const password = snapshot.val();
 
-            if (!fields.currentPassword.val()) {
-                return inputError(fields.currentPassword);
-            }
+            if (currentPassword !== password)
+                return formOutput(output, "error", "Incorrect password!");
 
-            if (!fields.newPassword.val()) {
-                return inputError(fields.newPassword);
-            }
-
-            if (!fields.confirmPassword.val()) {
-                return inputError(fields.confirmPassword);
-            }
-
-            if (fields.currentPassword.val() !== snap.val()) {
-                return formOutput(output, "error", "Incorrect current password!");
-            }
-
-            if (fields.newPassword.val() !== fields.confirmPassword.val()) {
-                return formOutput(output, "error", "Password do not match!");
-            }
-
-            if (fields.confirmPassword.val() === snap.val()) {
+            if (newPassword === password)
                 return formOutput(output, "error", "New password must not be the current password!");
-            }
 
-            await db.settings.update({
-                password: fields.confirmPassword.val()
-            });
+            if (newPassword !== confirmPassword)
+                return formOutput(output, "error", "New Password and confirm password must be same!");
 
-            formOutput(output, "success", "Password changed successfully");
+            await db.settings.update({ password: confirmPassword });
 
-            fields.currentPassword.val("");
-            fields.newPassword.val("");
-            fields.confirmPassword.val("");
+            formOutput(output, "success", "Password changed!");
+            clearFields();
         }
 
         catch (error) {
-            formOutput(output, "error", "Something went wrong! Please try later.");
+            formOutput(output, "error", error.message);
         }
     });
 };
 
 
-const handleFileUploadForm = ({ form, fields, output }) => {
+const handleFileUploadForm = ({ action, fields, output }) => {
 
-    let attachedFile = null;
-
-    const selectors = {
-        file: ".file",
-        filePreview: ".file-preview",
-        fileName: ".infileName",
-        fileFormat: ".file-format",
-    };
+    let file = null;
+    let fileName = "";
+    let fileType = "";
 
     const reset = () => {
 
-        $(selectors.filePreview)
-            .removeClass("show uploading")
-            .attr("data-text", "");
+        fields.fileName.val("");
+        fields.filePreview.removeClass("show uploading");
 
-        $(selectors.fileName).val("");
-        $(selectors.fileFormat).remove();
+        setTimeout(() => fields.filePreview.empty(), 500);
 
-        setTimeout(() => {
-            $(selectors.file).attr("src", "");
-        }, 1000);
-
-        attachedFile = null;
+        file = null;
+        fileName = "";
+        fileType = "";
     };
 
-    $(form.reset).on("click", reset);
+    const showPreview = src => {
 
-    $(form.attach).on("click", () => {
+        fields.filePreview
+            .html(
+                fileType === "pdf"
+                    ? `
+                        <span class="file-format">${fileType}</span>
+                        <iframe src="${src}#toolbar=0" width="100%" height="500"></iframe>
+                    `
+                    : `
+                        <span class="file-format">${fileType}</span>
+                        <img class="file" src="${src}">
+                    `
+            )
+            .addClass("show");
 
-        const input = $("<input>").attr({
+        fields.fileName.val(fileName);
+    };
+
+    $(action.reset).on("click", reset);
+
+    $(action.attach).on("click", () => {
+
+        const input = $("<input>", {
             type: "file",
             accept: "image/*,.pdf"
-        })[0];
+        });
 
-        input.onchange = e => {
+        input.on("change", e => {
 
-            attachedFile = e.target.files[0];
+            file = e.target.files[0];
 
-            if (!attachedFile) {
+            if (!file)
                 return;
-            }
 
-            const name = attachedFile.name.includes(".")
-                ? attachedFile.name.substring(0, attachedFile.name.lastIndexOf("."))
-                : attachedFile.name;
+            const parts = file.name.split(".");
+            fileType = parts.length > 1 ? parts.pop().toLowerCase() : "";
+            fileName = parts.join(".") || file.name;
 
-            const type = attachedFile.name.includes(".")
-                ? attachedFile.name.substring(attachedFile.name.lastIndexOf(".") + 1).toLowerCase()
-                : "";
-
-            if (!(type === "pdf" || attachedFile.type.startsWith("image/"))) {
-                return formOutput(output, "error", "Only Images and PDF files are allowed!");
-            }
+            if (fileType !== "pdf" && !file.type.startsWith("image/"))
+                return formOutput(output,"error", "Only Images and PDF files can be uploaded!");
 
             const reader = new FileReader();
+            reader.onload = () => showPreview(reader.result);
+            reader.readAsDataURL(file);
+        });
 
-            reader.onload = () => {
-
-                const preview = type === "pdf"
-                    ? `<span class="file-format"></span><iframe src="${reader.result}#toolbar=0" width="100%" height="500"></iframe>`
-                    : `<span class="file-format"></span><img src="${reader.result}" class="file">`;
-
-                $(selectors.filePreview)
-                    .html(preview)
-                    .addClass("show");
-
-                fields.fileName.val(name);
-                $(selectors.fileFormat).text(type);
-            };
-
-            reader.readAsDataURL(attachedFile);
-        };
-
-        input.click();
+        input.trigger("click");
     });
 
-    $(form.upload).on("click", async () => {
+    $(action.upload).on("click", async () => {
 
-        if (!attachedFile) {
+        if (!file)
             return formOutput(output, "error", "Select file");
-        }
 
-        if (!fields.fileName.val()) {
+        if (!fields.fileName.val())
             return inputError(fields.fileName);
-        }
 
         const { timestamp } = getTime();
-
-        const filename = `${fields.fileName.val()}.${$(selectors.fileFormat).text()}`;
+        const filename = `${fileName}.${fileType}`;
 
         try {
-            const uploadTask = db.stFiles.child(filename).put(attachedFile);
+            const uploadTask = db.stFiles.child(filename).put(file);
 
             uploadTask.on("state_changed", snap => {
 
-                const progress = (snap.bytesTransferred / snap.totalBytes) * 100;
+                const progress =
+                    (snap.bytesTransferred / snap.totalBytes) * 100;
 
-                $(selectors.filePreview)
+                fields.filePreview
                     .attr("data-text", `${progress.toFixed(0)}%`)
                     .addClass("uploading");
             });
@@ -303,62 +292,64 @@ const handleFileUploadForm = ({ form, fields, output }) => {
             await db.files.child(timestamp).set({
                 fileId: timestamp,
                 fileName: filename,
-                fileFormat: $(selectors.fileFormat).text(),
+                fileFormat: fileType,
                 fileLink: url,
                 uploadedAt: timestamp
             });
 
-            reset();
-
             formOutput(output, "success", "File uploaded successfully");
+            reset();
         }
 
         catch (error) {
-            formOutput(output, "error", error?.message || "Upload failed.");
+            formOutput(output, "error", error.message);
         }
     });
 };
 
 
 handleContactForm({
-    form: ".submit-contact-form",
+    action: ".submit-contact-form",
     fields: {
-        name: $(".inName"),
-        email: $(".inEmail"),
-        message: $(".inMessage")
+        userName: $(".user-name"),
+        userEmail: $(".user-email"),
+        userMessage: $(".user-message")
     },
     output: ".contact-form-output"
 });
 
 
 handleLoginForm({
-    form: ".dashboard-login",
+    action: ".dashboard-login",
     fields: {
-        password: $(".inPassword")
+        password: $(".password")
     },
     output: ".login-form-output"
 });
 
 
 handlePasswordForm({
-    form: ".change-password",
+    action: ".change-password",
     fields: {
-        currentPassword: $(".inCurrentPassword"),
-        newPassword: $(".inNewPassword"),
-        confirmPassword: $(".inConfirmPassword")
+        currentPassword: $(".current-password"),
+        newPassword: $(".new-password"),
+        confirmPassword: $(".confirm-password")
     },
     output: ".password-form-output"
 });
 
 
 handleFileUploadForm({
-    form: {
-        upload: ".upload-file",
-        attach: ".attach-file",
-        reset: ".reset-file"
+    action: {
+        upload: ".upload",
+        attach: ".attach",
+        reset: ".reset"
     },
     fields: {
-        fileName: $(".infileName"),
+        file: $(".file"),
+        filePreview: $(".file-preview"),
+        fileName: $(".file-name"),
+        fileFormat: $(".file-format")
     },
-    output: ".fileUpload-form-output"
+    output: ".file-form-output"
 });

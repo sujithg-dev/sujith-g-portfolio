@@ -1,11 +1,13 @@
 $(window).on("load", e => {
 
     if ($("body").hasClass("index-page")) {
+        syncTime();
         initNavbar();
         initSkill();
+        initJourney();
         initWorks();
-        radiumAnimation(["Developer", "Freelancer"], ".random", 10000);
-        // glitchAnimation(["Design", "Develop", "Code"], ".glitch", 4000);
+        radiumAnimation(["Developer", "Freelancer"], ".random");
+        // glitchAnimation(["Design", "Develop", "Code"], ".glitch");
     }
 });
 
@@ -16,12 +18,8 @@ $(window).on("scroll", e => {
         initNavbar();
 
     $(".color-picker").removeClass("show")
+
 });
-
-
-const isLocalhost = () => {
-    return window.location.hostname === "localhost" || window.location.hostname === "127.0.0.1" || window.location.hostname === "::1"
-}
 
 
 const getTime = () => {
@@ -48,64 +46,84 @@ const getTime = () => {
 }
 
 
-const formatTime = (timestamp) => {
-    const now = Date.now();
-    const diff = now - timestamp;
+const formatTime = timestamp => {
+
+    const now = new Date();
+    const date = new Date(timestamp);
+    const diff = now - date;
 
     const minute = 60 * 1000;
     const hour = 60 * minute;
     const day = 24 * hour;
 
-    if (diff < minute) {
+    if (diff < minute)
         return "Just now";
-    }
 
     if (diff < hour) {
         const mins = Math.floor(diff / minute);
-        return mins === 1 ? "1 min ago" : `${mins} mins ago`;
+        return mins === 1 ? "1 min" : `${mins} mins`;
     }
 
     if (diff < day) {
         const hrs = Math.floor(diff / hour);
-        return hrs === 1 ? "1 hr ago" : `${hrs} hrs ago`;
+        return hrs === 1 ? "1 hr" : `${hrs} hrs`;
     }
 
-    if (diff < day * 2) {
+    if (diff < day * 2)
         return "Yesterday";
+
+    const startOfWeek = new Date(now);
+    const dayOfWeek = (now.getDay() + 6) % 7; // Monday = 0
+    startOfWeek.setDate(now.getDate() - dayOfWeek);
+
+    if (date >= startOfWeek) {
+        return date.toLocaleDateString("en-GB", {
+            weekday: "long"
+        });
     }
 
-    return new Date(timestamp).toLocaleDateString("en-GB", {
+    return date.toLocaleDateString("en-GB", {
         day: "numeric",
         month: "short",
         year: "numeric"
     });
-}
+};
+
+
+const syncTime = () => {
+    setInterval(() => {
+        $(".notification .time, .row-receivedTime").each(function () {
+            $(this).text(
+                formatTime($(this).data("time"))
+            );
+        });
+    }, 60000);
+};
 
 
 const initNavbar = () => {
+
     if ($("body").hasClass("page-to-ignore"))
         return;
 
     $(".navbar").toggleClass("sticky", window.scrollY >= 10);
 
-    let current = "";
+    const current = $("section")
+        .toArray()
+        .find(section => {
 
-    $("section").each(function () {
-        const top = this.offsetTop - 60;
-        const bottom = top + this.clientHeight;
+            const top = section.offsetTop - 60;
+            const bottom = top + section.clientHeight;
 
-        if (scrollY >= top && scrollY < bottom)
-            current = this.id;
-    });
+            return scrollY >= top && scrollY < bottom;
+        })?.id || "";
 
-    $(".nav-link").removeClass("active");
+    $(".nav-link")
+        .removeClass("active")
+        .filter(`[href="#${current}"]`)
+        .addClass("active");
 
-    $(".nav-link").each(function () {
-        if ($(this).attr("href") === "#" + current)
-            $(this).addClass("active");
-    });
-
-    if (current === "skills" || current === "journey")
+    if (["skills", "journey"].includes(current))
         $(".nav-link3").addClass("active");
 };
 
@@ -159,118 +177,198 @@ const initSkill = () => {
 };
 
 
-const initWorks = () => {
-    const tabs = document.querySelectorAll(".works-tab");
-    const items = document.querySelectorAll(".works-item");
+const initJourney = () => {
 
-    tabs.forEach(tab => tab.onclick = () => {
+    const tabs = $(".journey-btn");
+    const items = $(".journey-content");
 
-        tabs.forEach(tab => tab.classList.remove("active"));
-        tab.classList.add("active");
+    const applyFilter = filter => {
 
-        items.forEach(item =>
-            item.classList.toggle("filtered", !(tab.dataset.filter === "all" || item.dataset.category === tab.dataset.filter))
-        );
+        tabs.each(function () {
+            $(this).toggleClass("active", this.dataset.filter === filter);
+        });
+
+        items.each(function () {
+            $(this).toggleClass("active", this.dataset.category === filter);
+        });
+    };
+
+    const savedFilter = localStorage.getItem("journeyFilter") || "profession";
+
+    applyFilter(savedFilter);
+
+    tabs.each(function () {
+
+        $(this).on("click", function () {
+
+            const filter = this.dataset.filter;
+
+            localStorage.setItem("journeyFilter", filter);
+
+            applyFilter(filter);
+        });
     });
 };
 
 
-const radiumAnimation = (words, selector, delay) => {
-    let i = 0;
-    const element = document.querySelector(selector);
+const initWorks = () => {
 
-    const render = (text, opacity = 1) => {
+    const tabs = $(".works-tab");
+    const items = $(".works-item");
 
-        const wordArray = text.split(" ");
+    const applyFilter = filter => {
 
-        element.innerHTML = wordArray.map(word => {
-            const letters = [...word]
-                .map(l => {
-                    return `<span class="letter" style="opacity:${opacity}" data-text="${l}">${l}</span>`;
-                })
-                .join("");
+        tabs.each(function () {
 
-            return `<div class="word">${letters}</div>`;
-        }).join("");
-    };
+            $(this).toggleClass("active", this.dataset.filter === filter);
+        });
 
-    const animate = (spans, show = true) => {
-        const order = spans.map((_, i) => i).sort(() => Math.random() - 0.5);
-
-        order.forEach((idx, i) => {
-
-            setTimeout(() => {
-                spans[idx].style.opacity = show ? 1 : 0;
-            }, i * 120);
+        items.each(function () {
+            $(this).toggleClass("filtered", !(filter === "all" || this.dataset.category === filter));
         });
     };
 
+    const savedFilter = localStorage.getItem("worksFilter") || "all";
+
+    applyFilter(savedFilter);
+
+    tabs.on("click", function () {
+
+        const filter = this.dataset.filter;
+
+        localStorage.setItem("worksFilter", filter);
+
+        applyFilter(filter);
+    });
+};
+
+
+const radiumAnimation = (words, selector, delay = 5000) => {
+
+    let index = 0;
+    const element = document.querySelector(selector);
+
+    const render = text => {
+        element.innerHTML = text
+            .split(" ")
+            .map(word =>
+                `<span class="word">${[...word]
+                    .map(letter => `<span class="letter" data-text="${letter}">${letter}</span>`)
+                    .join("")
+                }</span>`
+            )
+            .join(" ");
+    };
+
+    const shuffle = arr =>
+        [...arr].sort(() => Math.random() - 0.5);
+
+    const animate = show => {
+        const letters = [...element.querySelectorAll(".letter")];
+
+        shuffle(letters).forEach((letter, i) => {
+            setTimeout(() => {
+                letter.classList.toggle("hidden", !show);
+            }, i * 50);
+        });
+
+        return letters.length * 50;
+    };
+
     const cycle = () => {
-        const word = words[i];
-        render(word, 1);
+
+        animate(false);
+
+        const duration = element.querySelectorAll(".letter").length * 50;
 
         setTimeout(() => {
 
-            const spans = [...element.querySelectorAll("span")];
-            animate(spans, false);
+            index = (index + 1) % words.length;
+            render(words[index]);
 
-            setTimeout(() => {
+            requestAnimationFrame(() => {
+                element
+                    .querySelectorAll(".letter")
+                    .forEach(letter => letter.classList.add("hidden"));
 
-                i = (i + 1) % words.length;
-                render(words[i], 0);
-                animate([...element.querySelectorAll("span")], true);
-            }, spans.length * 120 + 200);
-        }, 2000);
+                animate(true);
+            });
+
+        }, duration + 300);
     };
 
-    cycle();
+    render(words[0]);
+
     setInterval(cycle, delay);
 };
 
 
-const glitchAnimation = (words, selector, delay) => {
-    const el = document.querySelector(selector);
-    if (!el) return;
-    const chars = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789";
-    let index = 0;
+const glitchAnimation = (words, selector, delay = 3000) => {
 
-    const scramble = (finalWord) => {
+    const el = document.querySelector(selector);
+
+    if (!el || !words?.length)
+        return;
+
+    const chars = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789";
+
+    let index = 0;
+    let interval;
+
+    const textEl = document.createElement("span");
+
+    textEl.className = "glitch-text";
+
+    el.textContent = "";
+    el.appendChild(textEl);
+
+    const scramble = word => {
+
         let iteration = 0;
-        const interval = setInterval(() => {
-            const text = finalWord.split("").map((l, i) =>
-                i < iteration ? l : chars[Math.floor(Math.random() * chars.length)]
-            ).join("");
-            el.innerHTML = '<span class="glitch-text" data-text=' + text + '>' + text + '</span>';
-            iteration += 1 / 3;
-            if (iteration >= finalWord.length) {
+
+        clearInterval(interval);
+
+        el.classList.add("glitch-active");
+
+        interval = setInterval(() => {
+
+            const text = word
+                .split("")
+                .map((char, i) =>
+                    i < iteration
+                        ? char
+                        : chars[Math.floor(Math.random() * chars.length)]
+                )
+                .join("");
+
+            textEl.textContent = text;
+            textEl.dataset.text = text;
+
+            iteration += 0.33;
+
+            if (iteration >= word.length) {
+
                 clearInterval(interval);
-                el.innerHTML = '<span class="glitch-text" data-text=' + finalWord + '>' + finalWord + '</span>';
+
+                textEl.textContent = word;
+                textEl.dataset.text = word;
+
                 el.classList.remove("glitch-active");
             }
+
         }, 75);
     };
 
     const cycle = () => {
-        el.classList.add("glitch-active");
+
         scramble(words[index]);
+
         index = (index + 1) % words.length;
     };
 
     cycle();
-    setInterval(cycle, delay);
-};
 
-
-const toggleJourney = (content, btn) => {
-    $(".journey-content, .journey-btn").removeClass("active");
-
-    $(`.${content}, .${btn}`).addClass("active");
-};
-
-
-const toggleTable = (table, btn) => {
-    $(".table-content, .nav-btn, .table-btns").removeClass("active");
-    $("." + table + ", ." + btn).addClass("active");
+    const timer = setInterval(cycle, delay);
 };
 
 
@@ -279,7 +377,3 @@ const toggleDialog = (selector) => {
     dialog.open ? dialog.close() : dialog.showModal();
 };
 
-
-const toggleNotification = (element) => {
-    $(element).toggleClass("active");
-};

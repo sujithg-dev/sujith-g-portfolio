@@ -34,8 +34,8 @@
     <!---->
 
     <!-- Custom JS -->
-    <script src="js/firebase.js" defer></script>
     <script src="js/custom.js" defer></script>
+    <script src="js/firebase.js" defer></script>
     <script src="js/theme.js" defer></script>
     <script src="js/formHandler.js" defer></script>
     <!---->
@@ -61,7 +61,7 @@
                     <div class="field-items">
                         <div class="input-item">
                             <span class="material-symbols-outlined icon">password</span>
-                            <input type="password" class="input inPassword" placeholder="Enter Password">
+                            <input type="password" class="input password" placeholder="Enter Password">
                         </div>
                     </div>
                 </form>
@@ -85,15 +85,15 @@
                 <div class="field-items">
                     <div class="input-item">
                         <span class="material-symbols-outlined icon">password</span>
-                        <input type="text" class="input inCurrentPassword" placeholder="Current Password">
+                        <input type="text" class="input current-password" placeholder="Current Password">
                     </div>
                     <div class="input-item">
                         <span class="material-symbols-outlined icon">password</span>
-                        <input type="text" class="input inNewPassword" placeholder="New Password">
+                        <input type="text" class="input new-password" placeholder="New Password">
                     </div>
                     <div class="input-item">
                         <span class="material-symbols-outlined icon">password</span>
-                        <input type="text" class="input inConfirmPassword" placeholder="Confirm Password">
+                        <input type="text" class="input confirm-password" placeholder="Confirm Password">
                     </div>
                 </div>
             </form>
@@ -111,21 +111,21 @@
             <span class="material-symbols-outlined icon" onclick='toggleDialog("window-fileUpload")'>close</span>
         </header>
         <main>
-            <div class="form-output fileUpload-form-output"></div>
+            <div class="form-output file-form-output"></div>
             <form>
                 <div class="file-preview"></div>
                 <div class="field-items">
                     <div class="input-item">
                         <span class="material-symbols-outlined icon">image</span>
-                        <input type="text" class="input infileName" placeholder="File Name">
+                        <input type="text" class="input file-name" placeholder="File Name">
                     </div>
                 </div>
             </form>
         </main>
         <footer>
-            <button class="button reset-file">Reset</button>
-            <button class="button attach-file">Attach</button>
-            <button class="button upload-file">Upload</button>
+            <button class="button reset">Reset</button>
+            <button class="button attach">Attach</button>
+            <button class="button upload">Upload</button>
         </footer>
     </dialog>
     <!---->
@@ -136,55 +136,17 @@
             <h4 class="title">Message</h4>
             <span class="material-symbols-outlined icon" onclick='toggleDialog("window-message")'>close</span>
         </header>
-        <div class="window-content">
-            <div>
-                <p>Name:</p>
-                <span class="txtName"></span>
-            </div>
-            <div>
-                <p>Email:</p>
-                <span class="txtEmail"></span>
-            </div>
-            <div>
-                <ul class="txtMessage"></ul>
-            </div>
-        </div>
+        <div class="window-content message-details"></div>
     </dialog>
     <!---->
 
     <!-- Dialog Visitor Info -->
     <dialog class="window window-visitor">
         <header>
-            <h4 class="title">User Details</h4>
+            <h4 class="title">Visitor Details</h4>
             <span class="material-symbols-outlined icon" onclick='toggleDialog("window-visitor")'>close</span>
         </header>
-        <main>
-            <div class="window-content">
-                <div class="item">
-                    <label>Device Type</label>
-                    <span>:</span>
-                    <span class="txtDeviceType"></span>
-                </div>
-                <div class="item">
-                    <label>Total Visits</label>
-                    <span>:</span>
-                    <span class="txtTotalVisit"></span>
-                </div>
-                <div class="item">
-                    <label>First Visit</label>
-                    <span>:</span>
-                    <span class="txtFirstVisit"></span>
-                </div>
-                <div class="item">
-                    <label>Last Visit</label>
-                    <span>:</span>
-                    <span class="txtLastVisit"></span>
-                </div>
-                <hr>
-                <div class="visit-list"></div>
-            </div>
-        </main>
-
+        <div class="window-content visitor-details"></div>
     </dialog>
     <!---->
 
@@ -200,21 +162,17 @@
                     <div class="nav-item nav-mode" onclick="toggleMode()">
                         <span class="material-symbols-outlined icon mode-icon">light_mode</span>
                     </div>
-                    <div class="nav-item nav-theme" onclick="togglePicker()">
-                        <span class="material-symbols-outlined icon">palette</span>
-                        <div class="color-picker"> <input type="range" min="0" max="360" onchange="updateColor(true, this.value)"></div>
-                    </div>
-                    <div class="nav-item nav-notification" onclick='toggleNotification(".notification-window")'>
+                    <div class="nav-item nav-notification" onclick="initNotification('toggle')">
                         <span class="material-symbols-outlined icon">notifications</span>
                         <span class="notification-count"></span>
                     </div>
                     <div class="notification-window">
                         <div class="header">
                             <h4 class="title">Notifications</h4>
-                            <span class="notification-link" onclick='deleteNotification()'>Mark all as read</span>
-                            <span class="material-symbols-outlined icon" onclick='toggleNotification(".notification-window")'>close</span>
+                            <span class="link" onclick="initNotification('clear')">Mark all as read</span>
+                            <span class="material-symbols-outlined icon" onclick="initNotification('toggle')">close</span>
                         </div>
-                        <div class="notification">
+                        <div class="content">
                             <p>No Notification</p>
                         </div>
                     </div>
@@ -230,32 +188,32 @@
         <section class="section section-dashboard" id="dashboard">
             <div class="container">
                 <div class="layout layout-settings">
-                    <div class="settings-item appLive-btn" onclick='updateSettings("appLive")'>
+                    <div class="settings-item appLive-btn" onclick='initSettings("appLive")'>
                         <span class="material-symbols-outlined icon">computer</span>
                         <div class="content">
                             <h4 class="name">App Status</h4>
                             <span class="status appLiveText"></>
                         </div>
                     </div>
-                    <div class="settings-item hueTheme-btn" onclick='updateSettings("hueTheme")'>
-                        <span class="material-symbols-outlined icon">person</span>
+                    <div class="settings-item dashboardLock-btn" onclick='initSettings("dashboardLock")'>
+                        <span class="material-symbols-outlined icon">lock</span>
                         <div class="content">
-                            <h4 class="name">Hue Theme</h4>
-                            <span class="status hueThemeText"></span>
+                            <h4 class="name">Dashboard Lock</h4>
+                            <span class="status dashboardLockText"></span>
                         </div>
                     </div>
                     <div class="settings-item appMode-btn" onclick='updateMode()'>
                         <span class="material-symbols-outlined icon">light_mode</span>
                         <div class="content">
                             <h4 class="name">Theme Mode</h4>
-                            <span class="status appModeText"></>
+                            <span class="status appModeText"></span>
                         </div>
                     </div>
-                    <div class="settings-item dashboardLock-btn" onclick='updateSettings("dashboardLock")'>
-                        <span class="material-symbols-outlined icon">lock</span>
+                    <div class="settings-item themeColor-btn">
+                        <span class="material-symbols-outlined icon">palette</span>
                         <div class="content">
-                            <h4 class="name">Dashboard Lock</h4>
-                            <span class="status dashboardLockText"></>
+                            <h4 class="name">Theme Color</h4>
+                            <div class="color-picker1"><input type="range" min="0" max="360" onchange="updateColor(this.value)"></div>
                         </div>
                     </div>
                 </div>
@@ -265,30 +223,31 @@
                             <button class="item-btn" onclick='toggleDialog("window-fileUpload")'><span class="material-symbols-outlined icon">upload</span></button>
                         </div>
                         <div class="table-nav">
-                            <button class="nav-btn nav-btn1 messages-btn active" id="messagesNav" onclick="toggleTable('table-messages', 'messages-btn')">Messages</button>
-                            <button class="nav-btn nav-btn2 visitors-btn" id="visitorNav" onclick="toggleTable('table-visitors', 'visitors-btn')">Visitors</button>
-                            <button class="nav-btn nav-btn3 files-btn" id="filesNav" onclick="toggleTable('table-files', 'files-btn')">Files</button>
+                            <button class="nav-btn nav-btn1 active" data-filter="table-messages">Messages</button>
+                            <button class="nav-btn nav-btn2" data-filter="table-visitors">Visitors</button>
+                            <button class="nav-btn nav-btn3" data-filter="table-files">Files</button>
                         </div>
                     </div>
-                    <div class="table-content table-messages active">
+                    <div class="table-content active" data-category="table-messages">
                         <table>
                             <thead>
                                 <tr>
-                                    <th>#</th>
+                                    <th class="text-center">#</th>
                                     <th>Name</th>
                                     <th>Email</th>
-                                    <th>Received</th>
+                                    <th class="text-center">Received</th>
+                                    <th class="text-center">No of Messages</th>
                                     <th class="text-center">Actions</th>
                                 </tr>
                             </thead>
                             <tbody class="messages-data"></tbody>
                         </table>
                     </div>
-                    <div class="table-content table-visitors">
+                    <div class="table-content" data-category="table-visitors">
                         <table>
                             <thead>
                                 <tr>
-                                    <th>#</th>
+                                    <th class="text-center">#</th>
                                     <th>Visitor Id</th>
                                     <th class="text-center">Device Type</th>
                                     <th class="text-center">First Visit</th>
@@ -299,11 +258,11 @@
                             <tbody class="visitors-data"></tbody>
                         </table>
                     </div>
-                    <div class="table-content table-files">
+                    <div class="table-content" data-category="table-files">
                         <table>
                             <thead>
                                 <tr>
-                                    <th>#</th>
+                                    <th class="text-center">#</th>
                                     <th>File Name</th>
                                     <th class="text-center">Format</th>
                                     <th class="text-center">Actions</th>

@@ -230,6 +230,11 @@
         margin-bottom: 100px;
     }
 
+    .journey-item>.content>.year {
+        width: 120px;
+        height: 36px;
+    }
+
     .journey-item>.content>.year::before {
         left: -40px;
         width: 40px;
@@ -253,26 +258,27 @@
 
     .works-tabs {
         padding: var(--6px);
+        width: 100%;
     }
 
     .works-tabs::before {
         top: var(--6px);
         left: var(--6px);
-        width: 80px;
+        width: 33.3%;
         height: var(--40px);
     }
 
     .works-tab {
-        width: 80px;
+        width: 33.3%;
         height: var(--40px);
     }
 
     .works-tabs:has(.tab-item2.active)::before {
-        left: 90px;
+        left: 33.3%;
     }
 
     .works-tabs:has(.tab-item3.active)::before {
-        left: 175px;
+        left: 65%;
     }
 
     .layout-works {
@@ -377,6 +383,10 @@
         right: 0;
     }
 
+    .nav-notification>.icon {
+        font-size: var(--28px);
+    }
+
     .notification-window {
         position: fixed;
         top: 10%;
@@ -384,8 +394,14 @@
         width: 90%;
     }
 
-    .notification-window>.content {
+    .notification-window>.content,
+    .notification-item {
         padding-inline: var(--10px);
+    }
+
+    .notification-item.active::after,
+    .notification-item>.time {
+        font-size: var(--fs_small);
     }
 
     .section.section-dashboard {
@@ -409,12 +425,12 @@
     }
 
     .table-header>.table-nav::before {
-        width: 80px;
+        width: 100px;
         height: var(--40px);
     }
 
     .table-header>.table-nav>.nav-btn {
-        width: 80px;
+        width: 100px;
         height: var(--40px);
         font-size: var(--fontSizeS);
     }
@@ -424,11 +440,11 @@
     }
 
     .table-header>.table-nav:has(.nav-btn2.active)::before {
-        left: 90px;
+        left: 110px;
     }
 
     .table-header>.table-nav:has(.nav-btn3.active)::before {
-        left: 175px;
+        left: 210px;
     }
 
     .table-header>.table-btns>.icon {
@@ -439,5 +455,22 @@
     .table-content>table>tbody>tr>td {
         font-size: 12px;
 
+    }
+
+    .window>header {
+        height: var(--44px);
+    }
+
+    .window>header>.icon {
+        width: var(--44px);
+        height: var(--44px);
+    }
+
+    .window>main {
+        padding: var(--20px);
+    }
+
+    .window>footer>.button {
+        height: var(--40px);
     }
 }

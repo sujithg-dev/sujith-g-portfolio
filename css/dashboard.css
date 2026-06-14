@@ -93,7 +93,7 @@
     color: var(--textSpan);
 }
 
-.notification-window>.header>.notification-link {
+.notification-window>.header>.link {
     display: none;
     cursor: pointer;
     font-family: var(--ff_number);
@@ -103,7 +103,7 @@
     margin-right: 40px;
 }
 
-.notification-window>.header>.notification-link.active {
+.notification-window>.header>.link.active {
     display: block;
 }
 
@@ -121,14 +121,14 @@
     border-bottom-left-radius: var(--20px);
 }
 
-.notification-window>.notification {
+.notification-window>.content {
     max-height: 500px;
     background: var(--bgInput);
-    border-radius: var(--20px);
+    border-radius: var(--10px);
     overflow-y: auto;
 }
 
-.notification-window>.notification>.empty {
+.notification-window>.content>.empty {
     padding: var(--20px);
     display: flex;
     align-items: center;
@@ -140,47 +140,45 @@
     cursor: pointer;
     position: relative;
     padding-inline: var(--20px);
-    padding-block: var(--20px);
-}
-
-.notification-item.active::after {
-    content: 'new';
-    position: absolute;
-    top: 50%;
-    right: var(--20px);
-    padding: 0 var(--8px);
-    font-family: var(--ff_regular);
-    font-size: 14px;
-    color: var(--white);
-    background: var(--accent);
-    border-radius: var(--40px);
+    padding-block: var(--10px);
+    display: grid;
+    grid-template-columns: 1fr max-content;
+    align-items: flex-end;
+    gap: var(--10px);
 }
 
 .notification-item:not(:last-child) {
-    border-bottom: 2px solid rgba(160, 160, 160, 0.2);
-}
-
-.notification-item>div {
-    display: flex;
-    justify-content: space-between;
+    border-bottom: var(--2px) solid rgba(127.5, 127.5, 127.5, 0.25);
 }
 
 .notification-item>div>.title {
+    position: relative;
     font-family: var(--ff_number);
     font-size: var(--fs_small);
     font-weight: 500;
     color: var(--accentDark);
 }
 
+.notification-item.active::after {
+    content: 'new';
+    position: absolute;
+    top: var(--10px);
+    right: var(--10px);
+    padding-inline: var(--10px);
+    font-size: 14px;
+    color: var(--white);
+    background: var(--accent);
+    border-radius: var(--10px);
+}
+
+.notification-item>div>.message {
+    font-size: var(--fs_small);
+    color: var(--textLight);
+}
+
 .notification-item>div>.time {
     font-size: 14px;
     color: var(--accentDark);
-}
-
-.notification-item>.message,
-.notification-item>.message>span {
-    font-size: 18px;
-    color: var(--textLight);
 }
 
 
@@ -219,17 +217,42 @@
     transform: scale(0.9);
 }
 
-.settings-item>.content>.name {
+.settings-item .name {
     font-size: var(--fs_normal);
 }
 
-.settings-item>.content>.status {
+.settings-item .status {
     margin-top: var(--4px);
     color: var(--textAccent);
     font-family: var(--ff_number);
-    font-size: var(--14px);
+    font-size: var(--fs_small);
     font-weight: 600;
     text-transform: uppercase;
+}
+
+/* ----- Settings > Color Picker ----- */
+.settings-item .color-picker1 {
+    margin-top: var(--12px);
+    width: 150px;
+    height: var(--16px);
+    border-radius: var(--8px);
+    overflow: hidden;
+}
+
+.settings-item .color-picker1>input {
+    cursor: pointer;
+    appearance: none;
+    width: 100%;
+    background: url("../assets/images/hslColor.png");
+    background-size: 100%;
+    outline: none;
+}
+
+.settings-item .color-picker1>input::-webkit-slider-thumb {
+    appearance: none;
+    width: var(--2px);
+    height: var(--20px);
+    background: var(--black);
 }
 
 
@@ -371,17 +394,20 @@
     white-space: nowrap;
 }
 
-.table-content>table>tbody>tr>td>.action {
+.table-content>table>tbody>tr> :is(.row-count, .row-receivedTime, .row-totalMessage, .row-deviceType, .row-firstVisit, .row-visitCount, .row-fileFormat) {
+    text-align: center;
+}
+
+.table-content>table>tbody>tr>.row-action {
     display: flex;
     align-items: center;
     justify-content: center;
     gap: var(--10px);
 }
 
-.table-content>table>tbody>tr>td>.action>.icon {
+.table-content>table>tbody>tr>.row-action>.icon {
     cursor: pointer;
     font-size: var(--20px);
-
     color: var(--accentDark);
 }
 
@@ -399,8 +425,13 @@
     border: 0;
     border-radius: var(--20px);
     box-shadow: 0 0 0 100vw rgba(0, 0, 0, 0.5);
+    outline: none;
     overflow: hidden;
     animation: hide-dialog 0.5s;
+}
+
+.window:focus {
+    outline: none;
 }
 
 .window[open] {
@@ -438,7 +469,7 @@
 }
 
 .window>main {
-    padding: var(--40px) var(--40px);
+    padding: var(--40px);
 }
 
 .window>main>.form-output {
@@ -547,14 +578,14 @@
 /* ----- Dialog Window > File Upload ----- */
 .window>main>form>.file-preview {
     position: relative;
-    z-index: 2;
+    z-index: 1;
     margin: auto;
     margin-bottom: var(--20px);
     width: auto;
     max-width: 0;
     height: auto;
     max-height: 0;
-    border-radius: var(--20px);
+    border-radius: var(--10px);
     transform: scale(0);
     opacity: 0;
     visibility: hidden;
@@ -572,6 +603,7 @@
 .window>main>form>.file-preview::after {
     content: attr(data-text);
     position: absolute;
+    z-index: 2;
     top: 0;
     left: 0;
     width: 100%;
@@ -584,7 +616,7 @@
     font-weight: 500;
     color: var(--white);
     background: var(--bgWork);
-    border-radius: var(--20px);
+    border-radius: var(--10px);
     backdrop-filter: blur(10px);
     opacity: 0;
     visibility: hidden;
@@ -602,9 +634,9 @@
 
 .window>main>form>.file-preview>.file-format {
     position: absolute;
-    z-index: 3;
-    top: var(--10px);
-    left: var(--10px);
+    z-index: 1;
+    top: 0;
+    left: 0;
     padding: var(--4px) var(--10px);
     font-family: var(--ff_number);
     font-size: var(--12px);
@@ -612,131 +644,109 @@
     text-transform: uppercase;
     color: var(--white);
     background: var(--accent);
-    border-radius: var(--40px);
+    border-bottom-right-radius: var(--10px);
 }
 
 
 /* ----- Dialog Window > Message ----- */
-.window-message {
-    width: clamp(450px, 40vw, 600px);
-
+.message-details {
+    padding: var(--10px) var(--20px) var(--20px);
 }
 
-.window>header>h6 {
-    display: flex;
-    align-items: center;
-    gap: var(--8px);
-}
-
-.window>header>h6>span {
-    font-family: var(--ff_number);
-    font-weight: 500;
-    color: var(--textAccent);
-}
-
-.window-message>.window-content {
+.message-details>.message-header {
     padding: var(--20px);
+    background: var(--bgInput);
+    border-radius: var(--20px);
 }
 
-.window-message>.window-content>div {
-    display: flex;
-    align-items: center;
-    gap: var(--8px);
-}
-
-.window-message>.window-content>div>span {
-    user-select: all;
-    color: var(--textAccent);
-}
-
-.window-message>.window-content>div>.txtMessage {
+.message-details>.message-body {
     margin-top: var(--10px);
-    width: 100%;
-    height: 100%;
     max-height: clamp(250px, 40vw, 300px);
-    display: flex;
-    flex-direction: column;
-    gap: var(--20px);
     padding: var(--20px);
     background: var(--bgInput);
     border-radius: var(--20px);
     overflow-x: scroll;
 }
 
-.window-message>.window-content>div>.txtMessage>li {
-    display: flex;
-    flex-direction: column;
-    align-items: flex-start;
-    gap: var(--4px);
-}
-
-.window-message>.window-content>div>.txtMessage>li>.timestamp {
-    user-select: all;
-    color: var(--accentDark);
-    font-family: var(--ff_number);
-    font-size: var(--fs_small);
-}
-
-.window-message>.window-content>div>.txtMessage>li>.message {
-    user-select: all;
-}
-
-.window-visitor>main {
-    padding: 0 var(--20px) var(--20px);
-}
-
-.window-visitor>main>.window-content {
-    margin-top: var(--20px);
-    padding: var(--20px);
-    background: var(--bgInput);
-    border-radius: var(--20px);
-    width: 100%;
-    height: 100%;
-    max-height: clamp(250px, 40vw, 500px);
-    overflow-x: scroll;
-}
-
-.window-content,
-.visit-card {
-    display: flex;
-    flex-direction: column;
-    gap: var(--6px);
-}
-
-.visit-list {
-    display: flex;
-    flex-direction: column;
-    gap: var(--20px);
-}
-
-.window-content>.item,
-.visit-card>.item {
+.message-details>.message-header>.item {
     display: grid;
-    grid-template-columns: 0.4fr min-content 1fr;
+    grid-template-columns: 0.2fr min-content 1fr;
     align-items: center;
     gap: var(--10px);
 }
 
-.window-content>.item>label,
-.visit-card>.item>label {
+.message-details .item>label {
     color: var(--text);
     font-family: var(--ff_number);
     font-size: var(--fs_small);
 }
 
-.window-content>.item>span,
-.visit-card>.item>span {
+.message-details .item>span {
+    color: var(--text);
+}
+
+.message-details .item>p {
+    font-family: var(--ff_semibold);
     color: var(--accentDark);
+}
+
+
+
+
+/* ----- Dialog Window > Visitor ----- */
+.visitor-details {
+    padding: var(--10px) var(--20px) var(--20px);
+}
+
+.visitor-details>.visitor-header {
+    padding: var(--20px);
+    background: var(--bgInput);
+    border-radius: var(--20px);
+}
+
+.visit-body {
+    margin-top: var(--10px);
+    padding: var(--20px);
+    max-height: clamp(250px, 40vw, 300px);
+    display: flex;
+    flex-direction: column;
+    gap: var(--20px);
+    background: var(--bgInput);
+    border-radius: var(--20px);
+    overflow-x: scroll;
+}
+
+.visitor-details .visit-card>h5 {
+    padding: var(--4px) var(--10px);
+    display: inline-flex;
+    font-family: var(--ff_number);
+    font-size: 12px;
+    font-weight: 500;
+    text-transform: uppercase;
+    color: var(--white);
+    background: var(--accentLight);
+    border-radius: var(--20px);
+}
+
+.visitor-details .item {
+    display: grid;
+    grid-template-columns: 0.5fr min-content 1fr;
+    align-items: center;
+    gap: var(--10px);
+}
+
+.visitor-details .item>label {
+    color: var(--text);
     font-family: var(--ff_number);
     font-size: var(--fs_small);
-    font-weight: 500;
 }
 
-.visit-card>.item>span {
-    word-break: break-all;
+.visitor-details .item>span {
+    color: var(--text);
 }
 
-.visit-card>h5 {
+.visitor-details .item>p {
+    color: var(--accentDark);
     font-family: var(--ff_number);
     font-size: var(--fs_small);
     font-weight: 500;
