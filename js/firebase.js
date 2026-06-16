@@ -455,7 +455,7 @@ const initVisitor = async () => {
             const updates = {
                 "visits/visitCount": count,
                 "visits/lastVisit": timestamp,
-                [`visits / visit_${count}`]: location
+                [`visits/visit_${count}`]: location
             };
 
             await visitorRef.update(updates);
@@ -602,7 +602,7 @@ const visitorActions = async visitorId => {
                     ["Location", visit.city && visit.country ? `${visit.city}, ${visit.country}` : "--"],
                     ["Coordinates", visit.latitude && visit.longitude ? `${visit.latitude}, ${visit.longitude}` : "--"],
                     ["IP Address", visit.ip || "--"],
-                    ["Time", visit.timestamp ? formatTime(visit.timestamp) : "--"]
+                    ["Visited At", visit.timestamp ? formatTime(visit.timestamp) : "--"]
                 ];
 
                 const card = $("<div>")

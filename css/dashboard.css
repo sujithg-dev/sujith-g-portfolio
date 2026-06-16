@@ -52,7 +52,7 @@
     align-items: center;
     justify-content: center;
     font-family: var(--ff_number);
-    font-size: var(--12px);
+    font-size: var(--fs_tiny);
     color: var(--white);
     background: var(--red);
     border-radius: 50%;
@@ -83,28 +83,35 @@
 }
 
 .notification-window>.header {
-    margin-bottom: var(--10px);
+    margin-bottom: var(--20px);
     display: flex;
-    justify-content: space-between;
+    align-items: center;
+    gap: var(--10px);
 }
 
 .notification-window>.header>.title {
-    font-size: var(--fs_normal);
     color: var(--textSpan);
 }
 
 .notification-window>.header>.link {
     display: none;
+    align-items: center;
+    justify-content: center;
     cursor: pointer;
+    padding: var(--4px) var(--10px);
     font-family: var(--ff_number);
-    font-size: 14px;
-    font-weight: 500;
-    color: var(--textAccent);
-    margin-right: 40px;
+    font-size: var(--fs_tiny);
+    color: var(--white);
+    background: var(--accentLight);
+    border-radius: var(--40px);
+}
+
+.notification-window>.header>.link:hover {
+    background: var(--accentDark);
 }
 
 .notification-window>.header>.link.active {
-    display: block;
+    display: flex;
 }
 
 .notification-window>.header>.icon {
@@ -112,8 +119,8 @@
     position: absolute;
     top: 0;
     right: 0;
-    width: var(--44px);
-    height: var(--44px);
+    width: var(--40px);
+    height: var(--40px);
     display: grid;
     place-items: center;
     color: var(--white);
@@ -124,7 +131,7 @@
 .notification-window>.content {
     max-height: 500px;
     background: var(--bgInput);
-    border-radius: var(--10px);
+    border-radius: var(--20px);
     overflow-y: auto;
 }
 
@@ -162,10 +169,10 @@
 .notification-item.active::after {
     content: 'new';
     position: absolute;
-    top: var(--10px);
-    right: var(--10px);
-    padding-inline: var(--10px);
-    font-size: 14px;
+    top: var(--20px);
+    right: var(--20px);
+    padding-inline: var(--6px);
+    font-size: var(--fs_tiny);
     color: var(--white);
     background: var(--accent);
     border-radius: var(--10px);
@@ -173,11 +180,11 @@
 
 .notification-item>div>.message {
     font-size: var(--fs_small);
-    color: var(--textLight);
+    color: var(--text);
 }
 
 .notification-item>div>.time {
-    font-size: 14px;
+    font-size: var(--fs_tiny);
     color: var(--accentDark);
 }
 
@@ -284,7 +291,7 @@
     content: '';
     position: absolute;
     left: var(--10px);
-    width: 120px;
+    width: 150px;
     height: var(--48px);
     background: var(--accentLight);
     border-radius: var(--40px);
@@ -294,7 +301,7 @@
 .table-header>.table-nav>.nav-btn {
     position: relative;
     height: var(--48px);
-    width: 120px;
+    width: 150px;
     color: var(--textSpan);
     font-family: var(--ff_semibold);
     font-size: var(--fs_normal);
@@ -310,11 +317,11 @@
 }
 
 .table-header>.table-nav:has(.nav-btn2.active)::before {
-    left: 130px;
+    left: 160px;
 }
 
 .table-header>.table-nav:has(.nav-btn3.active)::before {
-    left: 250px;
+    left: 310px;
 }
 
 .table-header>.table-items {
@@ -389,7 +396,7 @@
 .table-content>table>tbody>tr>td {
     padding: var(--14px) var(--20px);
     font-family: var(--ff_number);
-    font-size: 16px;
+    font-size: var(--fs_small);
     vertical-align: middle;
     white-space: nowrap;
 }
@@ -407,7 +414,7 @@
 
 .table-content>table>tbody>tr>.row-action>.icon {
     cursor: pointer;
-    font-size: var(--20px);
+    font-size: var(--icon_size);
     color: var(--accentDark);
 }
 
@@ -457,9 +464,12 @@
 }
 
 .window>header>.icon {
+    position: absolute;
+    top: 0;
+    right: 0;
     cursor: pointer;
-    width: var(--52px);
-    height: var(--52px);
+    width: var(--40px);
+    height: var(--40px);
     display: flex;
     align-items: center;
     justify-content: center;
@@ -688,6 +698,7 @@
 .message-details .item>p {
     font-family: var(--ff_semibold);
     color: var(--accentDark);
+
 }
 
 
@@ -750,4 +761,6 @@
     font-family: var(--ff_number);
     font-size: var(--fs_small);
     font-weight: 500;
+    overflow-wrap: break-word;
+    width: 250px;
 }

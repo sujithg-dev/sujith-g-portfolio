@@ -70,6 +70,7 @@
 
     --fs_normal: clamp(1rem, 1.2vw, 1.25rem);
     --fs_small: clamp(0.75rem, 1vw, 1rem);
+    --fs_tiny: clamp(0.65rem, 1vw, 0.75rem);
 
     --icon_size: clamp(1.15rem, 2vw, 1.5rem);
 
@@ -814,7 +815,7 @@ input:-webkit-autofill {
     font-size: var(--fs_small);
     color: var(--textSpan);
     background: var(--bgBtn);
-    border-radius: var(--10px);
+    border-radius: var(--4px);
 }
 
 .skill-item>.content>.skills>.skill:hover {
@@ -1129,14 +1130,6 @@ input:-webkit-autofill {
     height: 350px;
 }
 
-.works-item.inv>.item-img>.img {
-    filter: invert(0.8);
-}
-
-.works-item.inv:hover>.item-img>.img {
-    filter: invert(0);
-}
-
 .works-item>.category {
     position: absolute;
     z-index: 2;
@@ -1181,10 +1174,6 @@ input:-webkit-autofill {
     gap: var(--10px);
 }
 
-.works-item:hover>.item-content {
-    top: 350px;
-}
-
 .works-item>.item-content::before {
     content: '';
     position: absolute;
@@ -1198,8 +1187,8 @@ input:-webkit-autofill {
 }
 
 .works-item:hover>.item-content::before {
-    top: 0;
-    backdrop-filter: blur(100px);
+    backdrop-filter: blur(0);
+    background: transparent;
 }
 
 .works-item>.item-content>.name {
@@ -1215,13 +1204,13 @@ input:-webkit-autofill {
     margin-top: var(--10px);
     display: flex;
     align-items: center;
-    gap: var(--10px);
+    gap: var(--20px);
 }
 
 .works-item>.item-content>.skills>.skill {
     color: var(--white);
     font-family: var(--ff_number);
-    font-size: var(--fs_normal);
+    font-size: var(--fs_small);
     font-weight: 500;
 }
 
@@ -1232,6 +1221,12 @@ input:-webkit-autofill {
     border-radius: 50%;
 }
 
+.works-item:hover>.item-content>.name,
+.works-item:hover>.item-content>.description,
+.works-item:hover>.item-content>.skills>.skill,
+.works-item:hover>.item-content>.skills>.dot {
+    opacity: 0;
+}
 
 
 /* ----- Section Contact ----- */
