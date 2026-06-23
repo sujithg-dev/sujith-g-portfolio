@@ -9,7 +9,6 @@ const inputError = input => {
     }, 1000);
 };
 
-
 const formOutput = (form, type, message) => {
 
     const output = $(form);
@@ -37,11 +36,9 @@ const formOutput = (form, type, message) => {
     }, 2500);
 };
 
-
 const handleContactForm = ({ action, fields, output }) => {
 
-    const clearFields = () =>
-        Object.values(fields).forEach(field => field?.val?.(""));
+    const clearFields = () => Object.values(fields).forEach(field => field?.val?.(""));
 
     $(action).on("click", async () => {
 
@@ -79,8 +76,8 @@ const handleContactForm = ({ action, fields, output }) => {
                     [`${id}/timestamp`]: timestamp,
                     [`${id}/status`]: "unread"
                 });
-
-            } else {
+            }
+            else {
 
                 const payload = {
                     id: timestamp,
@@ -108,18 +105,16 @@ const handleContactForm = ({ action, fields, output }) => {
             formOutput(output, "success", "Message sent successfully.");
             clearFields();
         }
-        
+
         catch (error) {
             formOutput(output, "error", error.message);
         }
     });
 };
 
-
 const handleLoginForm = ({ action, fields, output }) => {
 
-    const clearFields = () =>
-        Object.values(fields).forEach(field => field?.val?.(""));
+    const clearFields = () => Object.values(fields).forEach(field => field?.val?.(""));
 
     $(action).on("click", async () => {
 
@@ -133,24 +128,24 @@ const handleLoginForm = ({ action, fields, output }) => {
 
             if (password === snapshot.val())
                 $(".dashboard").addClass("hide");
-            else
+            else {
                 formOutput(output, "error", "Incorrect password!");
+                inputError(fields.password);
+            }
 
             clearFields();
 
         }
-        
+
         catch (error) {
             formOutput(output, "error", error.message);
         }
     });
 };
 
-
 const handlePasswordForm = ({ action, fields, output }) => {
 
-    const clearFields = () =>
-        Object.values(fields).forEach(field => field?.val?.(""));
+    const clearFields = () => Object.values(fields).forEach(field => field?.val?.(""));
 
     $(action).on("click", async () => {
 
@@ -192,7 +187,6 @@ const handlePasswordForm = ({ action, fields, output }) => {
     });
 };
 
-
 const handleFileUploadForm = ({ action, fields, output }) => {
 
     let file = null;
@@ -200,6 +194,9 @@ const handleFileUploadForm = ({ action, fields, output }) => {
     let fileType = "";
 
     const reset = () => {
+
+        $(".reset, .upload").prop('disabled', true);
+
 
         fields.fileName.val("");
         fields.filePreview.removeClass("show uploading");
@@ -251,11 +248,13 @@ const handleFileUploadForm = ({ action, fields, output }) => {
             fileName = parts.join(".") || file.name;
 
             if (fileType !== "pdf" && !file.type.startsWith("image/"))
-                return formOutput(output,"error", "Only Images and PDF files can be uploaded!");
+                return formOutput(output, "error", "Only Images and PDF files can be uploaded!");
 
             const reader = new FileReader();
             reader.onload = () => showPreview(reader.result);
             reader.readAsDataURL(file);
+
+            $(".reset, .upload").prop('disabled', false);
         });
 
         input.trigger("click");
@@ -307,7 +306,6 @@ const handleFileUploadForm = ({ action, fields, output }) => {
     });
 };
 
-
 handleContactForm({
     action: ".submit-contact-form",
     fields: {
@@ -318,7 +316,6 @@ handleContactForm({
     output: ".contact-form-output"
 });
 
-
 handleLoginForm({
     action: ".dashboard-login",
     fields: {
@@ -326,7 +323,6 @@ handleLoginForm({
     },
     output: ".login-form-output"
 });
-
 
 handlePasswordForm({
     action: ".change-password",
@@ -337,7 +333,6 @@ handlePasswordForm({
     },
     output: ".password-form-output"
 });
-
 
 handleFileUploadForm({
     action: {

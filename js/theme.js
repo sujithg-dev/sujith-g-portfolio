@@ -17,19 +17,17 @@ const getThemeMode = mode => {
     }
 };
 
-
 const initTheme = () => {
 
     const loadSetting = (key, setter) => {
 
         const value = localStorage.getItem(key);
 
-        if (value !== null) {
+        if (value !== null)
             setter(value);
-        }
-        else {
-            db.settings.child(key).on("value", snapshot => setter(snapshot.val()));
-        }
+        else
+            db.settings.child(key).on("value", snapshot =>
+                setter(snapshot.val()));
     };
 
     loadSetting("appMode", value => {
@@ -43,20 +41,44 @@ const initTheme = () => {
     });
 };
 
+let hueInterval;
+let hueListenerInitialized = false;
 
 const setTheme = () => {
 
     const isLight = appMode === "light";
 
-    document.body.classList.toggle("light-mode", isLight);
-
+    $("body").toggleClass("light-mode", isLight);
     $(".mode-icon").text(isLight ? "dark_mode" : "light_mode");
-
     $(":root").css("--hueColor", hueCode);
-
     $(".color-picker input").val(hueCode);
-};
 
+    if (!hueListenerInitialized) {
+
+        hueListenerInitialized = true;
+
+        db.settings.child("hueEffect").on("value", value => {
+
+            if (hueInterval)
+                clearInterval(hueInterval);
+
+            if (!value.val()) {
+                $(":root").css("--hueColor", hueCode);
+                $(".color-picker input").val(hueCode);
+                return;
+            }
+
+            let count = hueCode ?? 0;
+
+            hueInterval = setInterval(() =>
+            {
+                $(":root").css("--hueColor", count++);
+                $(".color-picker input").val(count);
+                if (count > 360) count = 0;
+            }, 1000);
+        });
+    }
+};
 
 const toggleMode = () => {
 
@@ -66,7 +88,6 @@ const toggleMode = () => {
 
     setTheme();
 };
-
 
 const colorPicker = (action, hue) => {
 
@@ -86,7 +107,6 @@ const colorPicker = (action, hue) => {
     }
 };
 
-
 const updateMode = () => {
 
     const cycle = {
@@ -105,12 +125,11 @@ const updateMode = () => {
     }
 
     catch (error) {
-        console.log("Update Mode Error: ", error)
+        console.log("Update themm mode error: ", error)
     }
 
     setTheme();
 };
-
 
 const updateColor = (hueCode) => {
 
@@ -119,7 +138,7 @@ const updateColor = (hueCode) => {
     }
 
     catch (error) {
-        console.log("Update Color Error: ", error)
+        console.log("Update hue color error: ", error)
     }
 
     $(":root").css("--hueColor", hueCode);

@@ -51,7 +51,7 @@
 
     <!-- Block -->
     <div class="block dashboard">
-        <div class="window dashboard">
+        <div class="dialog dashboard">
             <header>
                 <h4 class="title">Dashboard Login</h4>
             </header>
@@ -61,7 +61,7 @@
                     <div class="field-items">
                         <div class="input-item">
                             <span class="material-symbols-outlined icon">password</span>
-                            <input type="password" class="input password" placeholder="Enter Password">
+                            <input type="password" class="input password" placeholder="Password">
                         </div>
                     </div>
                 </form>
@@ -74,10 +74,10 @@
     <!---->
 
     <!-- Dialog Change Password -->
-    <dialog class="window window-password">
+    <dialog class="dialog dialog-password">
         <header>
             <h4 class="title">Change Password</h4>
-            <span class="material-symbols-outlined icon" onclick='toggleDialog("window-password")'>close</span>
+            <span class="material-symbols-outlined icon" onclick='toggleDialog("dialog-password")'>close</span>
         </header>
         <main>
             <div class="form-output password-form-output"></div>
@@ -105,10 +105,10 @@
     <!---->
 
     <!-- Dialog File Upload -->
-    <dialog class="window window-fileUpload">
+    <dialog class="dialog dialog-fileUpload">
         <header>
             <h4 class="title">File Upload</h4>
-            <span class="material-symbols-outlined icon" onclick='toggleDialog("window-fileUpload")'>close</span>
+            <span class="material-symbols-outlined icon" onclick='toggleDialog("dialog-fileUpload")'>close</span>
         </header>
         <main>
             <div class="form-output file-form-output"></div>
@@ -123,40 +123,40 @@
             </form>
         </main>
         <footer>
-            <button class="button reset">Reset</button>
+            <button class="button reset" disabled>Reset</button>
+            <button class="button upload" disabled>Upload</button>
             <button class="button attach">Attach</button>
-            <button class="button upload">Upload</button>
         </footer>
     </dialog>
     <!---->
 
-    <!-- Dialog Message Info -->
-    <dialog class="window window-message">
+    <!-- Dialog Message -->
+    <dialog class="dialog dialog-message">
         <header>
             <h4 class="title">Message</h4>
-            <span class="material-symbols-outlined icon" onclick='toggleDialog("window-message")'>close</span>
+            <span class="material-symbols-outlined icon" onclick='toggleDialog("dialog-message")'>close</span>
         </header>
-        <div class="window-content message-details"></div>
+        <div class="dialog-content message-details"></div>
     </dialog>
     <!---->
 
-    <!-- Dialog Visitor Info -->
-    <dialog class="window window-visitor">
+    <!-- Dialog Visitor -->
+    <dialog class="dialog dialog-visitor">
         <header>
             <h4 class="title">Visitor Details</h4>
-            <span class="material-symbols-outlined icon" onclick='toggleDialog("window-visitor")'>close</span>
+            <span class="material-symbols-outlined icon" onclick='toggleDialog("dialog-visitor")'>close</span>
         </header>
-        <div class="window-content visitor-details"></div>
+        <div class="dialog-content visitor-details"></div>
     </dialog>
     <!---->
 
     <!-- Header -->
     <header class="dashboard-header">
-        <div class="container">
-            <div class="navbar-dashboard">
+        <div class="navbar-dashboard">
+            <div class="container">
                 <h4>Dashboard</h4>
                 <div class="navbar-items">
-                    <div class="nav-item nav-lock" onclick='toggleDialog("window-password")'>
+                    <div class="nav-item nav-lock" onclick='toggleDialog("dialog-password")'>
                         <span class="material-symbols-outlined icon">lock</span>
                     </div>
                     <div class="nav-item nav-mode" onclick="toggleMode()">
@@ -191,7 +191,7 @@
                     <div class="settings-item appLive-btn" onclick='initSettings("appLive")'>
                         <span class="material-symbols-outlined icon">computer</span>
                         <div class="content">
-                            <h4 class="name">App Status</h4>
+                            <h4 class="name">Website Status</h4>
                             <span class="status appLiveText"></>
                         </div>
                     </div>
@@ -216,11 +216,25 @@
                             <div class="color-picker1"><input type="range" min="0" max="360" onchange="updateColor(this.value)"></div>
                         </div>
                     </div>
+                    <div class="settings-item bgEffect-btn" onclick='initSettings("hueEffect")'>
+                        <span class="material-symbols-outlined icon">masked_transitions</span>
+                        <div class="content">
+                            <h4 class="name">Hue Effect</h4>
+                            <span class="status hueEffectText"></span>
+                        </div>
+                    </div>
+                    <div class="settings-item bgEffect-btn" onclick='initSettings("bgEffect")'>
+                        <span class="material-symbols-outlined icon">flare</span>
+                        <div class="content">
+                            <h4 class="name">Background Effect</h4>
+                            <span class="status bgEffectText"></span>
+                        </div>
+                    </div>
                 </div>
                 <div class="dashboard-table">
                     <div class="table-header">
                         <div class="table-items">
-                            <button class="item-btn" onclick='toggleDialog("window-fileUpload")'><span class="material-symbols-outlined icon">upload</span></button>
+                            <button class="item-btn" onclick='toggleDialog("dialog-fileUpload")'><span class="material-symbols-outlined icon">upload</span></button>
                         </div>
                         <div class="table-nav">
                             <button class="nav-btn nav-btn1 active" data-filter="table-messages">Messages</button>

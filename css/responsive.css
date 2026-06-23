@@ -148,7 +148,7 @@
     }
 
     .home-content>.random>.word>.letter {
-        font-size: 4rem;
+        font-size: 2rem;
     }
 
 
@@ -164,8 +164,8 @@
 
     /* ----- Section Skills ----- */
     .layout-skills {
-        margin-top: var(--20px);
-        gap: var(--20px);
+        margin-top: var(--40px);
+        gap: var(--12px);
         grid-template-columns: 1fr;
     }
 
@@ -215,7 +215,6 @@
     }
 
 
-
     /* ----- Section Journey ----- */
     .layout-journey {
         grid-template-columns: 1fr;
@@ -241,11 +240,15 @@
     }
 
     .journey-item>.content>.year::after {
-        left: -48.5px;
+        left: -52px;
+    }
+
+    .journey-item>.content>.name {
+        margin: var(--18px) auto var(--6px);
     }
 
     .journey-item>.content>.description {
-        padding-left: var(--10px);
+        padding-left: var(--24px);
     }
 
 
@@ -253,17 +256,17 @@
     .works-header {
         flex-direction: column;
         align-items: flex-start;
-        gap: var(--20px);
+        gap: var(--24px);
     }
 
     .works-tabs {
-        padding: var(--6px);
+        padding: 0;
         width: 100%;
     }
 
     .works-tabs::before {
-        top: var(--6px);
-        left: var(--6px);
+        top: 0;
+        left: 0;
         width: 33.3%;
         height: var(--40px);
     }
@@ -282,9 +285,9 @@
     }
 
     .layout-works {
-        margin-top: var(--20px);
+        margin-top: var(--12px);
         grid-template-columns: 1fr;
-        gap: var(--20px);
+        gap: var(--12px);
     }
 
     .works-item {
@@ -300,130 +303,234 @@
     }
 
     .works-item>.item-content {
-        padding: var(--20px);
-    }
-
-    .works-item>.item-content>.skills {
-        gap: var(--10px);
+        padding: var(--24px);
     }
 
 
     /* ----- Section Contact ----- */
     .section-contact {
-        padding-block: 50px;
+        padding-block: 100px 50px;
     }
 
     .layout-contact {
         grid-template-columns: 1fr;
-        gap: var(--40px);
+        gap: var(--48px);
     }
 
     .contact-box>.contact-items {
-        margin-top: var(--20px);
-        gap: var(--20px);
+        margin-top: var(--24px);
+        gap: var(--24px);
     }
 
+    .social-links {
+        margin-top: var(--24px);
+    }
+
+    .social-links>ul>li>a {
+        width: var(--36px);
+        height: var(--36px);
+    }
+
+    .social-links>ul>li>a>i {
+        font-size: var(--fs_normal);
+    }
 
     /* ----- Section Contact > Contact Form ----- */
     .contact-form {
-        padding: var(--20px);
+        padding: var(--28px) var(--20px) var(--28px);
     }
 
     .contact-form>.input-item>.icon {
-        padding: var(--14px);
+        padding: var(--12px);
+    }
+
+    .contact-form>.input-item>.input {
+        padding-inline: var(--12px);
+    }
+
+    .contact-form>.input-item>.user-message {
+        padding: var(--12px);
     }
 
     .contact-form>.form-btn>.button {
-        margin-top: var(--10px);
+        margin-top: var(--6px);
     }
 
 
     /* ----- Footer ----- */
     .footer {
-        padding-block: var(--20px);
+        height: 80px;
     }
 
     .footer-content>.social-links {
-        gap: var(--20px);
+        gap: var(--18px);
     }
 
-    .footer-content>.social-links>.link {
-        font-size: var(--18px);
-    }
 
 
     /* -------------------------
         dashboard.html
     ------------------------- */
-    .navbar-dashboard {
-        padding: var(--20px) 0;
+
+    /* ----- Dashboard > Navbar ----- */
+    .navbar-dashboard,
+    .navbar-dashboard.sticky {
+        height: 80px;
     }
 
-    .navbar-dashboard>.navbar-items {
-        gap: var(--12px);
+    .navbar-dashboard>div>h4 {
+        font-size: var(--fs_heading3);
     }
 
-    .navbar-dashboard>.navbar-items>.nav-item>.color-picker {
-        top: 40px;
-        left: unset;
-        right: 0;
+    .navbar-dashboard .navbar-items {
+        padding: 0;
     }
 
-    .nav-notification>.icon {
-        font-size: var(--28px);
+    .nav-notification .icon {
+        font-size: var(--24px);
     }
 
+
+    /* ----- Dashboard > Notification ----- */
     .notification-window {
         position: fixed;
-        top: 10%;
+        top: 60px;
         left: 5%;
         width: 90%;
     }
 
-    .notification-window>.content,
+    .notification-window>.header {
+        margin-bottom: var(--12px);
+    }
+
+    .notification-window>.header>.icon {
+        width: var(--40px);
+        height: var(--40px);
+    }
+
     .notification-item {
-        padding-inline: var(--10px);
+        padding-inline: var(--18px);
     }
 
     .notification-item.active::after {
-        top: var(--6px);
-        right: 0;
+        top: var(--12px);
+        right: var(--18px);
     }
 
-    .notification-item.active::after,
-    .notification-item>.time {
-        font-size: var(--fs_small);
+
+    /* ----- Dialog ----- */
+    .dialog>header>.title {
+        margin-top: var(--18px);
+        margin-left: var(--18px);
     }
 
+    .dialog>header>.icon {
+        width: var(--40px);
+        height: var(--40px);
+    }
+
+    .dialog>main {
+        padding: var(--24px);
+    }
+
+    .dialog>main>form>.field-items>.input-item>.input {
+        padding-inline: var(--12px);
+    }
+
+    .dialog>footer>.button {
+        padding-inline: var(--20px);
+        height: var(--40px);
+    }
+
+
+    /* ----- Dialog > File Upload ----- */
+    .dialog>main>form>.file-preview {
+        margin-bottom: var(--12px);
+    }
+
+
+    /* ----- Dialog > Message ----- */
+    .message-details {
+        padding: var(--6px) var(--18px) var(--18px);
+    }
+
+    .message-details>.message-header {
+        padding: var(--18px);
+    }
+
+    .message-details>.message-body {
+        padding: var(--18px);
+    }
+
+
+    /* ----- Dialog > Visitor ----- */
+    .visitor-details {
+        padding: var(--6px) var(--18px) var(--18px);
+    }
+
+    .visitor-details>.visitor-header {
+        padding: var(--18px);
+    }
+
+    .visit-body {
+        padding: var(--18px);
+    }
+
+    .visitor-details .item>p {
+        width: auto;
+    }
+
+
+    /* ----- Section Settings ----- */
     .section.section-dashboard {
-        padding: var(--20px) 0;
+        margin-top: 100px;
+        padding: 0;
     }
 
     .layout-settings {
-        gap: var(--10px);
+        grid-template-columns: 1fr 1fr;
+        gap: var(--12px);
+    }
+
+    .settings-item {
+        padding: var(--12px);
+        gap: var(--8px);
     }
 
     .settings-item>.icon {
-        width: 70px;
-        height: 70px;
+        width: var(--40px);
+        height: var(--40px);
+        font-size: var(--18px);
     }
 
+    .settings-item .name {
+        font-family: var(--ff_number);
+        font-size: var(--fs_small);
+    }
 
-    /* ----- Dashboard Table ----- */
-    .table-header,
-    .table-header>.table-btns {
-        gap: var(--6px);
+    .settings-item .color-picker1 {
+        width: fit-content;
+        height: var(--14px);
+    }
+
+    /* ----- Section > Tables ----- */
+    .dashboard-table {
+        margin-top: var(--24px);
+    }
+
+    .table-header>.table-nav {
+        padding: var(--8px);
     }
 
     .table-header>.table-nav::before {
-        width: 100px;
-        height: var(--40px);
+        left: var(--8px);
+        width: 80px;
+        height: var(--36px);
     }
 
     .table-header>.table-nav>.nav-btn {
-        width: 100px;
-        height: var(--40px);
-        font-size: var(--fontSizeS);
+        width: 80px;
+        height: var(--36px);
     }
 
     .table-header>.table-nav>.nav-btns.nav-btn.active {
@@ -431,11 +538,11 @@
     }
 
     .table-header>.table-nav:has(.nav-btn2.active)::before {
-        left: 110px;
+        left: 88px;
     }
 
     .table-header>.table-nav:has(.nav-btn3.active)::before {
-        left: 210px;
+        left: 168px;
     }
 
     .table-header>.table-btns>.icon {
@@ -443,26 +550,8 @@
         height: var(--40px);
     }
 
-
-
-    .window>header {
-        height: var(--44px);
-    }
-
-    .window>header>.icon {
-        width: var(--44px);
-        height: var(--44px);
-    }
-
-    .window>main {
-        padding: var(--20px);
-    }
-
-    .window>footer>.button {
+    .table-header>.table-items>.item-btn {
+        width: var(--40px);
         height: var(--40px);
-    }
-
-    .visitor-details .item>p {
-        width: 180px;
     }
 }

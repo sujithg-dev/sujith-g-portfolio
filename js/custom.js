@@ -1,26 +1,25 @@
 $(window).on("load", e => {
-
     if ($("body").hasClass("index-page")) {
         syncTime();
         initNavbar();
         initSkill();
         initJourney();
         initWorks();
-        radiumAnimation(["Developer", "Freelancer"], ".random");
+        radiumAnimation(["Developer", "Designer", "Freelancer"], ".random");
         // glitchAnimation(["Design", "Develop", "Code"], ".glitch");
     }
 });
-
 
 $(window).on("scroll", e => {
 
     if ($("body").hasClass("index-page"))
         initNavbar();
 
+    $(".navbar-dashboard").toggleClass("sticky", window.scrollY >= 10);
+
     $(".color-picker").removeClass("show")
 
 });
-
 
 const getTime = () => {
     const now = new Date();
@@ -44,7 +43,6 @@ const getTime = () => {
         formattedTime: `${day}, ${month}, ${year} - ${hour % 12 || 12}:${minute}:${second} ${hour >= 12 ? 'PM' : 'AM'}`
     }
 }
-
 
 const formatTime = timestamp => {
 
@@ -89,17 +87,15 @@ const formatTime = timestamp => {
     });
 };
 
-
 const syncTime = () => {
     setInterval(() => {
-        $(".notification .time, .row-receivedTime").each(function () {
+        $(".sync-time").each(function () {
             $(this).text(
                 formatTime($(this).data("time"))
             );
         });
     }, 60000);
 };
-
 
 const initNavbar = () => {
 
@@ -127,19 +123,21 @@ const initNavbar = () => {
         $(".nav-link3").addClass("active");
 };
 
-
 const initSkill = () => {
+
     $(".skill-item").each(function () {
 
         const card = $(this);
+
         const bar = card.find(".progress-bar")[0];
         const txt = card.find(".progress-text");
         const img = card.find(".progress-img");
 
         const r = 70, c = 2 * Math.PI * r;
+
         bar.style.strokeDasharray = c;
 
-        let raf;
+        let frame;
 
         card.find(".skill").hover(function () {
 
@@ -154,21 +152,29 @@ const initSkill = () => {
                 .filter(`[data-skill="${skill}"]`).addClass("active");
 
             let start;
-            cancelAnimationFrame(raf);
+            cancelAnimationFrame(frame);
 
             const anim = t => {
+
                 if (!start) start = t;
+
                 const p = Math.min((t - start) / 1000, 1) * percent;
+
                 bar.style.strokeDashoffset = c - (p / 100) * c;
                 txt.text(Math.floor(p) + "%");
-                if (p < percent) raf = requestAnimationFrame(anim);
-            };
-            raf = requestAnimationFrame(anim);
 
+                if (p < percent)
+                    frame = requestAnimationFrame(anim);
+            };
+            frame = requestAnimationFrame(anim);
         },
             function () {
-                cancelAnimationFrame(raf);
-                card.removeClass("active").find(".img-box").removeClass("active");
+                cancelAnimationFrame(frame);
+
+                card.removeClass("active")
+                    .find(".img-box")
+                    .removeClass("active");
+
                 bar.style.strokeDashoffset = c;
                 txt.text("0%");
             }
@@ -176,6 +182,31 @@ const initSkill = () => {
     });
 };
 
+const anim = t => {
+
+    if (!start) start = t;
+
+    const p = Math.min((t - start) / 1000, 1) * percent;
+
+    bar.style.strokeDashoffset = c - (p / 100) * c;
+    txt.text(Math.floor(p) + "%");
+
+    // Spark Position
+    const angle = ((p / 100) * 360 - 90) * Math.PI / 180;
+
+    const x = centerX + r * Math.cos(angle);
+    const y = centerY + r * Math.sin(angle);
+
+    spark.css({
+        left: x + "px",
+        top: y + "px",
+        opacity: 1
+    });
+
+    if (p < percent) {
+        raf = requestAnimationFrame(anim);
+    }
+};
 
 const initJourney = () => {
 
@@ -210,7 +241,6 @@ const initJourney = () => {
     });
 };
 
-
 const initWorks = () => {
 
     const tabs = $(".works-tab");
@@ -219,7 +249,6 @@ const initWorks = () => {
     const applyFilter = filter => {
 
         tabs.each(function () {
-
             $(this).toggleClass("active", this.dataset.filter === filter);
         });
 
@@ -242,8 +271,7 @@ const initWorks = () => {
     });
 };
 
-
-const radiumAnimation = (words, selector, delay = 5000) => {
+const radiumAnimation = (words, selector, delay = 6000) => {
 
     let index = 0;
     const element = document.querySelector(selector);
@@ -269,17 +297,17 @@ const radiumAnimation = (words, selector, delay = 5000) => {
         shuffle(letters).forEach((letter, i) => {
             setTimeout(() => {
                 letter.classList.toggle("hidden", !show);
-            }, i * 50);
+            }, i * 100);
         });
 
-        return letters.length * 50;
+        return letters.length * 100;
     };
 
     const cycle = () => {
 
         animate(false);
 
-        const duration = element.querySelectorAll(".letter").length * 50;
+        const duration = element.querySelectorAll(".letter").length * 100;
 
         setTimeout(() => {
 
@@ -294,14 +322,13 @@ const radiumAnimation = (words, selector, delay = 5000) => {
                 animate(true);
             });
 
-        }, duration + 300);
+        }, duration + 1000);
     };
 
     render(words[0]);
 
     setInterval(cycle, delay);
 };
-
 
 const glitchAnimation = (words, selector, delay = 3000) => {
 
@@ -371,9 +398,7 @@ const glitchAnimation = (words, selector, delay = 3000) => {
     const timer = setInterval(cycle, delay);
 };
 
-
 const toggleDialog = (selector) => {
     const dialog = $(`.${selector}`).first()[0];
     dialog.open ? dialog.close() : dialog.showModal();
 };
-

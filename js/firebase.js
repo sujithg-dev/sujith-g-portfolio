@@ -9,7 +9,6 @@ firebase.initializeApp({
     measurementId: "G-35PFV9DBR0"
 });
 
-
 const db = {
     settings: firebase.database().ref("Settings"),
     notifications: firebase.database().ref("Notifications"),
@@ -19,9 +18,7 @@ const db = {
     stFiles: firebase.storage().ref("Files")
 };
 
-
 window.addEventListener("load", () => {
-
     initSettings();
     initTheme();
     initTable();
@@ -29,11 +26,9 @@ window.addEventListener("load", () => {
 
     const isLocalhost = ["localhost", "127.0.0.1", "::1"].includes(window.location.hostname);
 
-    if (!isLocalhost && $("body").hasClass("index-page")) {
+    if (!isLocalhost && $("body").hasClass("index-page"))
         initVisitor();
-    }
 });
-
 
 const initSettings = async key => {
 
@@ -47,7 +42,7 @@ const initSettings = async key => {
             if (!value && $("body").hasClass("index-page") && !location.pathname.includes("blank.html"))
                 location.replace("blank.html");
 
-            $(".appLiveText").text(value ? "LIVE" : "BLOCK");
+            $(".appLiveText").text(value ? "Active" : "Blocked");
 
             setTimeout(() => {
                 $(".pre-loader").addClass("hide")
@@ -55,14 +50,22 @@ const initSettings = async key => {
         },
 
         dashboardLock: value => {
-
-            $(".dashboardLockText").text(value ? "ON" : "OFF");
+            $(".dashboardLockText").text(value ? "On" : "Off");
             $(".dashboard").toggleClass("hide", !value);
         },
 
         appMode: value => $(".appModeText").text(value),
 
-        hueCode: value => $(".color-picker1 input").val(value)
+        hueCode: value => $(".color-picker1 input").val(value),
+
+        hueEffect: value => {
+            $(".hueEffectText").text(value ? "On" : "Off")
+        },
+
+        bgEffect: value => {
+            $(".bgEffectText").text(value ? "On" : "Off")
+            $(".stars").toggleClass("active", value);
+        }
     };
 
     try {
@@ -76,13 +79,17 @@ const initSettings = async key => {
             return;
         }
 
-        Object.entries(settingsMap).forEach(([key, callback]) => db.settings.child(key).on("value", snapshot => callback(snapshot.val())));
+        Object
+            .entries(settingsMap)
+            .forEach(([key, callback]) =>
+                db.settings.child(key).on("value", snapshot =>
+                    callback(snapshot.val())));
     }
+
     catch (error) {
-        console.error("Settings error: ", error);
+        console.error("Settings fetching error: ", error);
     }
 };
-
 
 const initNotification = async action => {
 
@@ -112,8 +119,6 @@ const initNotification = async action => {
 
         db.notifications.orderByKey().limitToLast(10).on("value", snapshot => {
 
-
-
             const notificationCount = $(".notification-count");
             const notificationContent = $(".notification-window .content");
             const notificationLink = $(".notification-window .link");
@@ -139,39 +144,37 @@ const initNotification = async action => {
             notifications
                 .sort((a, b) => b.timestamp - a.timestamp)
                 .forEach(value => {
-
                     try {
                         const isMessage = value.type === "message";
                         const isUnread = value.status === "unread";
 
                         unread += isUnread ? 1 : 0;
 
-                        notificationContent
-                            .append(
-                                $("<div>")
-                                    .addClass(`notification-item ${isUnread ? " active" : ""}`)
-                                    .attr("onclick", isMessage ? `messageActions('${value.id}', 'info')` : `visitorActions('${value.visitorId}', 'info')`)
-                                    .append(
-                                        $("<div>").append(
-                                            $("<span>")
-                                                .addClass("title")
-                                                .text(isMessage ? "Message" : "Visitor"),
-                                            $("<p>")
-                                                .addClass("message")
-                                                .text(isMessage ? `You received a new message from ${value.name}.` : "Someone visited the website.")
-                                        ),
-                                        $("<div>").append(
-                                            $("<span>")
-                                                .addClass("time")
-                                                .attr("data-time", value.timestamp)
-                                                .text(formatTime(value.timestamp))
-                                        )
+                        notificationContent.append(
+                            $("<div>")
+                                .addClass(`notification-item ${isUnread ? " active" : ""}`)
+                                .attr("onclick", isMessage ? `messageActions('${value.id}', 'info')` : `visitorActions('${value.visitorId}', 'info')`)
+                                .append(
+                                    $("<div>").append(
+                                        $("<span>")
+                                            .addClass("title")
+                                            .text(isMessage ? "Message" : "Visitor"),
+                                        $("<p>")
+                                            .addClass("message")
+                                            .text(isMessage ? `You received a new message from ${value.name}.` : "Someone visited the website.")
+                                    ),
+                                    $("<div>").append(
+                                        $("<span>")
+                                            .addClass("time sync-time")
+                                            .attr("data-time", value.timestamp)
+                                            .text(formatTime(value.timestamp))
                                     )
-                            );
+                                )
+                        );
                     }
 
                     catch (error) {
-                        console.error("Notification item error:", value, error);
+                        console.error("Notification item fetching error:", value, error);
                     }
                 });
 
@@ -184,39 +187,40 @@ const initNotification = async action => {
     }
 
     catch (error) {
-        console.error("Notification Error:", error);
+        console.error("Notification fetching error:", error);
     }
 };
 
-
 const initTable = () => {
 
-    const tabs = document.querySelectorAll(".nav-btn");
-    const items = document.querySelectorAll(".table-content");
+    const tabs = $(".nav-btn");
+    const items = $(".table-content");
 
     const applyFilter = filter => {
 
-        tabs.forEach(tab =>
-            tab.classList.toggle("active", tab.dataset.filter === filter));
+        tabs.each(function () {
+            $(this).toggleClass("active", this.dataset.filter === filter);
+        });
 
-        items.forEach(item =>
-            item.classList.toggle("active", item.dataset.category === filter));
+        items.each(function () {
+            $(this).toggleClass("active", this.dataset.category === filter);
+        });
     };
 
     const filter = localStorage.getItem("tableFilter") || "table-messages";
 
     applyFilter(filter);
 
-    tabs.forEach(tab => {
+    tabs.each(function () {
 
-        tab.onclick = () => {
+        $(this).on("click", function () {
 
-            const filter = tab.dataset.filter;
+            const filter = this.dataset.filter;
 
             localStorage.setItem("tableFilter", filter);
 
             applyFilter(filter);
-        };
+        });
     });
 
     const appendRow = (container, row) =>
@@ -253,7 +257,6 @@ const initTable = () => {
 
             messages.sort((a, b) => b.timestamp - a.timestamp);
             messages.forEach((value, index) => {
-
                 appendRow(
                     container,
                     $("<tr>")
@@ -269,7 +272,7 @@ const initTable = () => {
                                 .addClass("row-messagerEmail")
                                 .text(value.email?.toLowerCase()),
                             $("<td>")
-                                .addClass("row-receivedTime")
+                                .addClass("row-receivedTime sync-time")
                                 .attr("data-time", value.timestamp).text(formatTime(value.timestamp)),
                             $("<td>")
                                 .addClass("row-totalMessage")
@@ -286,7 +289,7 @@ const initTable = () => {
                 );
             });
         },
-        "Error while fetching messages data"
+        "Messages data fetching error: "
     );
 
     listen(
@@ -296,20 +299,22 @@ const initTable = () => {
             const container = $(".visitors-data");
             container.empty();
 
-            let count = 1;
+            const visitors = [];
 
             snapshot.forEach(data => {
+                visitors.push(data.val());
+            });
 
-                const value = data.val();
-
+            visitors.sort((a, b) => b.timestamp - a.timestamp);
+            visitors.forEach((value, index) => {
                 appendRow(
                     container,
                     $("<tr>")
-                        .attr("id", data.key)
+                        .attr("id", value.key)
                         .append(
                             $("<td>")
                                 .addClass("row-count")
-                                .text(count++),
+                                .text(index + 1),
                             $("<td>")
                                 .addClass("row-visitorId")
                                 .text(value.id),
@@ -335,7 +340,7 @@ const initTable = () => {
                 );
             });
         },
-        "Error while fetching visitors data"
+        "Visitors data fetching error: "
     );
 
     listen(
@@ -348,43 +353,39 @@ const initTable = () => {
             let count = 1;
 
             snapshot.forEach(data => {
-
-                const value = data.val();
-
                 appendRow(
                     container,
                     $("<tr>")
-                        .attr("id", value.fileId)
+                        .attr("id", data.val().fileId)
                         .append(
                             $("<td>")
                                 .addClass("row-count")
                                 .text(count++),
                             $("<td>")
                                 .addClass("row-fileName")
-                                .text(value.fileName.substring(0, value.fileName.lastIndexOf("."))),
+                                .text(data.val().fileName.substring(0, data.val().fileName.lastIndexOf("."))),
                             $("<td>")
                                 .addClass("row-fileFormat")
-                                .text(value.fileFormat?.toUpperCase()),
+                                .text(data.val().fileFormat?.toUpperCase()),
                             $("<td>")
                                 .addClass("row-action")
                                 .append(
                                     $("<span>")
                                         .addClass("material-symbols-outlined icon")
-                                        .attr("onclick", `fileActions('${value.fileId}', 'link')`)
-                                        .text("link"),
+                                        .attr("onclick", `fileActions('${data.val().fileId}', 'link')`)
+                                        .text("open_in_new"),
                                     $("<span>")
                                         .addClass("material-symbols-outlined icon")
-                                        .attr("onclick", `fileActions('${value.fileId}', 'delete')`)
+                                        .attr("onclick", `fileActions('${data.val().fileId}', 'delete')`)
                                         .text("delete")
                                 )
                         )
                 );
             });
         },
-        "Error while fetching files data"
+        "Files data fetching error: "
     );
 };
-
 
 const initVisitor = async () => {
 
@@ -443,13 +444,13 @@ const initVisitor = async () => {
         };
 
         const visitorRef = firebase.database().ref("Visitors/" + uid);
-        const snap = await visitorRef.once("value");
+        const snapshot = await visitorRef.once("value");
 
         const location = await getLocationFromIP();
 
-        if (snap.exists()) {
+        if (snapshot.exists()) {
 
-            let count = snap.val().visits?.visitCount;
+            let count = snapshot.val().visits?.visitCount;
             count++;
 
             const updates = {
@@ -485,10 +486,9 @@ const initVisitor = async () => {
     }
 
     catch (error) {
-        console.error("initVisitor error:", error);
+        console.error("Update visitor data error:", error);
     }
 };
-
 
 const messageActions = async messageId => {
 
@@ -549,14 +549,13 @@ const messageActions = async messageId => {
             status: "read"
         });
 
-        toggleDialog("window-message");
+        toggleDialog("dialog-message");
     }
 
     catch (error) {
-        console.error("Message Action Error: ", error);
+        console.error("Message action error: ", error);
     }
 };
-
 
 const visitorActions = async visitorId => {
 
@@ -593,7 +592,8 @@ const visitorActions = async visitorId => {
             );
         });
 
-        Object.entries(value.visits || {})
+        Object
+            .entries(value.visits || {})
             .filter(([key]) => key.startsWith("visit_"))
             .sort(([a], [b]) => +a.split("_")[1] - +b.split("_")[1])
             .forEach(([key, visit]) => {
@@ -629,14 +629,13 @@ const visitorActions = async visitorId => {
 
         container.append(header, body);
 
-        toggleDialog("window-visitor");
+        toggleDialog("dialog-visitor");
     }
 
     catch (error) {
-        console.error("Visitor Action Error: ", error);
+        console.error("Visitor action error: ", error);
     }
 };
-
 
 const fileActions = async (fileId, type) => {
 
@@ -660,6 +659,6 @@ const fileActions = async (fileId, type) => {
     }
 
     catch (error) {
-        console.error("File Action Error: ", error);
+        console.error("File action error: ", error);
     }
 };
