@@ -554,4 +554,12 @@
         width: var(--40px);
         height: var(--40px);
     }
+
+    .table-content>table>thead>tr>th {
+        padding: var(--10px) var(--6px);
+    }
+
+    .table-content>table>tbody>tr>td {
+        padding: var(--6px);
+    }
 }

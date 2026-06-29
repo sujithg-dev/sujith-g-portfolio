@@ -121,3 +121,22 @@
         transform: translate(13px, -11px);
     }
 }
+
+@keyframes shooting {
+    0% {
+        transform: translateY(0vh) scale(0.25);
+        opacity: 0.5;
+        filter: hue-rotate(45deg);
+    }
+
+    50% {
+        transform: translateY(-50vh) scale(0.75);
+        opacity: 1;
+    }
+
+    100% {
+        transform: translateY(-115vh) scale(1);
+        opacity: 1;
+        filter: hue-rotate(-45deg);
+    }
+}

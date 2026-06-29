@@ -64,7 +64,11 @@ const initSettings = async key => {
 
         bgEffect: value => {
             $(".bgEffectText").text(value ? "On" : "Off")
-            $(".stars").toggleClass("active", value);
+            $(".circuit-background").toggleClass("active", value);
+            if (value)
+                circuitBackground();
+            else
+                stopCircuit();
         }
     };
 
@@ -95,6 +99,7 @@ const initNotification = async action => {
 
     if (action === "toggle") {
         $(".notification-window").toggleClass("active");
+        $(".nav-notification").toggleClass("active");
         return;
     }
 
@@ -246,8 +251,40 @@ const initTable = () => {
         db.messages,
         snapshot => {
 
-            const container = $(".messages-data");
-            container.empty();
+            const table = $(".messages-data");
+            table.empty();
+
+            if (!snapshot.exists()) {
+                table
+                    .addClass("empty")
+                    .text("No messages to fetch");
+                return;
+            }
+
+            const thead = $("<thead>").append(
+                $("<tr>").append(
+                    $("<th>")
+                        .addClass("text-center")
+                        .text("#"),
+                    $("<th>")
+                        .text("Name"),
+                    $("<th>")
+                        .text("Email"),
+                    $("<th>")
+                        .addClass("text-center")
+                        .text("Received"),
+                    $("<th>")
+                        .addClass("text-center")
+                        .text("Total Messages"),
+                    $("<th>")
+                        .addClass("text-center")
+                        .text("Actions")
+                )
+            );
+
+            const tbody = $("<tbody>");
+
+            table.append(thead, tbody);
 
             const messages = [];
 
@@ -258,7 +295,7 @@ const initTable = () => {
             messages.sort((a, b) => b.timestamp - a.timestamp);
             messages.forEach((value, index) => {
                 appendRow(
-                    container,
+                    tbody,
                     $("<tr>")
                         .attr("id", value.id)
                         .append(
@@ -296,8 +333,41 @@ const initTable = () => {
         db.visitors,
         snapshot => {
 
-            const container = $(".visitors-data");
-            container.empty();
+            const table = $(".visitors-data");
+            table.empty();
+
+            if (!snapshot.exists()) {
+                table
+                    .addClass("empty")
+                    .text("No visitors to fetch");
+                return;
+            }
+
+            const thead = $("<thead>").append(
+                $("<tr>").append(
+                    $("<th>")
+                        .addClass("text-center")
+                        .text("#"),
+                    $("<th>")
+                        .text("Visitor Id"),
+                    $("<th>")
+                        .addClass("text-center")
+                        .text("Device Type"),
+                    $("<th>")
+                        .addClass("text-center")
+                        .text("First Visit"),
+                    $("<th>")
+                        .addClass("text-center")
+                        .text("Total Visits"),
+                    $("<th>")
+                        .addClass("text-center")
+                        .text("Actions")
+                )
+            );
+
+            const tbody = $("<tbody>");
+
+            table.append(thead, tbody);
 
             const visitors = [];
 
@@ -308,7 +378,7 @@ const initTable = () => {
             visitors.sort((a, b) => b.timestamp - a.timestamp);
             visitors.forEach((value, index) => {
                 appendRow(
-                    container,
+                    tbody,
                     $("<tr>")
                         .attr("id", value.key)
                         .append(
@@ -347,36 +417,70 @@ const initTable = () => {
         db.files,
         snapshot => {
 
-            const container = $(".files-data");
-            container.empty();
+            if (!snapshot.exists()) {
+                table
+                    .addClass("empty")
+                    .text("No files to fetch");
+                return;
+            }
+
+            const table = $(".files-data");
+            table.empty();
+
+            const thead = $("<thead>").append(
+                $("<tr>").append(
+                    $("<th>")
+                        .addClass("text-center")
+                        .text("#"),
+                    $("<th>")
+                        .text("File Name"),
+                    $("<th>")
+                        .addClass("text-center")
+                        .text("File Format"),
+                    $("<th>")
+                        .addClass("text-center")
+                        .text("Action")
+                )
+            );
+
+            const tbody = $("<tbody>");
+
+            table.append(thead, tbody);
 
             let count = 1;
 
             snapshot.forEach(data => {
+
+                const file = data.val();
+
                 appendRow(
-                    container,
+                    tbody,
                     $("<tr>")
-                        .attr("id", data.val().fileId)
+                        .attr("id", file.fileId)
                         .append(
                             $("<td>")
                                 .addClass("row-count")
                                 .text(count++),
+
                             $("<td>")
                                 .addClass("row-fileName")
-                                .text(data.val().fileName.substring(0, data.val().fileName.lastIndexOf("."))),
+                                .text(file.fileName.substring(0, file.fileName.lastIndexOf("."))),
+
                             $("<td>")
                                 .addClass("row-fileFormat")
-                                .text(data.val().fileFormat?.toUpperCase()),
+                                .text(file.fileFormat?.toUpperCase()),
+
                             $("<td>")
                                 .addClass("row-action")
                                 .append(
                                     $("<span>")
                                         .addClass("material-symbols-outlined icon")
-                                        .attr("onclick", `fileActions('${data.val().fileId}', 'link')`)
+                                        .attr("onclick", `fileActions('${file.fileId}', 'link')`)
                                         .text("open_in_new"),
+
                                     $("<span>")
                                         .addClass("material-symbols-outlined icon")
-                                        .attr("onclick", `fileActions('${data.val().fileId}', 'delete')`)
+                                        .attr("onclick", `fileActions('${file.fileId}', 'delete')`)
                                         .text("delete")
                                 )
                         )

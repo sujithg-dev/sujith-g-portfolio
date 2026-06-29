@@ -37,12 +37,13 @@
     <script src="js/firebase.js" defer></script>
     <script src="js/theme.js" defer></script>
     <script src="js/formHandler.js" defer></script>
+    <script src="js/circuitBackground.js" defer></script>
     <!---->
 </head>
 
 <body class="index-page">
 
-    <!-- Pre Loader -->
+    <!-- Loader -->
     <div class="pre-loader">
         <span></span>
     </div>
@@ -88,19 +89,8 @@
     <main>
 
         <!-- Section Home -->
-        <section class="section section-home" id="home">
-            <div class="stars">
-                <span></span>
-                <span></span>
-                <span></span>
-                <span></span>
-                <span></span>
-                <span></span>
-                <span></span>
-                <span></span>
-                <span></span>
-                <span></span>
-            </div>
+        <section class="section section-home hero" id="home">
+            <canvas class="circuit-background"></canvas>
             <div class="container">
                 <div class="layout layout-home">
                     <div class="home-content">
@@ -561,20 +551,19 @@
                             <div class="contact-item">
                                 <span class="material-symbols-outlined icon">mail</span>
                                 <div class="text">
-                                    <h4 class="name">Email Address</h4>
+                                    <p class="name">Email Address</p>
                                     <a class="link" href="mailto:sujith.g7799@gmail.com">sujith.g7799@gmail.com</a>
                                 </div>
                             </div>
                             <div class="contact-item">
                                 <span class="material-symbols-outlined icon">chat</span>
                                 <div class="text">
-                                    <h4 class="name">Whatsapp</h4>
+                                    <p class="name">Whatsapp</p>
                                     <a class="link" href="https://wa.me/+918825762028" target="_blank">+91 8825762028</a>
                                 </div>
                             </div>
                         </div>
                         <div class="social-links">
-                            <p>Follow on social media</p>
                             <ul>
                                 <li><a class="link" target="_blank" href="https://www.instagram.com/sujith._.g/"><i class="fab fa-instagram icon"></i></a></li>
                                 <li><a class="link" target="_blank" href="https://x.com/sujith__g"><i class="fab fa-twitter icon"></i></a></li>

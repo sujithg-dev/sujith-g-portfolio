@@ -170,11 +170,8 @@
                         <div class="header">
                             <h4 class="title">Notifications</h4>
                             <span class="link" onclick="initNotification('clear')">Mark all as read</span>
-                            <span class="material-symbols-outlined icon" onclick="initNotification('toggle')">close</span>
                         </div>
-                        <div class="content">
-                            <p>No Notification</p>
-                        </div>
+                        <div class="content"></div>
                     </div>
                 </div>
             </div>
@@ -243,47 +240,13 @@
                         </div>
                     </div>
                     <div class="table-content active" data-category="table-messages">
-                        <table>
-                            <thead>
-                                <tr>
-                                    <th class="text-center">#</th>
-                                    <th>Name</th>
-                                    <th>Email</th>
-                                    <th class="text-center">Received</th>
-                                    <th class="text-center">No of Messages</th>
-                                    <th class="text-center">Actions</th>
-                                </tr>
-                            </thead>
-                            <tbody class="messages-data"></tbody>
-                        </table>
+                        <table class="messages-data"></table>
                     </div>
                     <div class="table-content" data-category="table-visitors">
-                        <table>
-                            <thead>
-                                <tr>
-                                    <th class="text-center">#</th>
-                                    <th>Visitor Id</th>
-                                    <th class="text-center">Device Type</th>
-                                    <th class="text-center">First Visit</th>
-                                    <th class="text-center">Total Visits</th>
-                                    <th class="text-center">Actions</th>
-                                </tr>
-                            </thead>
-                            <tbody class="visitors-data"></tbody>
-                        </table>
+                        <table class="visitors-data"></table>
                     </div>
                     <div class="table-content" data-category="table-files">
-                        <table>
-                            <thead>
-                                <tr>
-                                    <th class="text-center">#</th>
-                                    <th>File Name</th>
-                                    <th class="text-center">Format</th>
-                                    <th class="text-center">Actions</th>
-                                </tr>
-                            </thead>
-                            <tbody class="files-data"></tbody>
-                        </table>
+                        <table class="files-data"></table>
                     </div>
                 </div>
             </div>
