@@ -1,0 +1,129 @@
+.carousel {
+    cursor: pointer;
+    position: relative;
+    display: block;
+    padding: 0;
+    aspect-ratio: 16 / 10;
+    height: 300px;
+    background: var(--bgCard2);
+    overflow: hidden;
+}
+
+.carousel .carousel-track {
+    display: flex;
+    height: 100%;
+    overflow-x: auto;
+    scroll-snap-type: x mandatory;
+    scroll-behavior: smooth;
+    scrollbar-width: none;
+    -webkit-overflow-scrolling: touch;
+    overscroll-behavior-x: contain;
+}
+
+.carousel .carousel-track::-webkit-scrollbar {
+    display: none;
+}
+
+.carousel .carousel-track:focus-visible {
+    outline: 2px solid var(--accent);
+    outline-offset: -2px;
+}
+
+.carousel .carousel-track .carousel-image {
+    flex: 0 0 100%;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    object-position: top;
+    scroll-snap-align: center;
+    scroll-snap-stop: always;
+    border-radius: 0;
+    transform: none;
+    user-select: none;
+    -webkit-user-drag: none;
+}
+
+.carousel .carousel-btn {
+    position: absolute;
+    top: 50%;
+    z-index: 2;
+    display: grid;
+    place-items: center;
+    width: 38px;
+    height: 38px;
+    color: var(--white);
+    cursor: pointer;
+    background: rgba(0, 0, 0, .55);
+    backdrop-filter: blur(6px);
+    border: 0;
+    border-radius: 50%;
+    opacity: 0;
+    transform: translateY(-50%);
+    transition: opacity .3s ease, background .3s ease;
+}
+
+.carousel .carousel-btn.prev {
+    left: 12px;
+}
+
+.carousel .carousel-btn.next {
+    right: 12px;
+}
+
+.carousel .carousel-btn:hover {
+    background: var(--accent);
+}
+
+.carousel:hover .carousel-btn,
+.carousel .carousel-btn:focus-visible {
+    opacity: 1;
+}
+
+.carousel .carousel-dots {
+    position: absolute;
+    bottom: 12px;
+    left: 50%;
+    z-index: 2;
+    display: flex;
+    gap: 6px;
+    padding: 6px;
+    background: rgba(0, 0, 0, .45);
+    backdrop-filter: blur(6px);
+    border-radius: 999px;
+    transform: translateX(-50%);
+    opacity: 0;
+}
+
+.carousel:hover .carousel-dots {
+    opacity: 1;
+}
+
+.carousel .carousel-dot {
+    width: 5px;
+    height: 5px;
+    padding: 0;
+    cursor: pointer;
+    background: rgba(255, 255, 255, .45);
+    border: 0;
+    border-radius: 50%;
+    transition: width .3s ease, background .3s ease;
+}
+
+.carousel .carousel-dot.active {
+    width: 10px;
+    background: var(--white);
+    border-radius: 999px;
+}
+
+/* Touch screens have no hover, so keep the arrows visible */
+@media (hover: none) {
+    .carousel-btn {
+        opacity: 1;
+    }
+}
+
+@media (prefers-reduced-motion: reduce) {
+    .carousel-track {
+        scroll-behavior: auto;
+    }
+}
