@@ -1,11 +1,23 @@
-const inputError = input => {
+const inputError = (input, message) => {
+
+    const parent = input.closest(".input-item");
+
+    parent
+        .attr("data-error", message)
+        .addClass("error");
 
     input
         .addClass("error")
         .focus();
 
     setTimeout(() => {
-        input.removeClass("error")
+
+        input.removeClass("error");
+
+        parent
+            .removeClass("error")
+            .removeAttr("data-error");
+
     }, 1000);
 };
 
@@ -46,14 +58,20 @@ const handleContactForm = ({ action, fields, output }) => {
         const userEmail = fields.userEmail.val();
         const userMessage = fields.userMessage.val();
 
+        if (!userName)
+           return inputError(fields.userName, "Required");
+
         if (!/^[A-Za-z]+(?:\s[A-Za-z]+)*$/.test(userName) || userName.length < 3)
-            return inputError(fields.userName);
+            return inputError(fields.userName, "Invalid name");
+
+        if (!userEmail)
+            return inputError(fields.userEmail, "Required");
 
         if (!/^\S+@\S+\.\S+$/.test(userEmail))
-            return inputError(fields.userEmail);
+            return inputError(fields.userEmail, "Invalid email address");
 
         if (!userMessage)
-            return inputError(fields.userMessage);
+            return inputError(fields.userMessage, "Required");
 
         try {
             const snapshot = await db.messages.orderByChild("email").equalTo(userEmail).once("value");

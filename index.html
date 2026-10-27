@@ -19,6 +19,7 @@
 
     <!-- Custom CSS -->
     <link rel="stylesheet" type="text/css" href="css/main.css">
+    <link rel="stylesheet" type="text/css" href="css/carousel.css">
     <link rel="stylesheet" type="text/css" href="css/responsive.css">
     <link rel="stylesheet" type="text/css" href="css/anim.css">
     <!---->
@@ -37,7 +38,6 @@
     <script src="js/firebase.js" defer></script>
     <script src="js/theme.js" defer></script>
     <script src="js/formHandler.js" defer></script>
-    <script src="js/circuitBackground.js" defer></script>
     <!---->
 </head>
 
@@ -50,7 +50,7 @@
     <!---->
 
     <!-- Header -->
-    <header class="header">
+    <header>
         <nav class="navbar navbar-expand-lg">
             <div class="container">
                 <span class="navbar-brand">Sujith.g</span>
@@ -61,13 +61,7 @@
                     <div class="navbar-nav">
                         <a class="nav-link active" href="#home">Home</a>
                         <a class="nav-link nav-link2" href="#about">About</a>
-                        <div class="nav-item dropdown">
-                            <a class="nav-link nav-link3 dropdown-toggle" href="#" data-bs-toggle="dropdown">Resume</a>
-                            <div class="dropdown-menu">
-                                <a class="dropdown-item" href="#skills">Skills</a>
-                                <a class="dropdown-item" href="#journey">Journey</a>
-                            </div>
-                        </div>
+                        <a class="nav-link nav-link3" href="#skills">Resume</a>
                         <a class="nav-link nav-link4" href="#works">Works</a>
                         <a class="nav-link nav-link5" href="#contact">Contact</a>
                     </div>
@@ -89,18 +83,15 @@
     <main>
 
         <!-- Section Home -->
-        <section class="section section-home hero" id="home">
-            <canvas class="circuit-background"></canvas>
+        <section class="section home-section" id="home">
             <div class="container">
-                <div class="layout layout-home">
-                    <div class="home-content">
-                        <img class="home-img" src="assets/images/sujithG.webp">
-                        <div>
-                            <h3 class="home-subtitle">Hello!<span> I'm</span></h3>
-                            <h1 class="home-title">Sujith G</h1>
-                        </div>
-                        <div class="glitch"></div>
-                        <div class="random"></div>
+                <div class="home-content">
+                    <img class="display-image" loading="lazy" alt="Sujith G" src="assets/images/sujithG.webp">
+                    <div class="profession"></div>
+                    <div class="hobby"></div>
+                    <div class="text">
+                        <h3 class="welcome">Hello!<span> I'm</span></h3>
+                        <h1 class="name">Sujith</h1>
                     </div>
                 </div>
             </div>
@@ -108,232 +99,223 @@
         <!---->
 
         <!-- Section About -->
-        <section class="section section-about" id="about">
+        <section class="section about-section" id="about">
             <div class="container">
-                <div class="layout layout-about">
-
-                    <div class="about-image">
-                        <div class="stars">
-                            <span></span>
-                            <span></span>
-                            <span></span>
-                            <span></span>
-                            <span></span>
-                            <span></span>
-                            <span></span>
-                            <span></span>
-                            <span></span>
-                            <span></span>
-                        </div>
-                        <img class="img" src="assets/images/sujithG.webp">
-                    </div>
+                <div class="header about-header">
+                    <span class="subtitle">About Me</span>
+                    <h1 class="title">Building solutions with code and curiosity</h1>
+                </div>
+                <div class="about-layout">
                     <div class="about-content">
-                        <div class="content-header">
-                            <h4>About Me</h4>
-                            <h2>Nice to meet you!</h2>
-                        </div>
-                        <div class="paragraph">
-                            <p class="text">
-                                I'm a <span>Full Stack Developer</span> with <span>4+ years of experience</span> turning ideas into
-                                fast, production-ready web applications — for startups moving quickly and businesses
-                                building for scale.
-                            </p>
-                            <p class="text">What I bring to the table:</p>
-                            <ul class="list">
-                                <li class="list-item"><span>Scalable full-stack web apps</span> — from concept to deployment</li>
-                                <li class="list-item"><span>Performant, intuitive UIs</span> — built with clean, maintainable code</li>
-                                <li class="list-item"><span>Robust backend APIs</span> — powered by Spring Boot and RESTful design</li>
-                            </ul>
-                            <p class="text">
-                                I care about the details that matter — performance under load, architecture that doesn't
-                                break at scale, and interfaces people actually enjoy using.
-                            </p>
+                        <h2 class="about-title">Hi I'm Sujith, Full Stack Developer</h2>
+                        <p class="about-text">I'm a developer who enjoys turning ideas and requirements into reliable, useful software. I enjoy working across the stack, from creating intuitive user interfaces to designing backend services and working with databases.</p>
+                        <br>
+                        <p class="about-me-text">My focus is on writing maintainable code, understanding business requirements and building applications that are reliable, scalable and easy to use. I'm continuously learning new technologies and improving my development, testing and system design skills.</p>
+                        <div class="about-items">
+                            <div class="about-item">
+                                <span class="text">12<small>+</small></span>
+                                <span class="label">Years of Experience</span>
+                            </div>
+                            <div class="about-item">
+                                <span class="text">10<small>+</small></span>
+                                <span class="label">Successful Projects</span>
+                            </div>
+                            <div class="about-item">
+                                <span class="text">15<small>+</small></span>
+                                <span class="label">Leanred Technologies</span>
+                            </div>
                         </div>
                     </div>
+                    <diV class="about-cards">
+                        <div class="about-card">
+                            <div class="top">
+                                <h4 class="name">Frontend</h4>
+                                <span class="material-symbols-outlined icon">code_xml</span>
+                            </div>
+                            <p class="text">Building responsive and accessible interfaces with React, TypeScript, HTML and CSS.</p>
+                        </div>
+                        <div class="about-card">
+                            <div class="top">
+                                <h4 class="name">Backend</h4>
+                                <span class="material-symbols-outlined icon">dns</span>
+                            </div>
+                            <p class="text">Developing APIs and backend applications using Java, Spring Boot and REST APIs.</p>
+                        </div>
+                        <div class="about-card">
+                            <div class="top">
+                                <h4 class="name">Database</h4>
+                                <span class="material-symbols-outlined icon">database</span>
+                            </div>
+                            <p class="text">Working with relational and NoSQL databases for reliable data management.</p>
+                        </div>
+                        <div class="about-card">
+                            <div class="top">
+                                <h4 class="name">Problem Solving</h4>
+                                <span class="material-symbols-outlined icon">problem</span>
+                            </div>
+                            <p class="text">Writing clean, maintainable code and solving technical problems.</p>
+                        </div>
+                    </diV>
                 </div>
             </div>
         </section>
         <!---->
 
-        <!-- Section Skills -->
-        <section class="section section-skills" id="skills">
+        <!-- Section skills -->
+        <section class="section skills-section" id="skills">
             <div class="container">
-                <div class="content-header">
-                    <h4>My Skills</h4>
-                    <h2>Technologies I Work With</h2>
+                <div class="header skills-header">
+                    <span class="subtitle">My Skills</span>
+                    <h1 class="title">My extensive list of technical skills</h1>
                 </div>
-                <div class="layout layout-skills">
-                    <div class="skill-item">
-                        <div class="content">
-                            <div class="header">
-                                <svg class="svg" width="80" height="60" viewBox="0 0 60 50" style="overflow:visible">
-                                    <rect class="r3" x="1" y="13" width="20" height="36" fill="var(--accentLight)" />
-                                    <rect class="r1" x="0" y="0" rx="2" ry="2" width="60" height="50" fill="none" stroke="var(--accentDark)" stroke-width="3" />
-                                    <rect class="r2" x="0" y="0" rx="2" width="60" height="12" fill="var(--accentDark)" stroke="var(--accentDark)" stroke-width="3" />
-                                    <rect class="r4" x="6" y="18" rx="2" ry="2" width="10" height="10" fill="var(--white)" />
-                                    <line class="l2" x1="6" y1="34" x2="16" y2="34" stroke="var(--white)" stroke-width="2" />
-                                    <line class="l3" x1="6" y1="40" x2="16" y2="40" stroke="var(--white)" stroke-width="2" />
-                                    <line class="l5" x1="26" y1="22" x2="52" y2="22" stroke="var(--accentDark)" stroke-width="2" />
-                                    <line class="l6" x1="26" y1="28" x2="52" y2="28" stroke="var(--accentDark)" stroke-width="2" />
-                                    <line class="l7" x1="26" y1="34" x2="52" y2="34" stroke="var(--accentDark)" stroke-width="2" />
-                                    <line class="l8" x1="26" y1="40" x2="40" y2="40" stroke="var(--accentDark)" stroke-width="2" />
+                <div class="skills-controls">
+                    <button class="btn" id="prev"><span class="material-symbols-outlined icon">keyboard_arrow_left</span></button>
+                    <button class="btn" id="next"><span class="material-symbols-outlined icon">keyboard_arrow_right</span></button>
+                </div>
+                <div class="skills-carousel">
+                    <div class="skills-carousel-track">
+                        <div class="skill-card" data-percent="95">
+                            <a class="skill-certificate" href="https://www.guvi.in/verify-certificate?id=74zBm4134012705Z1k" target="_blank">
+                                <span class="material-symbols-outlined icon">workspace_premium</span>
+                            </a>
+                            <div class="skill-progress">
+                                <svg class="skill-progress-ring" width="120" height="120">
+                                    <circle class="skill-progress-bg" cx="60" cy="60" r="55"></circle>
+                                    <circle class="skill-progress-bar" cx="60" cy="60" r="55"></circle>
                                 </svg>
+                                <img class="skill-img" src="assets/icons/html.webp" alt="">
+                                <div class="skill-progress-text"></div>
+                            </div>
+                            <h3 class="skill-name">HTML</h3>
+                            <p class="skill-description">Build semantic, accessible and well-structured web pages with modern HTML5 standards.</p>
+                            <span class="skill-tag"></span>
+                        </div>
+                        <div class="skill-card" data-percent="90">
+                            <a class="skill-certificate" href="https://www.guvi.in/verify-certificate?id=74zBm4134012705Z1k" target="_blank">
+                                <span class="material-symbols-outlined icon">workspace_premium</span>
+                            </a>
+                            <div class="skill-progress">
+                                <svg class="skill-progress-ring" width="120" height="120">
+                                    <circle class="skill-progress-bg" cx="60" cy="60" r="55"></circle>
+                                    <circle class="skill-progress-bar" cx="60" cy="60" r="55"></circle>
+                                </svg>
+                                <img class="skill-img" src="assets/icons/css.webp" alt="">
+                                <div class="skill-progress-text"></div>
+                            </div>
+                            <h3 class="skill-name">CSS</h3>
+                            <p class="skill-description">Create responsive and modern interfaces using Flexbox, Grid, animations, transitions and reusable CSS architecture.</p>
+                            <span class="skill-tag"></span>
+                        </div>
+                        <div class="skill-card" data-percent="60">
+                            <a class="skill-certificate" href="https://www.guvi.in/verify-certificate?id=17722l1p7nKSC48X4z" target="_blank">
+                                <span class="material-symbols-outlined icon">workspace_premium</span>
+                            </a>
+                            <div class="skill-progress">
+                                <svg class="skill-progress-ring" width="120" height="120">
+                                    <circle class="skill-progress-bg" cx="60" cy="60" r="55"></circle>
+                                    <circle class="skill-progress-bar" cx="60" cy="60" r="55"></circle>
+                                </svg>
+                                <img class="skill-img" src="assets/icons/js.webp" alt="">
+                                <div class="skill-progress-text"></div>
+                            </div>
+                            <h3 class="skill-name">JavaScript</h3>
+                            <p class="skill-description">Develop interactive web experiences using DOM manipulation, asynchronous, and modern JavaScript.</p>
+                            <span class="skill-tag"></span>
+                        </div>
+                        <div class="skill-card" data-percent="70">
+                            <a class="skill-certificate" href="https://www.guvi.in/verify-certificate?id=1812j778PJD788WX1Y" target="_blank">
+                                <span class="material-symbols-outlined icon">workspace_premium</span>
+                            </a>
+                            <div class="skill-progress">
+                                <svg class="skill-progress-ring" width="120" height="120">
+                                    <circle class="skill-progress-bg" cx="60" cy="60" r="55"></circle>
+                                    <circle class="skill-progress-bar" cx="60" cy="60" r="55"></circle>
+                                </svg>
+                                <img class="skill-img" src="assets/icons/java.webp" alt="">
+                                <div class="skill-progress-text"></div>
+                            </div>
+                            <h3 class="skill-name">Java</h3>
+                            <p class="skill-description">Develop applications using OOP, Collections, Exception Handling, Streams, JDBC and modern Java features.</p>
+                            <span class="skill-tag"></span>
+                        </div>
+                        <div class="skill-card" data-percent="60">
+                            <div class="skill-progress">
+                                <svg class="skill-progress-ring" width="120" height="120">
+                                    <circle class="skill-progress-bg" cx="60" cy="60" r="55"></circle>
+                                    <circle class="skill-progress-bar" cx="60" cy="60" r="55"></circle>
+                                </svg>
+                                <img class="skill-img" src="assets/icons/reactjs.webp" alt="">
+                                <div class="skill-progress-text"></div>
+                            </div>
+                            <h3 class="skill-name">React JS</h3>
+                            <p class="skill-description">Build scalable user interfaces with reusable components, Hooks, React Router and state management.</p>
+                            <span class="skill-tag"></span>
+                        </div>
+                        <div class="skill-card" data-percent="50">
+                            <div class="skill-progress">
+                                <svg class="skill-progress-ring" width="120" height="120">
+                                    <circle class="skill-progress-bg" cx="60" cy="60" r="55"></circle>
+                                    <circle class="skill-progress-bar" cx="60" cy="60" r="55"></circle>
+                                </svg>
+                                <img class="skill-img" src="assets/icons/nodejs.webp" alt="">
+                                <div class="skill-progress-text"></div>
+                            </div>
+                            <h3 class="skill-name">Node JS</h3>
+                            <p class="skill-description">Develop scalable backend applications with Node.js, Express, REST APIs, middleware and authentication.</p>
+                            <span class="skill-tag"></span>
+                        </div>
 
-                                <div class="text">
-                                    <h3 class="name">Frontend</h3>
-                                    <span class="experience">4+ Years Experience</span>
-                                </div>
-                            </div>
-                            <ul class="skills">
-                                <li class="skill" data-skill="html" data-percent="95">HTML</li>
-                                <li class="skill" data-skill="css" data-percent="90">CSS</li>
-                                <li class="skill" data-skill="js" data-percent="60">JavaScript</li>
-                                <li class="skill" data-skill="react" data-percent="50">React.js</li>
-                            </ul>
-                        </div>
-                        <div class="skill-img">
-                            <div class="img-box" data-skill="html">
-                                <img class="img" alt="img" src="assets/icons/html.webp">
-                            </div>
-                            <div class="img-box" data-skill="css">
-                                <img class="img" alt="img" src="assets/icons/css.webp">
-                            </div>
-                            <div class="img-box" data-skill="js">
-                                <img class="img" alt="img" src="assets/icons/js.webp">
-                            </div>
-                            <div class="img-box" data-skill="react">
-                                <img class="img" alt="img" src="assets/icons/reactjs.webp">
-                            </div>
-                        </div>
-                        <div class="skill-progress">
-                            <svg class="progress-svg" viewBox="0 0 180 180">
-                                <circle class="progress-bg"></circle>
-                                <circle class="progress-bar"></circle>
-
-                            </svg>
-                            <img class="progress-img" alt="progress-img" src="">
-                            <div class="progress-text">0%</div>
-                        </div>
-                    </div>
-                    <div class="skill-item">
-                        <div class="content">
-                            <div class="header">
-                                <svg class="svg" width="80" height="60" viewBox="0 0 60 50" style="overflow:visible">
-                                    <rect class="r1" x="0" y="0" rx="2" ry="2" width="60" height="50" fill="none" stroke="var(--accentDark)" stroke-width="3" />
-                                    <rect class="r2" x="0" y="0" rx="2" ry="2" width="60" height="12" fill="var(--accentLight)" stroke="var(--accentLight)" stroke-width="3" />
-                                    <rect class="r3" x="30" y="3" rx="6" ry="6" width="6" height="6" fill="var(--white)" />
-                                    <rect class="r4" x="40" y="3" rx="6" ry="6" width="6" height="6" fill="var(--white)" />
-                                    <rect class="r5" x="50" y="3" rx="6" ry="6" width="6" height="6" fill="var(--white)" />
+                        <div class="skill-card" data-percent="60">
+                            <div class="skill-progress">
+                                <svg class="skill-progress-ring" width="120" height="120">
+                                    <circle class="skill-progress-bg" cx="60" cy="60" r="55"></circle>
+                                    <circle class="skill-progress-bar" cx="60" cy="60" r="55"></circle>
                                 </svg>
-                                <div class="text">
-                                    <h3 class="name">Backend</h3>
-                                    <span class="experience">3+ Years Experience</span>
-                                </div>
+                                <img class="skill-img" src="assets/icons/springboot.png" alt="">
+                                <div class="skill-progress-text"></div>
                             </div>
-                            <ul class="skills">
-                                <li class="skill" data-skill="java" data-percent="70">Java</li>
-                                <li class="skill" data-skill="php" data-percent="50">PHP</li>
-                                <li class="skill" data-skill="nodejs" data-percent="40">Node.js</li>
-                            </ul>
+                            <h3 class="skill-name">Spring Boot</h3>
+                            <p class="skill-description">Build robust Java backend applications using REST APIs, Spring MVC, dependency injection and database integration.</p>
+                            <span class="skill-tag"></span>
                         </div>
-                        <div class="skill-img">
-                            <div class="img-box" data-skill="java">
-                                <img class="img" alt="img" src="assets/icons/java.webp">
-                            </div>
-                            <div class="img-box" data-skill="php">
-                                <img class="img" alt="img" src="assets/icons/php.webp">
-                            </div>
-                            <div class="img-box" data-skill="nodejs">
-                                <img class="img" alt="img" src="assets/icons/nodejs.webp">
-                            </div>
-                        </div>
-                        <div class="skill-progress">
-                            <svg class="progress-svg">
-                                <circle class="progress-bg"></circle>
-                                <circle class="progress-bar"></circle>
-                            </svg>
-                            <img class="progress-img" alt="progress-img" src="">
-                            <div class="progress-text">0%</div>
-                        </div>
-                    </div>
-                    <div class="skill-item">
-                        <div class="content">
-                            <div class="header">
-                                <svg class="svg" width="80" height="60" viewBox="0 0 60 50" style="overflow:visible">
-                                    <rect class="r1" x="0" y="0" rx="2" ry="2" width="60" height="50" fill="none" stroke="var(--accentDark)" stroke-width="3" />
-                                    <rect class="r2" x="0" y="0" rx="2" width="60" height="12" fill="var(--accentDark)" stroke="var(--accentDark)" stroke-width="3" />
-                                    <rect class="r3" x="6" y="18" rx="1" ry="1" width="18" height="26" fill="var(--accentLight)" stroke="var(--accentDark)" stroke-width="1" />
-                                    <rect class="r3" x="28" y="18" rx="1" ry="1" width="26" height="26" fill="none" stroke="var(--accentDark)" stroke-width="1" />
+                        <div class="skill-card" data-percent="80">
+                            <div class="skill-progress">
+                                <svg class="skill-progress-ring" width="120" height="120">
+                                    <circle class="skill-progress-bg" cx="60" cy="60" r="55"></circle>
+                                    <circle class="skill-progress-bar" cx="60" cy="60" r="55"></circle>
                                 </svg>
-                                <div class="text">
-                                    <h3 class="name">Database</h3>
-                                    <span class="experience">3+ Years Experience</span>
-                                </div>
+                                <img class="skill-img" src="assets/icons/mysql.webp" alt="">
+                                <div class="skill-progress-text"></div>
                             </div>
-                            <ul class="skills">
-                                <li class="skill" data-skill="mySQL" data-percent="80">MySQL</li>
-                                <li class="skill" data-skill="firebase" data-percent="80">Firebase</li>
-                                <li class="skill" data-skill="oracle" data-percent="40">Oracle</li>
-                            </ul>
+                            <h3 class="skill-name">MySQL</h3>
+                            <p class="skill-description">Design relational databases and write efficient SQL queries using joins, indexes, constraints and optimization techniques.</p>
+                            <span class="skill-tag"></span>
                         </div>
-                        <div class="skill-img">
-                            <div class="img-box" data-skill="mySQL">
-                                <img class="img" alt="img" src="assets/icons/mysql.webp">
-                            </div>
-                            <div class="img-box" data-skill="firebase">
-                                <img class="img" alt="img" src="assets/icons/firebase.webp">
-                            </div>
-                            <div class="img-box" data-skill="oracle">
-                                <img class="img" alt="img" src="assets/icons/oracle.webp">
-                            </div>
-                        </div>
-                        <div class="skill-progress">
-                            <svg class="progress-svg">
-                                <circle class="progress-bg"></circle>
-                                <circle class="progress-bar"></circle>
-                            </svg>
-                            <img class="progress-img" alt="progress-img" src="">
-                            <div class="progress-text">0%</div>
-                        </div>
-                    </div>
-                    <div class="skill-item">
-                        <div class="content">
-                            <div class="header">
-                                <svg class="svg" width="80" height="60" viewBox="0 0 60 50" style="overflow:visible">
-                                    <rect class="r1" x="0" y="0" rx="2" ry="2" width="60" height="50" fill="none" stroke="var(--accentDark)" stroke-width="3" />
-                                    <rect class="r2" x="0" y="0" rx="2" width="60" height="12" fill="var(--accentDark)" stroke="var(--accentDark)" stroke-width="3" />
-                                    <rect class="r3" x="6" y="18" rx="1" ry="1" width="18" height="26" fill="var(--accentLight)" stroke="var(--accentDark)" stroke-width="1" />
-                                    <rect class="r3" x="28" y="18" rx="1" ry="1" width="26" height="26" fill="none" stroke="var(--accentDark)" stroke-width="1" />
+                        <div class="skill-card" data-percent="90">
+                            <div class="skill-progress">
+                                <svg class="skill-progress-ring" width="120" height="120">
+                                    <circle class="skill-progress-bg" cx="60" cy="60" r="55"></circle>
+                                    <circle class="skill-progress-bar" cx="60" cy="60" r="55"></circle>
                                 </svg>
-                                <div class="text">
-                                    <h3 class="name">Design</h3>
-                                    <span class="experience">3+ Years Experience</span>
-                                </div>
+                                <img class="skill-img" src="assets/icons/mongodb.webp" alt="">
+                                <div class="skill-progress-text"></div>
                             </div>
-                            <ul class="skills">
-                                <li class="skill" data-skill="figma" data-percent="75">Figma</li>
-                                <li class="skill" data-skill="photoshop" data-percent="75">Photoshop</li>
-                                <li class="skill" data-skill="illustrate" data-percent="40">Illustrate</li>
-                            </ul>
+                            <h3 class="skill-name">Mongo DB</h3>
+                            <p class="skill-description">Work with NoSQL databases using document modeling, CRUD operations, queries, aggregation and indexing.</p>
+                            <span class="skill-tag"></span>
                         </div>
-                        <div class="skill-img">
-                            <div class="img-box" data-skill="figma">
-                                <img class="img" alt="img" src="assets/icons/figma.webp">
+                        <div class="skill-card" data-percent="80">
+                            <div class="skill-progress">
+                                <svg class="skill-progress-ring" width="120" height="120">
+                                    <circle class="skill-progress-bg" cx="60" cy="60" r="55"></circle>
+                                    <circle class="skill-progress-bar" cx="60" cy="60" r="55"></circle>
+                                </svg>
+                                <img class="skill-img" src="assets/icons/firebase.webp" alt="">
+                                <div class="skill-progress-text"></div>
                             </div>
-                            <div class="img-box" data-skill="photoshop">
-                                <img class="img" alt="img" src="assets/icons/photoshop.webp">
-                            </div>
-                            <div class="img-box" data-skill="illustrate">
-                                <img class="img" alt="img" src="assets/icons/illustrator.webp">
-                            </div>
-                        </div>
-                        <div class="skill-progress">
-                            <svg class="progress-svg">
-                                <circle class="progress-bg"></circle>
-                                <circle class="progress-bar"></circle>
-                            </svg>
-                            <img class="progress-img" alt="progress-img" src="">
-                            <div class="progress-text">0%</div>
+                            <h3 class="skill-name">Firebase</h3>
+                            <p class="skill-description">Build real-time applications using Firebase Authentication, Realtime Database, Firestore, Hosting and Cloud Storage.</p>
+                            <span class="skill-tag"></span>
                         </div>
                     </div>
                 </div>
@@ -342,86 +324,92 @@
         <!---->
 
         <!-- Section Journey -->
-        <section class="section section-journey" id="journey">
+        <section class="section journey-section" id="journey">
             <div class="container">
-                <div class="layout layout-journey">
-                    <div class="content-header">
-                        <h4>My Journey</h4>
-                        <h2>Know More About <br> My <button class="journey-btn profession-btn active" data-filter="profession">Profession</button> and <button class="journey-btn education-btn" data-filter="education">Education</button></h2>
-                    </div>
-                    <div class="journey-content active" data-category="profession">
-                        <div class="journey-item active">
-                            <div class="nav"></div>
-                            <div class="content">
-                                <span class="year">2026 - Present</span>
-                                <h3 class="name">Senior Analsyt</h3>
-                                <span class="location"><span class="material-symbols-outlined icon">work</span>Wipro, Chennai</span>
-                                <ul class="description">
-                                    <li>Working on System Configration US healthcare Benefits</li>
-                                    <li>Improved system performance & reduced production issues</li>
-                                </ul>
+                <div class="header journey-header">
+                    <span class="subtitle">My Journey</span>
+                    <h1 class="title journey-tabs" role="tablist">My <button class="journey-tab active" role="tab" aria-selected="true" data-filter="profession">profession</button> and <button class="journey-tab" role="tab" aria-selected="false" data-filter="education">education</button> journey</h1>
+                </div>
+                <div class="journey-layout">
+                    <div class="journey-content active" role="tabpanel" data-category="profession">
+                        <article class="journey-item">
+                            <div class="org-logo">
+                                <img class="logo" src="assets/icons/wipro.webp" alt="Organisation logo">
                             </div>
-                        </div>
-                        <div class="journey-item">
-                            <div class="nav"></div>
-                            <div class="content">
-                                <span class="year">2023 - 2025</span>
-                                <h3 class="name">Senior Setup Configuration Specialist</h3>
-                                <span class="location"><span class="material-symbols-outlined icon">work</span>Wipro, Chennai</span>
-                                <ul class="description">
-                                    <li>Configured and managed application environments</li>
-                                    <li>Delivered production-ready solutions</li>
-                                </ul>
+                            <div class="journey-card">
+                                <div class="journey-card-top">
+                                    <h3 class="role-name">Senior Analyst</h3>
+                                    <span class="role-year is-current">2026 - Present</span>
+                                </div>
+                                <span class="org-name">Wipro HR Services, Chennai</span>
+                                <p class="role-description">Lead client engagements, analyze business requirements, and deliver scalable configuration and technical solutions.</p>
                             </div>
-                        </div>
-                        <div class="journey-item">
-                            <div class="nav"></div>
-                            <div class="content">
-                                <span class="year">2021 - 2023</span>
-                                <h3 class="name">Setup Configuration Specialist</h3>
-                                <span class="location"><span class="material-symbols-outlined icon">work</span>Wipro, Chennai</span>
-                                <ul class="description">
-                                    <li>Supported system configurations and deployments</li>
-                                    <li>Assisted in troubleshooting and system optimization</li>
-                                </ul>
+                        </article>
+                        <article class="journey-item">
+                            <div class="org-logo">
+                                <img class="logo" src="assets/icons/wipro.webp" alt="Organisation logo">
                             </div>
-                        </div>
+                            <div class="journey-card">
+                                <div class="journey-card-top">
+                                    <h3 class="role-name">Senior Setup Configuration Specialist</h3>
+                                    <span class="role-year">2024 - 2025</span>
+                                </div>
+                                <span class="org-name">Wipro HR Services, Chennai</span>
+                                <p class="role-description">Managed complex system configurations, mentored team members, and improved setup accuracy and delivery efficiency.</p>
+                            </div>
+                        </article>
+                        <article class="journey-item">
+                            <div class="org-logo">
+                                <img class="logo" src="assets/icons/wipro.webp" alt="Organisation logo">
+                            </div>
+                            <div class="journey-card">
+                                <div class="journey-card-top">
+                                    <h3 class="role-name">Setup Configuration Specialist</h3>
+                                    <span class="role-year">2021 - 2023</span>
+                                </div>
+                                <span class="org-name">Wipro HR Services, Chennai</span>
+                                <p class="role-description">Configured and validated enterprise systems based on client requirements, ensuring accurate and reliable production releases.</p>
+                            </div>
+                        </article>
                     </div>
                     <div class="journey-content" data-category="education">
                         <div class="journey-item">
-                            <div class="nav"></div>
-                            <div class="content">
-                                <span class="year">2017 - 2021</span>
-                                <h3 class="name">B.Tech in Information Technology</h3>
-                                <span class="location"><span class="material-symbols-outlined icon">school</span>Adhiyamaan College of Engineering, Hosur</span>
-                                <ul class="description">
-                                    <li>Built a strong foundation in programming</li>
-                                    <li>Worked on academic projects on fullstack development</li>
-                                </ul>
+                            <div class="org-logo">
+                                <img class="logo" src="assets/icons/degree.png" alt="School logo">
+                            </div>
+                            <div class="journey-card">
+                                <div class="journey-card-top">
+                                    <h3 class="role-name">B.Tech in Information Technology</h3>
+                                    <span class="role-year">2017 - 2021</span>
+                                </div>
+                                <span class="org-name">Adhiyamaan College of Engineering, Hosur</span>
+                                <p class="role-description">Developed a strong foundation in software engineering, programming, databases, and web technologies through academic projects.</p>
                             </div>
                         </div>
                         <div class="journey-item">
-                            <div class="nav"></div>
-                            <div class="content">
-                                <span class="year">2016 - 2017</span>
-                                <h3 class="name">Higher Secondary Education</h3>
-                                <span class="location"><span class="material-symbols-outlined icon">school</span>Achariya Siksha Mandir, Puducherry</span>
-                                <ul class="description">
-                                    <li>Learned computer science and programming basics</li>
-                                    <li>Developed interest in coding and problem-solving</li>
-                                </ul>
+                            <div class="org-logo">
+                                <img class="logo" src="assets/icons/degree.png" alt="School logo">
+                            </div>
+                            <div class="journey-card">
+                                <div class="journey-card-top">
+                                    <h3 class="role-name">Higher Secondary Education</h3>
+                                    <span class="role-year">2016 - 2017</span>
+                                </div>
+                                <span class="org-name">Achariya Siksha Mandir, Puducherry</span>
+                                <p class="role-description">Focused on mathematics and computer science, building a strong foundation for higher education and a career in technology.</p>
                             </div>
                         </div>
                         <div class="journey-item">
-                            <div class="nav"></div>
-                            <div class="content">
-                                <span class="year">2014 - 2015</span>
-                                <h3 class="name">Secondary Education</h3>
-                                <span class="location"><span class="material-symbols-outlined icon">school</span>Ideal High School, Puducherry</span>
-                                <ul class="description">
-                                    <li>Built a strong academic foundation across core subjects</li>
-                                    <li>Improved analytical thinking and problem-solving skills</li>
-                                </ul>
+                            <div class="org-logo">
+                                <img class="logo" src="assets/icons/degree.png" alt="School logo">
+                            </div>
+                            <div class="journey-card">
+                                <div class="journey-card-top">
+                                    <h3 class="role-name">Secondary Education</h3>
+                                    <span class="role-year">2014 - 2015</span>
+                                </div>
+                                <span class="org-name">Ideal High School, Puducherry</span>
+                                <p class="role-description">Completed secondary education while developing an early interest in computers, technology, and problem-solving.</p>
                             </div>
                         </div>
                     </div>
@@ -431,165 +419,258 @@
         <!---->
 
         <!-- Section Works -->
-        <section class="section section-works" id="works">
-            <div class="container">
-                <div class="works-header">
-                    <div class="content-header">
-                        <h4>My Works</h4>
-                        <h2>Check Out My Works</h2>
-                    </div>
-                    <div class="works-tabs">
-                        <button class="works-tab tab-item1" data-filter="web">Website</button>
-                        <button class="works-tab tab-item2 active" data-filter="all">All</button>
-                        <button class="works-tab tab-item3" data-filter="android">Android</button>
-                    </div>
+        <section class="section works-section" id="works">
+            <div class="container works-container">
+                <div class="header works-header">
+                    <span class="subtitle">My Works</span>
+                    <h1 class="title">Things I've built</h1>
                 </div>
-                <div class="layout layout-works">
-                    <a class="works-item" data-category="web" href="javascript:void">
-                        <div class="item-img">
-                            <img class="img" alt="img" src="assets/images/works/personal-portfolio/personal-portfolio1.webp">
+                <div class="works-tabs" role="tablist" aria-label="Filter projects">
+                    <button class="works-tab active" role="tab" aria-selected="true" data-filter="all">All</button>
+                    <button class="works-tab" role="tab" aria-selected="false" data-filter="web">Website</button>
+                    <button class="works-tab" role="tab" aria-selected="false" data-filter="android">Android</button>
+                    <button class="works-tab" role="tab" aria-selected="false" data-filter="springboot">Spring Boot</button>
+                </div>
+                <div class="works-layout">
+                    <article class="works-item" data-category="web">
+                        <div class="carousel project-carousel">
+                            <div class="carousel-track" tabindex="0">
+                                <img class="carousel-image" loading="lazy" alt="Project Image" src="assets/images/works/chef-booking/chef-booking1.webp">
+                                <img class="carousel-image" loading="lazy" alt="Project Image" src="assets/images/works/chef-booking/chef-booking2.webp">
+                                <img class="carousel-image" loading="lazy" alt="Project Image" src="assets/images/works/chef-booking/chef-booking4.webp">
+                                <img class="carousel-image" loading="lazy" alt="Project Image" src="assets/images/works/chef-booking/chef-booking5.webp">
+                            </div>
+                            <button class="carousel-btn prev"><span class="material-symbols-outlined icon">chevron_left</span></button>
+                            <button class="carousel-btn next"><span class="material-symbols-outlined icon">chevron_right</span></button>
+                            <div class="carousel-dots"></div>
                         </div>
-                        <span class="category">Website</span>
-                        <div class="item-content">
-                            <h3 class="name">Personal Portfolio</h3>
-                            <p class="description">A responsive portfolio website to showcase projects, skills, and experience.</p>
-                            <ul class="skills">
-                                <li class="skill">HTML</li>
-                                <li class="dot"></li>
-                                <li class="skill">CSS</li>
-                                <li class="dot"></li>
-                                <li class="skill">JavaScript</li>
-                                <li class="dot"></li>
-                                <li class="skill">Firebase</li>
+                        <div class="project-details">
+                            <span class="project-category">Website</span>
+                            <div class="project-header">
+                                <h3 class="project-name">Chef Booking</h3>
+                                <div class="project-links">
+                                    <a class="project-link" href="https://github.com/sujithg-dev/chef-booking-website" target="_blank"><i class="fab fa-github icon"></i></a>
+                                    <a class="project-link" href="https://sujithg-dev.github.io/chef-booking-website/" target="_blank"><span class="material-symbols-outlined icon link-icon">arrow_forward</span></a>
+                                </div>
+                            </div>
+                            <p class="project-description">Managing schedules, and handling customer requests.</p>
+                            <ul class="project-skills">
+                                <li class="project-skill">HTML</li>
+                                <li class="project-skill">CSS</li>
+                                <li class="project-skill">JavaScript</li>
                             </ul>
                         </div>
-                    </a>
-                    <a class="works-item inv" data-category="web" href="https://github.com/sujithg-dev/chef-booking-website" target="_blank">
-                        <div class="item-img">
-                            <img class="img" alt="img" src="assets/images/works/chef-booking/chef-booking1.webp">
+                    </article>
+                    <article class="works-item" data-category="web">
+                        <div class="carousel project-carousel">
+                            <div class="carousel-track" tabindex="0">
+                                <img class="carousel-image" loading="lazy" alt="Project Image" src="assets/images/works/product-sale/product-sale1.webp">
+                                <img class="carousel-image" loading="lazy" alt="Project Image" src="assets/images/works/product-sale/product-sale2.webp">
+                                <img class="carousel-image" loading="lazy" alt="Project Image" src="assets/images/works/product-sale/product-sale3.webp">
+                                <img class="carousel-image" loading="lazy" alt="Project Image" src="assets/images/works/product-sale/product-sale4.webp">
+                            </div>
+                            <button class="carousel-btn prev"><span class="material-symbols-outlined icon">chevron_left</span></button>
+                            <button class="carousel-btn next"><span class="material-symbols-outlined icon">chevron_right</span></button>
+                            <div class="carousel-dots"></div>
                         </div>
-                        <span class="category">Website</span>
-                        <div class="item-content">
-                            <h3 class="name">Chef Booking</h3>
-                            <p class="description">A web platform for booking chefs, managing schedules, and handling customer requests.</p>
-                            <ul class="skills">
-                                <li class="skill">HTML</li>
-                                <li class="dot"></li>
-                                <li class="skill">CSS</li>
-                                <li class="dot"></li>
-                                <li class="skill">JavaScript</li>
+                        <div class="project-details">
+                            <span class="project-category">Website</span>
+                            <div class="project-header">
+                                <h3 class="project-name">Product Sale</h3>
+                                <div class="project-links">
+                                    <a class="project-link" href="https://github.com/sujithg-dev/product-sale-website" target="_blank"><i class="fab fa-github icon"></i></a>
+                                    <a class="project-link" href="https://sujithg-dev.github.io/product-sale-website/" target="_blank"><span class="material-symbols-outlined icon link-icon">arrow_forward</span></a>
+                                </div>
+                            </div>
+                            <p class="project-description">Showcase website focused clean design and layout.</p>
+                            <ul class="project-skills">
+                                <li class="project-skill">HTML</li>
+                                <li class="project-skill">CSS</li>
+                                <li class="project-skill">JavaScript</li>
                             </ul>
                         </div>
-                    </a>
-                    <a class="works-item inv" data-category="web" href="https://github.com/sujithg-dev/product-sale-website" target="_blank">
-                        <div class="item-img">
-                            <img class="img" alt="img" src="assets/images/works/product-sale/product-sale1.webp">
+                    </article>
+                    <article class="works-item" data-category="web">
+                        <div class="carousel project-carousel">
+                            <div class="carousel-track" tabindex="0">
+                                <img class="img" loading="lazy" alt="Project Image" src="assets/images/works/personal-branding/personal-branding1.webp">
+                                <img class="img" loading="lazy" alt="Project Image" src="assets/images/works/personal-branding/personal-branding2.webp">
+                                <img class="img" loading="lazy" alt="Project Image" src="assets/images/works/personal-branding/personal-branding3.webp">
+                                <img class="img" loading="lazy" alt="Project Image" src="assets/images/works/personal-branding/personal-branding4.webp">
+                            </div>
+                            <button class="carousel-btn prev"><span class="material-symbols-outlined icon">chevron_left</span></button>
+                            <button class="carousel-btn next"><span class="material-symbols-outlined icon">chevron_right</span></button>
+                            <div class="carousel-dots"></div>
                         </div>
-                        <span class="category">Website</span>
-                        <div class="item-content">
-                            <h3 class="name">Product Sale</h3>
-                            <p class="description">A product showcase website focused on improving conversions with clean design and layout.</p>
-                            <ul class="skills">
-                                <li class="skill">HTML</li>
-                                <li class="dot"></li>
-                                <li class="skill">CSS</li>
-                                <li class="dot"></li>
-                                <li class="skill">JavaScript</li>
+                        <div class="project-details">
+                            <span class="project-category">Website</span>
+                            <div class="project-header">
+                                <h3 class="project-name">Personal Branding</h3>
+                                <div class="project-links">
+                                    <a class="project-link" href="https://github.com/sujithg-dev/personal-branding-website" target="_blank"><i class="fab fa-github icon"></i></a>
+                                    <a class="project-link" href="https://sujithg-dev.github.io/personal-branding-website/" target="_blank"><span class="material-symbols-outlined icon link-icon">arrow_forward</span></a>
+                                </div>
+                            </div>
+                            <p class="project-description">Website designed to highlight projects, and professional identity.</p>
+                            <ul class="project-skills">
+                                <li class="project-skill">HTML</li>
+                                <li class="project-skill">CSS</li>
+                                <li class="project-skill">JavaScript</li>
                             </ul>
                         </div>
-                    </a>
-                    <a class="works-item" data-category="web" href="https://github.com/sujithg-dev/personal-branding-website" target="_blank">
-                        <div class="item-img">
-                            <img class="img" alt="img" src="assets/images/works/personal-branding/personal-branding1.webp">
+                    </article>
+                    <article class="works-item" data-category="android">
+                        <div class="carousel project-carousel">
+                            <div class="carousel-track" tabindex="0">
+                                <img class="img" loading="lazy" alt="img" src="assets/images/works/pro-class/proclass.webp">
+                            </div>
+                            <button class="carousel-btn prev"><span class="material-symbols-outlined icon">chevron_left</span></button>
+                            <button class="carousel-btn next"><span class="material-symbols-outlined icon">chevron_right</span></button>
+                            <div class="carousel-dots"></div>
                         </div>
-                        <span class="category">Website</span>
-                        <div class="item-content">
-                            <h3 class="name">Personal Branding</h3>
-                            <p class="description">A personal branding website designed to highlight skills, projects, and professional identity.</p>
-                            <ul class="skills">
-                                <li class="skill">HTML</li>
-                                <li class="dot"></li>
-                                <li class="skill">CSS</li>
-                                <li class="dot"></li>
-                                <li class="skill">JavaScript</li>
-
+                        <div class="project-details">
+                            <span class="project-category">Android</span>
+                            <div class="project-header">
+                                <h3 class="project-name">Pro Class</h3>
+                            </div>
+                            <p class="project-description">Track student attendance and monitor activity during sessions.</p>
+                            <ul class="project-skills">
+                                <li class="project-skill">Java</li>
+                                <li class="project-skill">Firebase</li>
+                                <li class="project-skill">Android Studio</li>
                             </ul>
                         </div>
-                    </a>
-                    <a class="works-item inv" data-category="android" href="javascript:void">
-                        <div class="item-img">
-                            <img class="img" alt="img" src="assets/images/works/pro-class/proclass.webp">
+                    </article>
+                    <article class="works-item" data-category="springboot">
+                        <div class="carousel project-carousel">
+                            <div class="carousel-track" tabindex="0">
+                                <img class="img" loading="lazy" alt="Project Image" src="assets/images/works/apigateway/apigateway (1).png">
+                                <img class="img" loading="lazy" alt="Project Image" src="assets/images/works/apigateway/apigateway (2).png">
+                                <img class="img" loading="lazy" alt="Project Image" src="assets/images/works/apigateway/apigateway (3).png">
+                                <img class="img" loading="lazy" alt="Project Image" src="assets/images/works/apigateway/apigateway (4).png">
+                            </div>
+                            <button class="carousel-btn prev"><span class="material-symbols-outlined icon">chevron_left</span></button>
+                            <button class="carousel-btn next"><span class="material-symbols-outlined icon">chevron_right</span></button>
+                            <div class="carousel-dots"></div>
                         </div>
-                        <span class="category">Android</span>
-                        <div class="item-content">
-                            <h3 class="name">Pro Class</h3>
-                            <p class="description">An Android application to track student attendance and monitor activity during sessions.</p>
-                            <ul class="skills">
-                                <li class="skill">Java</li>
-                                <li class="dot"></li>
-                                <li class="skill">Firebase</li>
-                                <li class="dot"></li>
-                                <li class="skill">Android Studio</li>
+                        <div class="project-details">
+                            <span class="project-category">Spring Boot</span>
+                            <div class="project-header">
+                                <h3 class="project-name">API Gateway</h3>
+                                <div class="project-links">
+                                    <a class="project-link" href="https://github.com/sujithg-dev/springboot-api-gateway" target="_blank"><i class="fab fa-github icon"></i></a>
+                                </div>
+                            </div>
+                            <p class="project-description">Built-in rate limiting, authentication, and monitoring.</p>
+                            <ul class="project-skills">
+                                <li class="project-skill">Java</li>
+                                <li class="project-skill">MongoDB</li>
+                                <li class="project-skill">Spring Boot</li>
+                                <li class="project-skill">REST API</li>
                             </ul>
                         </div>
-                    </a>
+                    </article>
+                    <article class="works-item" data-category="springboot">
+                        <div class="carousel project-carousel">
+                            <div class="carousel-track" tabindex="0">
+                                <img class="img" loading="lazy" alt="Project Image" src="assets/images/works/student-managment/student-managment (1).png">
+                                <img class="img" loading="lazy" alt="Project Image" src="assets/images/works/student-managment/student-managment (2).png">
+                                <img class="img" loading="lazy" alt="Project Image" src="assets/images/works/student-managment/student-managment (3).png">
+                                <img class="img" loading="lazy" alt="Project Image" src="assets/images/works/student-managment/student-managment (4).png">
+                            </div>
+                            <button class="carousel-btn prev"><span class="material-symbols-outlined icon">chevron_left</span></button>
+                            <button class="carousel-btn next"><span class="material-symbols-outlined icon">chevron_right</span></button>
+                            <div class="carousel-dots"></div>
+                        </div>
+                        <div class="project-details">
+                            <span class="project-category">Spring Boot</span>
+                            <div class="project-header">
+                                <h3 class="project-name">Student Management</h3>
+                                <div class="project-links">
+                                    <a class="project-link" href="https://github.com/sujithg-dev/student-management" target="_blank"><i class="fab fa-github icon"></i></a>
+                                </div>
+                            </div>
+                            <p class="project-description">Built-in rate limiting, authentication, and monitoring.</p>
+                            <ul class="project-skills">
+                                <li class="project-skill">Java</li>
+                                <li class="project-skill">MySQL</li>
+                                <li class="project-skill">Spring Boot</li>
+                            </ul>
+                        </div>
+                    </article>
+                    <article class="works-item" data-category="springboot">
+                        <div class="carousel project-carousel">
+                            <div class="carousel-track" tabindex="0">
+                                <img class="img" loading="lazy" alt="Project Image" src="assets/images/works/hotel-reservation/hotel-reservation1.png">
+                                <img class="img" loading="lazy" alt="Project Image" src="assets/images/works/hotel-reservation/hotel-reservation2.png">
+                                <img class="img" loading="lazy" alt="Project Image" src="assets/images/works/hotel-reservation/hotel-reservation3.png">
+                                <img class="img" loading="lazy" alt="Project Image" src="assets/images/works/hotel-reservation/hotel-reservation4.png">
+                                <img class="img" loading="lazy" alt="Project Image" src="assets/images/works/hotel-reservation/hotel-reservation5.png">
+                                <img class="img" loading="lazy" alt="Project Image" src="assets/images/works/hotel-reservation/hotel-reservation6.png">
+                            </div>
+                            <button class="carousel-btn prev"><span class="material-symbols-outlined icon">chevron_left</span></button>
+                            <button class="carousel-btn next"><span class="material-symbols-outlined icon">chevron_right</span></button>
+                            <div class="carousel-dots"></div>
+                        </div>
+                        <div class="project-details">
+                            <span class="project-category">Spring Boot</span>
+                            <div class="project-header">
+                                <h3 class="project-name">Hotel Reservation</h3>
+                                <div class="project-links">
+                                    <a class="project-link" href="https://github.com/sujithg-dev/StayEase" target="_blank"><i class="fab fa-github icon"></i></a>
+                                    <a class="project-link" href="https://stayease-b7ju.onrender.com/login" target="_blank"><span class="material-symbols-outlined icon link-icon">arrow_forward</span></a>
+                                </div>
+                            </div>
+                            <p class="project-description">Hotel reservation system with role based access for customer, manager and admin.</p>
+                            <ul class="project-skills">
+                                <li class="project-skill">Java</li>
+                                <li class="project-skill">MongoDB</li>
+                                <li class="project-skill">Spring Boot</li>
+                            </ul>
+                        </div>
+                    </article>
                 </div>
             </div>
         </section>
         <!---->
 
         <!-- Section Contact -->
-        <section class="section section-contact" id="contact">
+        <section class="section contact-section" id="contact">
             <div class="container">
-                <div class="layout layout-contact">
-                    <div class="contact-box">
-                        <div class="content-header">
-                            <h4>Contact Me</h4>
-                            <h2>Reach Out For Any <br> Inquiries</h2>
-                        </div>
-                        <div class="contact-items">
-                            <div class="contact-item">
-                                <span class="material-symbols-outlined icon">mail</span>
-                                <div class="text">
-                                    <p class="name">Email Address</p>
-                                    <a class="link" href="mailto:sujith.g7799@gmail.com">sujith.g7799@gmail.com</a>
-                                </div>
-                            </div>
-                            <div class="contact-item">
-                                <span class="material-symbols-outlined icon">chat</span>
-                                <div class="text">
-                                    <p class="name">Whatsapp</p>
-                                    <a class="link" href="https://wa.me/+918825762028" target="_blank">+91 8825762028</a>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="social-links">
-                            <ul>
-                                <li><a class="link" target="_blank" href="https://www.instagram.com/sujith._.g/"><i class="fab fa-instagram icon"></i></a></li>
-                                <li><a class="link" target="_blank" href="https://x.com/sujith__g"><i class="fab fa-twitter icon"></i></a></li>
-                                <li><a class="link" target="_blank" href="https://www.linkedin.com/in/sujithguna/"><i class="fab fa-linkedin-in icon"></i></a></li>
-                            </ul>
-                        </div>
+                <div class="contact-layout">
+                    <div class="header contact-header">
+                        <span class="subtitle">Contact</span>
+                        <h1 class="title">Reach out for any inquiries</h1>
+                        <p class="contact-intro">Have a project in mind or just want to say hello? Send me a message and I'll get back to you as soon as I can.</p>
                     </div>
-                    <div class="contact-box">
-                        <form class="form contact-form">
-                            <div class="form-output contact-form-output"></div>
-                            <div class="input-item">
-                                <span class="material-symbols-outlined icon">person</span>
-                                <input class="input user-name" type="text" name="fullname" placeholder="Your Fullname" required>
+                    <form class="form contact-form">
+                        <div class="form-header">
+                            <p class="form-output contact-form-output"></p>
+                        </div>
+                        <div class="form-body">
+                            <div class="input-field">
+                                <input class="input user-name" type="text" name="fullname" placeholder=" " autocomplete="name">
+                                <label class="label">Your full name</label>
+                                <span class="input-error"></span>
                             </div>
-                            <div class="input-item">
-                                <span class="material-symbols-outlined icon">alternate_email</span>
-                                <input class="input user-email" type="email" name="email" placeholder="Your Email Address" required>
+                            <div class="input-field">
+                                <input class="input user-email" type="email" name="email" placeholder=" " autocomplete="email">
+                                <label class="label">Your email address</label>
+                                <span class="input-error"></span>
                             </div>
-                            <div class="input-item">
-                                <textarea class="input user-message" rows="5" cols="3" placeholder="Any queries? Ask here . . ."></textarea>
+                            <div class="input-field">
+                                <textarea class="input textarea user-message" name="message" rows="5" placeholder=" "></textarea>
+                                <label class="label">Any queries? Ask here</label>
+                                <span class="input-error"></span>
                             </div>
-                            <div class="form-btn">
-                                <button class="button submit-contact-form" type="button">Send Message<span class="material-symbols-outlined icon">send</span></button>
-                            </div>
-                        </form>
-                    </div>
+                        </div>
+                        <div class="form-footer">
+                            <button class="form-btn submit-contact-form">
+                                <span class="label">Send Message</span>
+                                <span class="material-symbols-outlined icon">send</span>
+                            </button>
+                        </div>
+                    </form>
                 </div>
             </div>
         </section>
@@ -600,9 +681,43 @@
     <!-- Footer -->
     <footer class="footer">
         <div class="container">
-            <div class="footer-content">
-                <p class="copyright-text">Sujith G © 2026</p>
-
+            <div class="footer-top">
+                <div class="footer-top-left">
+                    <div class="profile-details">
+                        <div class="profile-image-box">
+                            <img class="profile-image" loading="lazy" alt="Sujith G" src="assets/images/sujithG.webp">
+                        </div>
+                        <div class="text">
+                            <h3 class="name">Sujith G</h3>
+                            <span class="profession">Full Stack Developer</span>
+                        </div>
+                    </div>
+                    <div class="social-links">
+                        <a class="link" href="#" target="_blank"><i class="fab fa-linkedin-in icon"></i></a>
+                        <a class="link" href="#" target="_blank"><i class="fab fa-instagram icon"></i></a>
+                        <a class="link" href="#" target="_blank"><i class="fab fa-twitter icon"></i></a>
+                        <a class="link" href="https://github.com/sujithg-dev" target="_blank"><i class="fab fa-github icon"></i></a>
+                    </div>
+                </div>
+                <div class="footer-top-right">
+                    <div class="contact-links">
+                        <h4 class="contact-title">Get In Touch</h4>
+                        <div class="contact-items">
+                            <a class="contact-item" href="mailto:sujithguna001@gmail.com">
+                                <span class="label">Email Address</span>
+                                <span class="value">sujithguna001@gmail.com</span>
+                            </a>
+                            <a class="contact-item" href="https://wa.me/918825762028" target="_blank" rel="noopener">
+                                <span class="label">WhatsApp</span>
+                                <span class="value">+91 88257 62028</span>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <span class="copyright">Copyright © <b>2026</b> Sujith G | Designed by Sujith G</span>
+                <a class="top-link" href="#home"><span class="material-symbols-outlined icon">arrow_upward</span></a>
             </div>
         </div>
     </footer>

@@ -36,11 +36,11 @@ const initSettings = async key => {
 
         appLive: value => {
 
-            if (value && $("body").hasClass("blank-page") && !location.pathname.includes("index.html"))
-                location.replace("index.html");
+            // if (value && $("body").hasClass("blank-page") && !location.pathname.includes("index.html"))
+            //     location.replace("index.html");
 
-            if (!value && $("body").hasClass("index-page") && !location.pathname.includes("blank.html"))
-                location.replace("blank.html");
+            // if (!value && $("body").hasClass("index-page") && !location.pathname.includes("blank.html"))
+            //     location.replace("blank.html");
 
             $(".appLiveText").text(value ? "Active" : "Blocked");
 
@@ -61,15 +61,6 @@ const initSettings = async key => {
         hueEffect: value => {
             $(".hueEffectText").text(value ? "On" : "Off")
         },
-
-        bgEffect: value => {
-            $(".bgEffectText").text(value ? "On" : "Off")
-            $(".circuit-background").toggleClass("active", value);
-            if (value)
-                circuitBackground();
-            else
-                stopCircuit();
-        }
     };
 
     try {
@@ -300,7 +291,7 @@ const initTable = () => {
                         .attr("id", value.id)
                         .append(
                             $("<td>")
-                                .addClass("row-count")
+                                .addClass("row-count text-center")
                                 .text(index + 1),
                             $("<td>")
                                 .addClass("row-messagerName")
@@ -309,13 +300,13 @@ const initTable = () => {
                                 .addClass("row-messagerEmail")
                                 .text(value.email?.toLowerCase()),
                             $("<td>")
-                                .addClass("row-receivedTime sync-time")
+                                .addClass("row-receivedTime sync-time text-center")
                                 .attr("data-time", value.timestamp).text(formatTime(value.timestamp)),
                             $("<td>")
-                                .addClass("row-totalMessage")
+                                .addClass("row-totalMessage text-center")
                                 .text(value.totalMessages),
                             $("<td>")
-                                .addClass("row-action")
+                                .addClass("row-action text-center")
                                 .append(
                                     $("<span>")
                                         .addClass("material-symbols-outlined icon")
@@ -358,6 +349,9 @@ const initTable = () => {
                         .text("First Visit"),
                     $("<th>")
                         .addClass("text-center")
+                        .text("Last Visit"),
+                    $("<th>")
+                        .addClass("text-center")
                         .text("Total Visits"),
                     $("<th>")
                         .addClass("text-center")
@@ -383,23 +377,27 @@ const initTable = () => {
                         .attr("id", value.key)
                         .append(
                             $("<td>")
-                                .addClass("row-count")
+                                .addClass("row-count text-center")
                                 .text(index + 1),
                             $("<td>")
                                 .addClass("row-visitorId")
                                 .text(value.id),
                             $("<td>")
-                                .addClass("row-deviceType")
+                                .addClass("row-deviceType text-center")
                                 .text(value.browserInfo?.deviceType || "--"),
                             $("<td>")
-                                .addClass("row-firstVisit")
+                                .addClass("row-firstVisit text-center")
                                 .attr("data-time", value.visits?.firstVisit)
                                 .text(formatTime(value.visits?.firstVisit)),
                             $("<td>")
-                                .addClass("row-visitCount")
+                                .addClass("row-lastVisit text-center")
+                                .attr("data-time", value.visits?.lastVisit)
+                                .text(value.visits?.lastVisit ? formatTime(value.visits.lastVisit) : "--"),
+                            $("<td>")
+                                .addClass("row-visitCount text-center")
                                 .text(value.visits?.visitCount),
                             $("<td>")
-                                .addClass("row-action")
+                                .addClass("row-action text-center")
                                 .append(
                                     $("<span>")
                                         .addClass("material-symbols-outlined icon")
@@ -459,7 +457,7 @@ const initTable = () => {
                         .attr("id", file.fileId)
                         .append(
                             $("<td>")
-                                .addClass("row-count")
+                                .addClass("row-count text-center")
                                 .text(count++),
 
                             $("<td>")
@@ -467,11 +465,11 @@ const initTable = () => {
                                 .text(file.fileName.substring(0, file.fileName.lastIndexOf("."))),
 
                             $("<td>")
-                                .addClass("row-fileFormat")
+                                .addClass("row-fileFormat text-center")
                                 .text(file.fileFormat?.toUpperCase()),
 
                             $("<td>")
-                                .addClass("row-action")
+                                .addClass("row-action text-center")
                                 .append(
                                     $("<span>")
                                         .addClass("material-symbols-outlined icon")
