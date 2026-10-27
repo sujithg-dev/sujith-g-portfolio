@@ -30,6 +30,47 @@
         box-shadow: 0 5px 20px rgba(0, 0, 0, 0.2);
     }
 
+    .navbar-brand {
+        font-size: 1.5rem;
+        color: var(--text);
+    }
+
+    .navbar-nav {
+        padding-top: var(--24px);
+        display: flex;
+        flex-direction: column;
+        gap: var(--12px);
+    }
+
+    .navbar-nav::before {
+        display: none;
+    }
+
+    .nav-link {
+        margin: auto;
+        width: 100%;
+        color: var(--text);
+    }
+
+    .navbar-items .nav-item .icon {
+        color: var(--text);
+    }
+
+    .navbar-nav .nav-link.active {
+        color: var(--white);
+        background: var(--accent);
+        border-radius: var(--border-rounded);
+    }
+
+    .navbar-items {
+        padding-block: var(--24px);
+        justify-content: center;
+    }
+
+    .navbar.sticky .navbar-nav .nav-link.active {
+        color: var(--white);
+    }
+
 
     /* ----- Section Header ----- */
     .header .name {

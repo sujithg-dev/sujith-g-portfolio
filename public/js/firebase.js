@@ -61,15 +61,6 @@ const initSettings = async key => {
         hueEffect: value => {
             $(".hueEffectText").text(value ? "On" : "Off")
         },
-
-        bgEffect: value => {
-            $(".bgEffectText").text(value ? "On" : "Off")
-            $(".canvas-container").toggleClass("active", value);
-            if (value)
-                circuitBackground();
-            else
-                stopCircuit();
-        }
     };
 
     try {

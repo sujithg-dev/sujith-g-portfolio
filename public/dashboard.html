@@ -52,22 +52,21 @@
     <!-- Block -->
     <div class="block dashboard">
         <div class="dialog dashboard">
-            <header>
-                <h4 class="title">Dashboard Login</h4>
+            <header class="dialog-header">
+                <h4 class="dialog-title">Dashboard Login</h4>
             </header>
-            <main>
-                <div class="form-output login-form-output"></div>
-                <form>
+            <main class="dialog-main">
+                <div class="dialog-form-output login-form-output"></div>
+                <form class="dialog-form">
                     <div class="field-items">
                         <div class="input-item">
-                            <span class="material-symbols-outlined icon">password</span>
                             <input type="password" class="input password" placeholder="Password">
                         </div>
                     </div>
                 </form>
             </main>
-            <footer>
-                <button class="button dashboard-login">Login</button>
+            <footer class="dialog-footer">
+                <button class="dialog-btn dashboard-login">Login</button>
             </footer>
         </div>
     </div>
@@ -75,66 +74,68 @@
 
     <!-- Dialog Change Password -->
     <dialog class="dialog dialog-password">
-        <header>
-            <h4 class="title">Change Password</h4>
-            <span class="material-symbols-outlined icon" onclick='toggleDialog("dialog-password")'>close</span>
+        <header class="dialog-header">
+            <h4 class="dialog-title">Change Password</h4>
+            <div class="dialog-close" onclick='toggleDialog("dialog-password")'>
+                <span class="material-symbols-outlined icon">close</span>
+            </div>
         </header>
-        <main>
-            <div class="form-output password-form-output"></div>
-            <form>
+        <main class="dialog-main">
+            <div class="dialog-form-output password-form-output"></div>
+            <form class="dialog-form">
                 <div class="field-items">
                     <div class="input-item">
-                        <span class="material-symbols-outlined icon">password</span>
                         <input type="text" class="input current-password" placeholder="Current Password">
                     </div>
                     <div class="input-item">
-                        <span class="material-symbols-outlined icon">password</span>
                         <input type="text" class="input new-password" placeholder="New Password">
                     </div>
                     <div class="input-item">
-                        <span class="material-symbols-outlined icon">password</span>
                         <input type="text" class="input confirm-password" placeholder="Confirm Password">
                     </div>
                 </div>
             </form>
         </main>
-        <footer>
-            <button class="button change-password">Change</button>
+        <footer class="dialog-footer">
+            <button class="dialog-btn change-password">Change</button>
         </footer>
     </dialog>
     <!---->
 
     <!-- Dialog File Upload -->
     <dialog class="dialog dialog-fileUpload">
-        <header>
-            <h4 class="title">File Upload</h4>
-            <span class="material-symbols-outlined icon" onclick='toggleDialog("dialog-fileUpload")'>close</span>
+        <header class="dialog-header">
+            <h4 class="dialog-title">File Upload</h4>
+            <div class="dialog-close" onclick='toggleDialog("dialog-fileUpload")'>
+                <span class="material-symbols-outlined icon">close</span>
+            </div>
         </header>
-        <main>
-            <div class="form-output file-form-output"></div>
-            <form>
+        <main class="dialog-main">
+            <div class="dialog-form-output file-form-output"></div>
+            <form class="dialog-form">
                 <div class="file-preview"></div>
                 <div class="field-items">
                     <div class="input-item">
-                        <span class="material-symbols-outlined icon">image</span>
                         <input type="text" class="input file-name" placeholder="File Name">
                     </div>
                 </div>
             </form>
         </main>
-        <footer>
-            <button class="button reset" disabled>Reset</button>
-            <button class="button upload" disabled>Upload</button>
-            <button class="button attach">Attach</button>
+        <footer class="dialog-footer">
+            <button class="dialog-btn reset" disabled>Reset</button>
+            <button class="dialog-btn upload" disabled>Upload</button>
+            <button class="dialog-btn attach">Attach</button>
         </footer>
     </dialog>
     <!---->
 
     <!-- Dialog Message -->
     <dialog class="dialog dialog-message">
-        <header>
-            <h4 class="title">Message</h4>
-            <span class="material-symbols-outlined icon" onclick='toggleDialog("dialog-message")'>close</span>
+        <header class="dialog-header">
+            <h4 class="dialog-title">Message</h4>
+            <div class="dialog-close" onclick='toggleDialog("dialog-message")'>
+                <span class="material-symbols-outlined icon">close</span>
+            </div>
         </header>
         <div class="dialog-content message-details"></div>
     </dialog>
@@ -142,9 +143,11 @@
 
     <!-- Dialog Visitor -->
     <dialog class="dialog dialog-visitor">
-        <header>
-            <h4 class="title">Visitor Details</h4>
-            <span class="material-symbols-outlined icon" onclick='toggleDialog("dialog-visitor")'>close</span>
+        <header class="dialog-header">
+            <h4 class="dialog-title">Visitor Details</h4>
+            <div class="dialog-close" onclick='toggleDialog("dialog-visitor")'>
+                <span class="material-symbols-outlined icon">close</span>
+            </div>
         </header>
         <div class="dialog-content visitor-details"></div>
     </dialog>
@@ -152,22 +155,24 @@
 
     <!-- Header -->
     <header class="dashboard-header">
-        <div class="navbar-dashboard">
-            <div class="container">
-                <h4>Dashboard</h4>
-                <div class="navbar-items">
-                    <div class="nav-item nav-lock" onclick='toggleDialog("dialog-password")'>
+        <div class="container">
+            <div class="navbar-dashboard">
+                <div>
+                    <h4 class="dashboard-title">Dashboard</h4>
+                </div>
+                <div class="dashboard-items">
+                    <div class="item item-lock" onclick='toggleDialog("dialog-password")'>
                         <span class="material-symbols-outlined icon">lock</span>
                     </div>
-                    <div class="nav-item nav-mode" onclick="toggleMode()">
+                    <div class="item item-mode" onclick="toggleMode()">
                         <span class="material-symbols-outlined icon mode-icon">light_mode</span>
                     </div>
-                    <div class="nav-item nav-notification" onclick="initNotification('toggle')">
+                    <div class="item item-notification" onclick="initNotification('toggle')">
                         <span class="material-symbols-outlined icon">notifications</span>
                         <span class="notification-count"></span>
                     </div>
                     <div class="notification-window">
-                        <div class="header">
+                        <div class="notification-header">
                             <h4 class="title">Notifications</h4>
                             <span class="link" onclick="initNotification('clear')">Mark all as read</span>
                         </div>
@@ -175,6 +180,7 @@
                     </div>
                 </div>
             </div>
+        </div>
         </div>
     </header>
     <!---->
@@ -188,43 +194,36 @@
                     <div class="settings-item appLive-btn" onclick='initSettings("appLive")'>
                         <span class="material-symbols-outlined icon">computer</span>
                         <div class="content">
-                            <h4 class="name">Website Status</h4>
+                            <h5 class="name">Website Status</h5>
                             <span class="status appLiveText"></>
                         </div>
                     </div>
                     <div class="settings-item dashboardLock-btn" onclick='initSettings("dashboardLock")'>
                         <span class="material-symbols-outlined icon">lock</span>
                         <div class="content">
-                            <h4 class="name">Dashboard Lock</h4>
+                            <h5 class="name">Dashboard Lock</h5>
                             <span class="status dashboardLockText"></span>
                         </div>
                     </div>
                     <div class="settings-item appMode-btn" onclick='updateMode()'>
                         <span class="material-symbols-outlined icon">light_mode</span>
                         <div class="content">
-                            <h4 class="name">Theme Mode</h4>
+                            <h5 class="name">Theme Mode</h5>
                             <span class="status appModeText"></span>
                         </div>
                     </div>
                     <div class="settings-item themeColor-btn">
                         <span class="material-symbols-outlined icon">palette</span>
                         <div class="content">
-                            <h4 class="name">Theme Color</h4>
+                            <h5 class="name">Theme Color</h5>
                             <div class="color-picker1"><input type="range" min="0" max="360" onchange="updateColor(this.value)"></div>
                         </div>
                     </div>
                     <div class="settings-item bgEffect-btn" onclick='initSettings("hueEffect")'>
                         <span class="material-symbols-outlined icon">masked_transitions</span>
                         <div class="content">
-                            <h4 class="name">Hue Effect</h4>
+                            <h5 class="name">Hue Effect</h5>
                             <span class="status hueEffectText"></span>
-                        </div>
-                    </div>
-                    <div class="settings-item bgEffect-btn" onclick='initSettings("bgEffect")'>
-                        <span class="material-symbols-outlined icon">flare</span>
-                        <div class="content">
-                            <h4 class="name">Background Effect</h4>
-                            <span class="status bgEffectText"></span>
                         </div>
                     </div>
                 </div>

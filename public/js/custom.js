@@ -15,18 +15,16 @@
 
 /* ---------- 1. Helpers ---------- */
 
-const $one = (selector, root = document) => root.querySelector(selector);
-const $all = (selector, root = document) => [...root.querySelectorAll(selector)];
+const $one = (sel, root = document) => root.querySelector(sel);
+const $all = (sel, root = document) => [...root.querySelectorAll(sel)];
+const sleep = ms => new Promise(r => setTimeout(r, ms));
+const nextFrame = () => new Promise(r => requestAnimationFrame(() => r()));
+const reduceMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
 
 const ready = fn =>
     document.readyState === "loading"
         ? document.addEventListener("DOMContentLoaded", fn)
         : fn();
-
-const reduceMotion = matchMedia("(prefers-reduced-motion: reduce)").matches;
-
-const sleep = ms => new Promise(resolve => setTimeout(resolve, ms));
-const nextFrame = () => new Promise(resolve => requestAnimationFrame(resolve));
 
 // localStorage can throw (private mode, blocked storage), so wrap it once
 const storage = {
@@ -47,34 +45,23 @@ const rafThrottle = fn => {
     };
 };
 
-// Fisher-Yates (sort(() => Math.random() - .5) is biased)
-const shuffle = list => {
-    const copy = [...list];
-    for (let i = copy.length - 1; i > 0; i--) {
-        const j = (Math.random() * (i + 1)) | 0;
-        [copy[i], copy[j]] = [copy[j], copy[i]];
-    }
-    return copy;
-};
 
 // Runs an async `step` repeatedly, only while the element is on screen and the tab is visible
-const playWhileVisible = (element, step) => {
-    let onScreen = false;
+const playWhileVisible = (element, task) => {
+    let visible = false;
     let running = false;
 
     const loop = async () => {
         if (running) return;
         running = true;
-        while (onScreen && !document.hidden) await step();
+        while (visible) await task();
         running = false;
     };
 
     new IntersectionObserver(([entry]) => {
-        onScreen = entry.isIntersecting;
-        loop();
+        visible = entry.isIntersecting;
+        if (visible) loop();
     }).observe(element);
-
-    document.addEventListener("visibilitychange", loop);
 };
 
 
@@ -424,64 +411,62 @@ const initSkills = () => {
 
 /* ---------- 7. Hero text effects ---------- */
 
-const neonText = (words, selector, { letterDelay = 80, hold = 4000, fade = 1000 } = {}) => {
-    const element = $one(selector);
-    if (!element || !words.length) return;
-
+const neonText = (words, selector, delay = 6000) => {
     let index = 0;
-    let letters = [];
+    const element = document.querySelector(selector);
 
     const render = text => {
-        const fragment = document.createDocumentFragment();
-
-        text.split(" ").forEach(part => {
-            const word = document.createElement("span");
-            word.className = "word";
-            word.setAttribute("aria-hidden", "true");
-
-            [...part].forEach(char => {
-                const letter = document.createElement("span");
-                letter.className = "letter hidden";
-                letter.textContent = char;
-                word.append(letter);
-            });
-
-            fragment.append(word);
-        });
-
-        element.replaceChildren(fragment);
-        element.setAttribute("role", "img");
-        element.setAttribute("aria-label", text);
-        letters = $all(".letter", element);
-
-        // flush styles so the first fade-in actually transitions
-        void element.offsetWidth;
+        element.innerHTML = text
+            .split(" ")
+            .map(word =>
+                `<span class="word">${[...word]
+                    .map(letter => `<span class="letter" data-text="${letter}">${letter}</span>`)
+                    .join("")
+                }</span>`
+            )
+            .join(" ");
     };
 
-    // one class toggle per letter; the random stagger is a CSS transition-delay
-    const setVisible = show => {
+    const shuffle = arr =>
+        [...arr].sort(() => Math.random() - 0.5);
+
+    const animate = show => {
+        const letters = [...element.querySelectorAll(".letter")];
+
         shuffle(letters).forEach((letter, i) => {
-            letter.style.transitionDelay = `${i * letterDelay}ms`;
-            letter.classList.toggle("hidden", !show);
+            setTimeout(() => {
+                letter.classList.toggle("hidden", !show);
+            }, i * 100);
         });
-        return letters.length * letterDelay + fade;
+
+        return letters.length * 100;
+    };
+
+    const cycle = () => {
+
+        animate(false);
+
+        const duration = element.querySelectorAll(".letter").length * 100;
+
+        setTimeout(() => {
+
+            index = (index + 1) % words.length;
+            render(words[index]);
+
+            requestAnimationFrame(() => {
+                element
+                    .querySelectorAll(".letter")
+                    .forEach(letter => letter.classList.add("hidden"));
+
+                animate(true);
+            });
+
+        }, duration + 1000);
     };
 
     render(words[0]);
-    setVisible(true);
 
-    if (reduceMotion || words.length === 1) return;
-
-    playWhileVisible(element, async () => {
-        await sleep(hold);
-        await sleep(setVisible(false));
-
-        index = (index + 1) % words.length;
-        render(words[index]);
-        await nextFrame();
-
-        await sleep(setVisible(true));
-    });
+    setInterval(cycle, delay);
 };
 
 const glitchText = (
