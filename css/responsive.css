@@ -25,8 +25,7 @@
     .navbar.sticky {
         padding: var(--10px) 0;
         height: auto;
-        background: var(--bgNavbar);
-        backdrop-filter: blur(50px);
+        background: var(--bg-navbar);
         box-shadow: 0 5px 20px rgba(0, 0, 0, 0.2);
     }
 
