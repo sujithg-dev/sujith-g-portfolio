@@ -59,7 +59,7 @@ const handleContactForm = ({ action, fields, output }) => {
         const userMessage = fields.userMessage.val();
 
         if (!userName)
-           return inputError(fields.userName, "Required");
+            return inputError(fields.userName, "Required");
 
         if (!/^[A-Za-z]+(?:\s[A-Za-z]+)*$/.test(userName) || userName.length < 3)
             return inputError(fields.userName, "Invalid name");
@@ -136,18 +136,22 @@ const handleLoginForm = ({ action, fields, output }) => {
 
     $(action).on("click", async () => {
 
-        const password = fields.password.val()?.trim();
+        const password = getCode();
 
-        if (!password)
+        if (!password) {
             return inputError(fields.password);
+        }
 
         try {
             const snapshot = await db.settings.child("password").once("value");
 
-            if (password === snapshot.val())
+            if (password === snapshot.val()) {
+                resetPin();
                 $(".dashboard").addClass("hide");
+            }
             else {
                 formOutput(output, "error", "Incorrect password!");
+                resetPin();
                 inputError(fields.password);
             }
 

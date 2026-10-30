@@ -576,3 +576,47 @@ ready(() => {
     // the Firebase contact handler lives in its own file / block
     if (typeof initContact === "function") initContact();
 });
+
+const otp = document.getElementById("lock-pin");
+const boxes = [...otp.querySelectorAll("input")];
+
+// Get the combined 4-digit value
+const getCode = () => boxes.map(b => b.value).join("");
+
+boxes.forEach((box, i) => {
+    // Typing: keep digits only, then jump to next box
+    box.addEventListener("input", () => {
+        box.value = box.value.replace(/\D/g, "").slice(0, 1);
+        if (box.value && i < boxes.length - 1) boxes[i + 1].focus();
+        if (getCode().length === 4) console.log("Code:", getCode());
+    });
+
+    box.addEventListener("keydown", (e) => {
+        // Backspace on an empty box goes to the previous box
+        if (e.key === "Backspace" && !box.value && i > 0) {
+            boxes[i - 1].focus();
+            boxes[i - 1].value = "";
+            e.preventDefault();
+        }
+        if (e.key === "ArrowLeft" && i > 0) boxes[i - 1].focus();
+        if (e.key === "ArrowRight" && i < boxes.length - 1) boxes[i + 1].focus();
+    });
+
+    // Select the digit on focus so typing replaces it
+    box.addEventListener("focus", () => box.select());
+
+    // Paste "1234" and it fills all boxes
+    box.addEventListener("paste", (e) => {
+        e.preventDefault();
+        const digits = (e.clipboardData.getData("text") || "").replace(/\D/g, "").slice(0, 4);
+        digits.split("").forEach((d, j) => {
+            if (boxes[i + j]) boxes[i + j].value = d;
+        });
+        boxes[Math.min(i + digits.length, boxes.length - 1)].focus();
+    });
+});
+
+function resetPin() {
+    boxes.forEach(b => (b.value = ""));
+    boxes[0].focus();
+}

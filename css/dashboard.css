@@ -221,15 +221,15 @@
 }
 
 .dialog-header {
-    padding: var(--24px) var(--24px) var(--12px);
+    padding: var(--36px) var(--36px) var(--12px);
     display: flex;
     align-items: center;
     justify-content: space-between;
 }
 
 .dialog-title {
-    font-size: var(--fs-md);
-    font-weight: 600;
+    font-size: var(--fs-lg);
+    font-weight: 700;
     color: var(--text);
 }
 
@@ -252,7 +252,7 @@
 }
 
 .dialog-main {
-    padding: var(--24px) var(--48px) var(--12px);
+    padding: var(--36px) var(--48px) var(--24px);
 }
 
 .dialog-form-output {
@@ -262,14 +262,16 @@
     display: flex;
     align-items: center;
     justify-content: center;
-    color: var(--white);
+    font-size: var(--fs-sm);
+    font-weight: 600;
+    border-radius: var(--border-rounded);
     opacity: 0;
     visibility: hidden;
 }
 
 .dialog-form-output.show {
     margin-bottom: var(--12px);
-    height: var(--48px);
+    height: var(--44px);
     opacity: 1;
     visibility: visible;
 }
@@ -313,7 +315,7 @@
 }
 
 .dialog-footer {
-    padding: 0 var(--48px) var(--24px);
+    padding: 0 var(--48px) var(--36px);
     display: flex;
     align-items: center;
     justify-content: flex-end;
