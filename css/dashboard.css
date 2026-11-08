@@ -564,7 +564,7 @@
     font-size: var(--40px);
     color: var(--text-span);
     background: var(--bg-light3);
-    border: 2px solid var(--border-input);
+    border: 2px solid var(--border-light);
     border-radius: var(--18px);
     font-variation-settings: 'wght' 300
 }
