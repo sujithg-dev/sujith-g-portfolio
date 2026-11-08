@@ -93,6 +93,7 @@
                         <h3 class="welcome">Hello!<span> I'm</span></h3>
                         <h1 class="name">Sujith</h1>
                     </div>
+                    <a href="#next-section" class="scroll-arrow" aria-label="Scroll down"></a>
                 </div>
             </div>
         </section>
@@ -128,31 +129,23 @@
                     </div>
                     <diV class="about-cards">
                         <div class="about-card">
-                            <div class="top">
-                                <h4 class="name">Frontend</h4>
-                                <span class="material-symbols-outlined icon">code_xml</span>
-                            </div>
+                            <span class="material-symbols-outlined icon">code_xml</span>
+                            <h4 class="name">Frontend</h4>
                             <p class="text">Building responsive and accessible interfaces with HTML, CSS, JS and React.</p>
                         </div>
                         <div class="about-card">
-                            <div class="top">
-                                <h4 class="name">Backend</h4>
-                                <span class="material-symbols-outlined icon">dns</span>
-                            </div>
+                            <span class="material-symbols-outlined icon">dns</span>
+                            <h4 class="name">Backend</h4>
                             <p class="text">Developing APIs and backend applications using Java, Spring Boot and REST APIs.</p>
                         </div>
                         <div class="about-card">
-                            <div class="top">
-                                <h4 class="name">Database</h4>
-                                <span class="material-symbols-outlined icon">database</span>
-                            </div>
+                            <span class="material-symbols-outlined icon">database</span>
+                            <h4 class="name">Database</h4>
                             <p class="text">Working with relational and NoSQL databases for reliable data management.</p>
                         </div>
                         <div class="about-card">
-                            <div class="top">
-                                <h4 class="name">Problem Solving</h4>
-                                <span class="material-symbols-outlined icon">problem</span>
-                            </div>
+                            <span class="material-symbols-outlined icon">problem</span>
+                            <h4 class="name">Problem Solving</h4>
                             <p class="text">Writing clean, maintainable code and solving technical problems.</p>
                         </div>
                     </diV>
@@ -326,92 +319,68 @@
         <!-- Section Journey -->
         <section class="section journey-section" id="journey">
             <div class="container">
-                <div class="header journey-header">
-                    <span class="subtitle">My Journey</span>
-                    <h1 class="title journey-tabs" role="tablist">My <button class="journey-tab active" role="tab" aria-selected="true" data-filter="profession">professional</button> and <button class="journey-tab" role="tab" aria-selected="false" data-filter="education">educational</button> journey</h1>
-                </div>
-                <div class="journey-layout">
+                <div class="layout layout-journey">
+                    <div class="header journey-header">
+                        <span class="subtitle">My Journey</span>
+                        <h1 class="title journey-tabs" role="tablist">Know more about my <button class="journey-tab active" role="tab" aria-selected="true" data-filter="profession">professional</button> and <button class="journey-tab" role="tab" aria-selected="false" data-filter="education">educational</button> journey</h1>
+                    </div>
                     <div class="journey-content active" role="tabpanel" data-category="profession">
                         <article class="journey-item">
-                            <div class="org-logo">
-                                <img class="logo" src="assets/icons/wipro.webp" alt="Organisation logo">
-                            </div>
-                            <div class="journey-card">
-                                <div class="journey-card-top">
-                                    <h3 class="role-name">Senior Analyst</h3>
-                                    <span class="role-year is-current">2026 - Present</span>
-                                </div>
-                                <span class="org-name">Wipro HR Services, Chennai</span>
+                            <div class="nav"></div>
+                            <div class="content">
+                                <span class="role-year is-current">2026 - Present</span>
+                                <h3 class="role-name">Senior Analsyt</h3>
+                                <span class="org-name">Wipro, Chennai</span>
                                 <p class="role-description">Lead client engagements, analyze business requirements, and deliver scalable configuration and technical solutions.</p>
                             </div>
                         </article>
                         <article class="journey-item">
-                            <div class="org-logo">
-                                <img class="logo" src="assets/icons/wipro.webp" alt="Organisation logo">
-                            </div>
-                            <div class="journey-card">
-                                <div class="journey-card-top">
-                                    <h3 class="role-name">Senior Setup Configuration Specialist</h3>
-                                    <span class="role-year">2024 - 2025</span>
-                                </div>
-                                <span class="org-name">Wipro HR Services, Chennai</span>
+                            <div class="nav"></div>
+                            <div class="content">
+                                <span class="role-year">2023 - 2025</span>
+                                <h3 class="role-name">Senior Setup Configuration Specialist</h3>
+                                <span class="org-name">Wipro, Chennai</span>
                                 <p class="role-description">Managed complex system configurations, mentored team members, and improved setup accuracy and delivery efficiency.</p>
                             </div>
                         </article>
                         <article class="journey-item">
-                            <div class="org-logo">
-                                <img class="logo" src="assets/icons/wipro.webp" alt="Organisation logo">
-                            </div>
-                            <div class="journey-card">
-                                <div class="journey-card-top">
-                                    <h3 class="role-name">Setup Configuration Specialist</h3>
-                                    <span class="role-year">2021 - 2023</span>
-                                </div>
-                                <span class="org-name">Wipro HR Services, Chennai</span>
+                            <div class="nav"></div>
+                            <div class="content">
+                                <span class="role-year">2021 - 2023</span>
+                                <h3 class="role-name">Setup Configuration Specialist</h3>
+                                <span class="org-name">Wipro, Chennai</span>
                                 <p class="role-description">Configured and validated enterprise systems based on client requirements, ensuring accurate and reliable production releases.</p>
                             </div>
                         </article>
                     </div>
-                    <div class="journey-content" data-category="education">
-                        <div class="journey-item">
-                            <div class="org-logo">
-                                <img class="logo" src="assets/icons/degree.png" alt="School logo">
-                            </div>
-                            <div class="journey-card">
-                                <div class="journey-card-top">
-                                    <h3 class="role-name">B.Tech in Information Technology</h3>
-                                    <span class="role-year">2017 - 2021</span>
-                                </div>
+                    <div class="journey-content" role="tabpanel" data-category="education">
+                        <article class="journey-item">
+                            <div class="nav"></div>
+                            <div class="content">
+                                <span class="role-year">2017 - 2021</span>
+                                <h3 class="role-name">B.Tech in Information Technology</h3>
                                 <span class="org-name">Adhiyamaan College of Engineering, Hosur</span>
-                                <p class="role-description">Developed a strong foundation in software engineering, programming, databases, and web technologies through academic projects.</p>
+                                <p class="role-description">Developed a strong foundation in software engineering, programming, and databases through academic projects.</p>
                             </div>
-                        </div>
-                        <div class="journey-item">
-                            <div class="org-logo">
-                                <img class="logo" src="assets/icons/degree.png" alt="School logo">
-                            </div>
-                            <div class="journey-card">
-                                <div class="journey-card-top">
-                                    <h3 class="role-name">Higher Secondary Education</h3>
-                                    <span class="role-year">2015 - 2017</span>
-                                </div>
+                        </article>
+                        <article class="journey-item">
+                            <div class="nav"></div>
+                            <div class="content">
+                                <span class="role-year">2016 - 2017</span>
+                                <h3 class="role-name">Higher Secondary Education</h3>
                                 <span class="org-name">Achariya Siksha Mandir, Puducherry</span>
                                 <p class="role-description">Focused on mathematics and computer science, building a strong foundation for higher education and a career in technology.</p>
                             </div>
-                        </div>
-                        <div class="journey-item">
-                            <div class="org-logo">
-                                <img class="logo" src="assets/icons/degree.png" alt="School logo">
-                            </div>
-                            <div class="journey-card">
-                                <div class="journey-card-top">
-                                    <h3 class="role-name">Secondary Education</h3>
-                                    <span class="role-year">2014 - 2015</span>
-                                </div>
+                        </article>
+                        <article class="journey-item">
+                            <div class="nav"></div>
+                            <div class="content">
+                                <span class="role-year">2014 - 2015</span>
+                                <h3 class="role-name">Secondary Education</h3>
                                 <span class="org-name">Ideal High School, Puducherry</span>
                                 <p class="role-description">Completed secondary education while developing an early interest in computers, technology, and problem-solving.</p>
                             </div>
-                        </div>
+                        </article>
                     </div>
                 </div>
             </div>
@@ -693,9 +662,9 @@
                         </div>
                     </div>
                     <div class="social-links">
-                        <a class="link" href="#" target="_blank"><i class="fab fa-linkedin-in icon"></i></a>
-                        <a class="link" href="#" target="_blank"><i class="fab fa-instagram icon"></i></a>
-                        <a class="link" href="#" target="_blank"><i class="fab fa-twitter icon"></i></a>
+                        <a class="link" href="https://www.linkedin.com/in/sujithguna/" target="_blank"><i class="fab fa-linkedin-in icon"></i></a>
+                        <a class="link" href="https://www.instagram.com/sujith._.g/" target="_blank"><i class="fab fa-instagram icon"></i></a>
+                        <a class="link" href="https://x.com/sujith__g" target="_blank"><i class="fab fa-twitter icon"></i></a>
                         <a class="link" href="https://github.com/sujithg-dev" target="_blank"><i class="fab fa-github icon"></i></a>
                     </div>
                 </div>

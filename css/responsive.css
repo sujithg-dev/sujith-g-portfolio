@@ -150,6 +150,10 @@
 
 
     /* ----- Section Skills ----- */
+                .skills-carousel {
+                    -webkit-mask-image: linear-gradient(to right, #000 calc(100% - 40px), transparent 100%);
+                    mask-image: linear-gradient(to right, #000 calc(100% - 40px), transparent 100%);
+                }
     .skill-card {
         padding: var(--20px) var(--20px) var(--48px);
         flex: 0 0 calc((100% - 70px)/1);
@@ -163,24 +167,6 @@
 
     /* ----- Section Jounery ----- */
     .journey-item {
-        padding-left: 60px;
-    }
-
-    .journey-item::before {
-        left: 21px;
-    }
-
-    .journey-item .org-logo {
-        width: 44px;
-        height: 44px;
-    }
-
-    .journey-item .org-logo .logo {
-        width: 24px;
-        filter: invert(1);
-    }
-
-    .journey-card {
         padding: var(--20px);
     }
 

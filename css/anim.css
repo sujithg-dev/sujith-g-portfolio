@@ -204,3 +204,40 @@
         transform: translateY(0);
     }
 }
+
+@keyframes scroll-wheel {
+    0% {
+        opacity: 0;
+        transform: translateY(0);
+    }
+
+    30% {
+        opacity: 1;
+    }
+
+    100% {
+        opacity: 0;
+        transform: translateY(14px);
+    }
+}
+
+@media (prefers-reduced-motion: reduce) {
+    .wheel {
+        animation: none;
+        opacity: 1;
+    }
+}
+
+@keyframes bounce {
+
+    0%,
+    100% {
+        transform: translateX(-50%) translateY(0) rotate(45deg);
+        opacity: 0.6;
+    }
+
+    50% {
+        transform: translateX(-50%) translateY(10px) rotate(45deg);
+        opacity: 1;
+    }
+}

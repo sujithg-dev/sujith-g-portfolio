@@ -36,11 +36,11 @@ const initSettings = async key => {
 
         appLive: value => {
 
-            // if (value && $("body").hasClass("blank-page") && !location.pathname.includes("index.html"))
-            //     location.replace("index.html");
+            if (value && $("body").hasClass("blank-page") && !location.pathname.includes("index.html"))
+                location.replace("index.html");
 
-            // if (!value && $("body").hasClass("index-page") && !location.pathname.includes("blank.html"))
-            //     location.replace("blank.html");
+            if (!value && $("body").hasClass("index-page") && !location.pathname.includes("blank.html"))
+                location.replace("blank.html");
 
             $(".appLiveText").text(value ? "Active" : "Blocked");
 
@@ -173,10 +173,10 @@ const initNotification = async action => {
                         console.error("Notification item fetching error:", value, error);
                     }
                 });
-
+            
             notificationCount
                 .toggleClass("active", unread > 0)
-                .text(unread || "");
+                .text(unread > 9 ? "9+" : unread || "");
 
             notificationLink.toggleClass("active", unread > 0);
         });
